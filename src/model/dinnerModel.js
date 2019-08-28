@@ -5,6 +5,7 @@ class DinnerModel {
     this.dishes = dishesConst;
     this.noGuests = 0;
     this.menu = [];
+    //this.ingredients = [];
     //let a = getDish();
     //TODO Lab 0
     // implement the data structure that will hold number of guests
@@ -29,6 +30,13 @@ class DinnerModel {
   //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
     //TODO Lab 0
+    if(type == 'starter'){
+      return this.menu[1];
+    }else if(type == 'main dish'){
+      return this.menu[2];
+    }else if(type == 'dessert'){
+      return this.menu[3];
+    }
   }
 
   //Returns all the dishes on the menu.
@@ -39,12 +47,27 @@ class DinnerModel {
 
   //Returns all ingredients for all the dishes on the menu.
   getAllIngredients() {
+    let ingredients = [];
+    for(let i = 1; i < 3; i++) {
+      ingredients.push(this.menu[i].ingredients)
+    }
+  //  console.log(ingredients)
+    return ingredients;
     //TODO Lab 0
   }
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   getTotalMenuPrice() {
     //TODO Lab 0
+    let totalPrice = 0;
+    let guests = this.noGuests;
+    let ingredients = this.getAllIngredients();
+    for(let i = 0; i < ingredients.length; i++){
+      for(let j = 0; j < ingredients[i].length ; j++){
+        totalPrice += ingredients[i][j].price;
+      }
+    }
+    //console.log(totalPrice);
   }
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
