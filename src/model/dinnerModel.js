@@ -15,7 +15,6 @@ class DinnerModel {
     if(num >= 0){
         this.noGuests = num;
     }
-
   }
 
   getNumberOfGuests() {
