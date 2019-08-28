@@ -4,14 +4,12 @@ class DinnerModel {
   constructor() {
     this.dishes = dishesConst;
     this.noGuests = 0;
-    //TODO Lab 0
-    // implement the data structure that will hold number of guests
-    // and selected dishes for the dinner menu
+    this.menu = [];
+    this.allIngredients = [];
 
   }
 
   setNumberOfGuests(num) {
-    //TODO Lab 0
     if(num >= 0){
         this.noGuests = num;
     }
@@ -19,39 +17,85 @@ class DinnerModel {
   }
 
   getNumberOfGuests() {
-    //TODO Lab 0
     return this.noGuests;
   }
 
   //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
-    //TODO Lab 0
+    if(type == 'starter') {
+        return this.menu[0];
+    }
+    if(type == 'main dish') {
+        return this.menu[1];
+    }
+    if(type == 'dessert') {
+        return this.menu[2];
+    }
   }
 
   //Returns all the dishes on the menu.
   getFullMenu() {
-    //TODO Lab 0
+    return this.menu;
   }
 
   //Returns all ingredients for all the dishes on the menu.
   getAllIngredients() {
     //TODO Lab 0
+    for(let i=0; i < this.menu.length; i++) {
+        this.allIngredients.push(this.menu[i].ingredients);
+    }
+    return this.allIngredients;
   }
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   getTotalMenuPrice() {
     //TODO Lab 0
+    let totalPrice = 0;
+    for(let i=0; i < this.allIngredients.length; i++) {
+        for(let j=0; j < this.allIngredients[i].length; j++) {
+            totalPrice += this.allIngredients[i][j].price;
+
+        }
+    }
+    return totalPrice;
   }
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   addDishToMenu(id) {
-    //TODO Lab 0
+    let dish = this.getDish(id);
+    let pos = 0;
+
+    if(id < 100) {
+        pos = 0;
+    }
+    else if(100 <= id < 200) {
+        pos = 1;
+    }
+    else if(id >= 200) {
+        pos = 2;
+    }
+    this.menu[pos] = dish;
+    // console.log(this.menu[0]);
+
   }
 
   //Removes dish from menu
   removeDishFromMenu(id) {
-    //TODO Lab 0
+    let dish = this.getDish(id);
+    let pos = 0;
+
+    if(id < 100) {
+        pos = 0;
+    }
+    else if(100 <= id < 200) {
+        pos = 1;
+    }
+    else if(id >= 200) {
+        pos = 2;
+    }
+    this.menu.splice(pos, 1);
+
   }
 
 
@@ -70,8 +114,14 @@ class DinnerModel {
         });
         if (dish.name.indexOf(query) !== -1) {
           found = true;
+          return dish.type;
         }
       }
+     if (query == null && type == null){
+         return dish.type;
+     }
+
+
       return dish.type === type && found;
     });
   }

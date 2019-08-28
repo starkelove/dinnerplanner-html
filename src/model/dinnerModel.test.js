@@ -45,6 +45,15 @@ describe("DinnerModel", () => {
       const result2 = model.getDish();
       expect(result2).to.equal(undefined);
     });
+
+    it("return dish of specified type", () => {
+      model.addDishToMenu(1);
+      expect(model.getSelectedDish('starter')).to.equal(model.getDish(1));
+
+      model.addDishToMenu(100);
+      expect(model.getSelectedDish('main dish')).to.equal(model.getDish(100));
+    });
+
   });
 
   describe("filtering for dishes", () => {
@@ -115,5 +124,21 @@ describe("DinnerModel", () => {
       // should now be removed
       expect(model.getFullMenu()).to.not.include(model.getDish(1));
     });
+
+    it("get all ingredients", () => {
+    // first ingredient of dish 1 is eggs
+      model.addDishToMenu(1);
+      expect(model.getAllIngredients()[0][0].name).to.include("eggs");
+    });
+
+    it("get total menu price", () => {
+    // total price for dish 1 and 100 is 90
+      model.addDishToMenu(1);
+      model.addDishToMenu(100);
+      model.getAllIngredients();
+      expect(model.getTotalMenuPrice()).to.equal(90);
+    });
+
+
   });
 });
