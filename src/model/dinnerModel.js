@@ -4,11 +4,14 @@ class DinnerModel {
   constructor() {
     this.dishes = dishesConst;
     this.noGuests = 0;
+    this.menu = [];
+    //let a = getDish();
     //TODO Lab 0
     // implement the data structure that will hold number of guests
     // and selected dishes for the dinner menu
 
   }
+
 
   setNumberOfGuests(num) {
     //TODO Lab 0
@@ -31,6 +34,7 @@ class DinnerModel {
   //Returns all the dishes on the menu.
   getFullMenu() {
     //TODO Lab 0
+    return this.menu;
   }
 
   //Returns all ingredients for all the dishes on the menu.
@@ -47,11 +51,39 @@ class DinnerModel {
   //it is removed from the menu and the new one added.
   addDishToMenu(id) {
     //TODO Lab 0
+    let dish = this.getDish(id);
+    let pos = 0;
+    if(id < 100){
+      pos = 1;
+    }else if(100 >= id < 200){
+      pos = 2;
+    }else if(200){
+      pos = 3;
+    }
+  //  if(this.menu)
+    if(this.menu[pos] == null){
+      this.menu[id] = dish;
+    }else{
+      this.removeDishFromMenu(pos);
+      this.menu[id] = dish;
+    }
+
   }
 
   //Removes dish from menu
   removeDishFromMenu(id) {
     //TODO Lab 0
+//    let dish = this.getDish(id);
+    //if(this.menu)
+    let pos = 0;
+    if(id < 100){
+      pos = 1;
+    }else if(100 >= id < 200){
+      pos = 2;
+    }else if(200){
+      pos = 3;
+    }
+    this.menu.splice(pos,1);
   }
 
 
@@ -70,9 +102,18 @@ class DinnerModel {
         });
         if (dish.name.indexOf(query) !== -1) {
           found = true;
+          return dish.type;
         }
+      } else if(type == null && query == null) {
+        return dish.type;
       }
+
+      if(type == null && query != null){
+        return dish = 1;
+      }
+      else{
       return dish.type === type && found;
+      }
     });
   }
 
