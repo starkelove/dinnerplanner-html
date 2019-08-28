@@ -57,17 +57,11 @@ class DinnerModel {
       pos = 1;
     }else if(100 >= id < 200){
       pos = 2;
-    }else if(200){
+    }else if(id >= 200){
       pos = 3;
     }
-  //  if(this.menu)
-    if(this.menu[pos] == null){
-      this.menu[id] = dish;
-    }else{
-      this.removeDishFromMenu(pos);
-      this.menu[id] = dish;
-    }
 
+    this.menu[pos] = dish;
   }
 
   //Removes dish from menu
