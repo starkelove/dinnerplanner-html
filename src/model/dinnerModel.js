@@ -5,9 +5,6 @@ class DinnerModel {
     this.dishes = dishesConst;
     this.noGuests = 0;
     this.menu = [];
-    //this.ingredients = [];
-    //let a = getDish();
-    //TODO Lab 0
     // implement the data structure that will hold number of guests
     // and selected dishes for the dinner menu
 
@@ -15,7 +12,6 @@ class DinnerModel {
 
 
   setNumberOfGuests(num) {
-    //TODO Lab 0
     if(num >= 0){
         this.noGuests = num;
     }
@@ -23,13 +19,11 @@ class DinnerModel {
   }
 
   getNumberOfGuests() {
-    //TODO Lab 0
     return this.noGuests;
   }
 
   //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
-    //TODO Lab 0
     if(type == 'starter'){
       return this.menu[1];
     }else if(type == 'main dish'){
@@ -41,7 +35,6 @@ class DinnerModel {
 
   //Returns all the dishes on the menu.
   getFullMenu() {
-    //TODO Lab 0
     return this.menu;
   }
 
@@ -51,9 +44,7 @@ class DinnerModel {
     for(let i = 1; i < 3; i++) {
       ingredients.push(this.menu[i].ingredients)
     }
-  //  console.log(ingredients)
     return ingredients;
-    //TODO Lab 0
   }
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
@@ -67,13 +58,11 @@ class DinnerModel {
         totalPrice += ingredients[i][j].price;
       }
     }
-    //console.log(totalPrice);
   }
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   addDishToMenu(id) {
-    //TODO Lab 0
     let dish = this.getDish(id);
     let pos = 0;
     if(id < 100){
@@ -89,9 +78,6 @@ class DinnerModel {
 
   //Removes dish from menu
   removeDishFromMenu(id) {
-    //TODO Lab 0
-//    let dish = this.getDish(id);
-    //if(this.menu)
     let pos = 0;
     if(id < 100){
       pos = 1;
