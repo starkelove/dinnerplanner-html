@@ -74,7 +74,7 @@ class DinnerModel {
       pos = 1;
     }else if(100 >= id < 200){
       pos = 2;
-    }else if(200){
+    }else if(id >= 200){
       pos = 3;
     }
     this.menu.splice(pos,1);
