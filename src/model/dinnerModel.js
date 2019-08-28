@@ -3,7 +3,7 @@ class DinnerModel {
 
   constructor() {
     this.dishes = dishesConst;
-
+    this.noGuests = 0;
     //TODO Lab 0
     // implement the data structure that will hold number of guests
     // and selected dishes for the dinner menu
@@ -12,13 +12,18 @@ class DinnerModel {
 
   setNumberOfGuests(num) {
     //TODO Lab 0
+    if(num >= 0){
+        this.noGuests = num;
+    }
+
   }
 
   getNumberOfGuests() {
     //TODO Lab 0
+    return this.noGuests;
   }
 
-  //Returns the dish that is on the menu for selected type 
+  //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
     //TODO Lab 0
   }
@@ -41,7 +46,7 @@ class DinnerModel {
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   addDishToMenu(id) {
-    //TODO Lab 0 
+    //TODO Lab 0
   }
 
   //Removes dish from menu
@@ -82,11 +87,11 @@ class DinnerModel {
   }
 }
 
-// the dishes constant contains an array of all the 
+// the dishes constant contains an array of all the
 // dishes in the database. Each dish has id, name, type,
 // image (name of the image file), description and
-// array of ingredients. Each ingredient has name, 
-// quantity (a number), price (a number) and unit (string 
+// array of ingredients. Each ingredient has name,
+// quantity (a number), price (a number) and unit (string
 // defining the unit i.e. "g", "slices", "ml". Unit
 // can sometimes be empty like in the example of eggs where
 // you just say "5 eggs" and not "5 pieces of eggs" or anything else.
@@ -349,4 +354,3 @@ function deepFreeze(o) {
 }
 
 deepFreeze(dishesConst);
-
