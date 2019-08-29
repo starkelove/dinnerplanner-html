@@ -38,35 +38,17 @@ class DinnerModel {
     return this.menu;
   }
 
-  //Returns all ingredients for all the dishes on the menu.
-/*  getAllIngredients() {
-    //TODO Lab 0
-    for(let i=0; i < this.menu.length; i++) {
-        this.allIngredients.push(this.menu[i].ingredients);
-    }
-    return this.allIngredients;
-  }*/
 
   getAllIngredients() {
-     this.allIngredients = this.menu.map(function (dishes){
-      return dishes.ingredients;
-    });
-    console.log(this.allIngredients);
+    this.allIngredients = this.menu.map(dish => dish.ingredients);
+    return this.allIngredients;
 
   }
 
-
-  //Returns the total price of the menu (all the ingredients multiplied by number of guests).
-  getTotalMenuPrice() {
-    //TODO Lab 0
-    let totalPrice = 0;
-    for(let i=0; i < this.allIngredients.length; i++) {
-        for(let j=0; j < this.allIngredients[i].length; j++) {
-            totalPrice += this.allIngredients[i][j].price;
-
-        }
-    }
-    return totalPrice;
+  getTotalMenuPrice(){
+      let subPrices = this.allIngredients.map(subarray => subarray.map(obj => obj.price).reduce((acc, scalar) => acc + scalar, 0));
+      let totalPrice = subPrices.reduce((acc, scalar) => acc + scalar, 0);
+      return this.noGuests*totalPrice;
   }
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
@@ -85,7 +67,6 @@ class DinnerModel {
         pos = 2;
     }
     this.menu[pos] = dish;
-    // console.log(this.menu[0]);
 
   }
 

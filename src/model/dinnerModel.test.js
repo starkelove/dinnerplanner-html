@@ -128,14 +128,17 @@ describe("DinnerModel", () => {
     it("get all ingredients", () => {
     // first ingredient of dish 1 is eggs
       model.addDishToMenu(1);
+      model.getAllIngredients();
       expect(model.getAllIngredients()[0][0].name).to.include("eggs");
     });
 
     it("get total menu price", () => {
-    // total price for dish 1 and 100 is 90
+    // total price for dish 1 and 100 is 90 
       model.addDishToMenu(1);
       model.addDishToMenu(100);
+      model.setNumberOfGuests(1);
       model.getAllIngredients();
+      model.getTotalMenuPrice();
       expect(model.getTotalMenuPrice()).to.equal(90);
     });
 
