@@ -24,11 +24,11 @@ class DinnerModel {
   //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
     if(type == 'starter'){
-      return this.menu[1];
+      return this.menu[0];
     }else if(type == 'main dish'){
-      return this.menu[2];
+      return this.menu[1];
     }else if(type == 'dessert'){
-      return this.menu[3];
+      return this.menu[2];
     }
   }
 
@@ -39,25 +39,33 @@ class DinnerModel {
 
   //Returns all ingredients for all the dishes on the menu.
   getAllIngredients() {
-    let ingredients = [];
-    for(let i = 1; i < 3; i++) {
-      ingredients.push(this.menu[i].ingredients)
-    }
+    var ingredients = this.menu.map(function (meny) {
+        return meny.ingredients;
+      });
     return ingredients;
   }
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   getTotalMenuPrice() {
-    //TODO Lab 0
-    let totalPrice = 0;
     let guests = this.noGuests;
     let ingredients = this.getAllIngredients();
-    for(let i = 0; i < ingredients.length; i++){
-      for(let j = 0; j < ingredients[i].length ; j++){
-        totalPrice += ingredients[i][j].price;
-      }
-    }
+
+    // var accPrice = ingredients.map(function(subarray) {
+    //   return subarray.map(function(meny) {
+    //     return meny.price;
+    //     })
+    //     .reduce((acc, total) => acc + total, 0);
+    // });
+
+    var accPrice = ingredients.map(subarray => subarray.map(
+      meny => meny.price).reduce((acc, total) => acc + total, 0)
+    );
+
+    var totalPrice = accPrice.reduce((acc, total) => acc + total, 0);
+
+    return totalPrice*guests;
   }
+
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
@@ -65,11 +73,11 @@ class DinnerModel {
     let dish = this.getDish(id);
     let pos = 0;
     if(id < 100){
-      pos = 1;
+      pos = 0;
     }else if(100 >= id < 200){
-      pos = 2;
+      pos = 1;
     }else if(id >= 200){
-      pos = 3;
+      pos = 2;
     }
 
     this.menu[pos] = dish;
@@ -79,11 +87,11 @@ class DinnerModel {
   removeDishFromMenu(id) {
     let pos = 0;
     if(id < 100){
-      pos = 1;
+      pos = 0;
     }else if(100 >= id < 200){
-      pos = 2;
+      pos = 1;
     }else if(id >= 200){
-      pos = 3;
+      pos = 2;
     }
     this.menu.splice(pos,1);
   }
