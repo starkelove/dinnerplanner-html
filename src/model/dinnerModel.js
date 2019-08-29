@@ -39,13 +39,22 @@ class DinnerModel {
   }
 
   //Returns all ingredients for all the dishes on the menu.
-  getAllIngredients() {
+/*  getAllIngredients() {
     //TODO Lab 0
     for(let i=0; i < this.menu.length; i++) {
         this.allIngredients.push(this.menu[i].ingredients);
     }
     return this.allIngredients;
+  }*/
+
+  getAllIngredients() {
+     this.allIngredients = this.menu.map(function (dishes){
+      return dishes.ingredients;
+    });
+    console.log(this.allIngredients);
+
   }
+
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   getTotalMenuPrice() {
