@@ -112,9 +112,6 @@ class DinnerModel {
         return dish.type;
       }
 
-      if(type == null && query != null){
-        return dish = 1;
-      }
       else{
       return dish.type === type && found;
       }
