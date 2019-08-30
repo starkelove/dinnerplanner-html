@@ -25,11 +25,11 @@ class DinnerModel {
   //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
     if(type == 'starter'){
-      return this.menu[1];
+      return this.menu[0];
     }else if(type == 'main dish'){
-      return this.menu[2];
+      return this.menu[1];
     }else if(type == 'dessert'){
-      return this.menu[3];
+      return this.menu[2];
     }
   }
 
@@ -41,7 +41,7 @@ class DinnerModel {
   //Returns all ingredients for all the dishes on the menu.
   getAllIngredients() {
     let ingredients = [];
-    for(let i = 1; i < 3; i++) {
+    for(let i = 0; i < 3; i++) {
       ingredients.push(this.menu[i].ingredients)
     }
     return ingredients;
@@ -58,6 +58,7 @@ class DinnerModel {
         totalPrice += ingredients[i][j].price;
       }
     }
+    return totalPrice*guests;
   }
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
@@ -66,11 +67,11 @@ class DinnerModel {
     let dish = this.getDish(id);
     let pos = 0;
     if(id < 100){
-      pos = 1;
+      pos = 0;
     }else if(100 >= id < 200){
-      pos = 2;
+      pos = 1;
     }else if(id >= 200){
-      pos = 3;
+      pos = 2;
     }
 
     this.menu[pos] = dish;
@@ -80,11 +81,11 @@ class DinnerModel {
   removeDishFromMenu(id) {
     let pos = 0;
     if(id < 100){
-      pos = 1;
+      pos = 0;
     }else if(100 >= id < 200){
-      pos = 2;
+      pos = 1;
     }else if(id >= 200){
-      pos = 3;
+      pos = 2;
     }
     this.menu.splice(pos,1);
   }
