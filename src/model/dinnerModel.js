@@ -1,52 +1,152 @@
 //DinnerModel class
 class DinnerModel {
 
+
+
   constructor() {
     this.dishes = dishesConst;
+    this.noGuests = 0;
+    this.menu = [];
+    this.apiDishes = [];
+    this.key = '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767';
+    function handleHTTPError(response) {
+      if(response.ok)
+         return response;
+      throw Error(response.statusText);
+    }
 
-    //TODO Lab 0
     // implement the data structure that will hold number of guests
     // and selected dishes for the dinner menu
 
   }
 
+
   setNumberOfGuests(num) {
-    //TODO Lab 0
+    if(num >= 0){
+        this.noGuests = num;
+    }
+    var data = this.getDish(559251);
+    console.log(data);
   }
 
   getNumberOfGuests() {
-    //TODO Lab 0
+    return this.noGuests;
   }
 
-  //Returns the dish that is on the menu for selected type 
+  //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
-    //TODO Lab 0
+    if(type == 'starter'){
+      return this.menu[0];
+    }else if(type == 'main dish'){
+      return this.menu[1];
+    }else if(type == 'dessert'){
+      return this.menu[2];
+    }
   }
 
   //Returns all the dishes on the menu.
   getFullMenu() {
-    //TODO Lab 0
+    return this.menu;
   }
 
   //Returns all ingredients for all the dishes on the menu.
   getAllIngredients() {
-    //TODO Lab 0
+    var ingredients = this.menu.map(function (meny) {
+        return meny.ingredients;
+      });
+    return ingredients;
   }
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   getTotalMenuPrice() {
-    //TODO Lab 0
+    //let guests = this.noGuests;
+    //let ingredients = this.getAllIngredients();
+    console.log("we are in");
+
+    // var accPrice = ingredients.map(function(subarray) {
+    //   return subarray.map(function(meny) {
+    //     return meny.price;
+    //     })
+    //     .reduce((acc, total) => acc + total, 0);
+    // });
+/*
+    var accPrice = ingredients.map(subarray => subarray.map(
+      meny => meny.price).reduce((acc, total) => acc + total, 0)
+    );
+
+    var totalPrice = accPrice.reduce((acc, total) => acc + total, 0);*/
+/*
+    var data = null;
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        console.log(this.responseText);
+      }
+    });
+
+    xhr.open("GET", "http://sunset.nada.kth.se:8080/iprog/group/10/recipes/559251/information");
+    xhr.setRequestHeader("X-Mashape-Key", "3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767");
+  //  xhr.setRequestHeader("User-Agent", "PostmanRuntime/7.15.2");
+  //  xhr.setRequestHeader("Accept", "*///*");
+  //  xhr.setRequestHeader("Cache-Control", "no-cache");
+  //  xhr.setRequestHeader("Postman-Token", "4c8f42fe-6916-4243-b924-6ea4509e1c69,48bfd71c-0c78-4084-abdd-10c98b0cf5c8");
+  //  xhr.setRequestHeader("cache-control", "no-cache");
+  /*  xhr.onreadystatechange = function() {
+      if(xhr.readyState === 4)
+        if(xhr.status === 200){
+           // here the API call result is known
+           console.log(xhr.responseText);
+        }else{
+           console.error(xhr.statusText);
+        }
+    }
+    xhr.send(data);*/
+    var body;
+    fetch("http://sunset.nada.kth.se:8080/iprog/group/10/recipes/559251/information", {headers:{"X-Mashape-Key":"3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767"}})
+    .then(response => response.json())
+    .then(data => {
+      body = data;
+      console.log(body)
+     })
+    .then(console.log)
+    .catch(console.error);
+
+    console.log(this.dishes);
+  //  console.log(body);
+    return totalPrice*guests;
   }
+
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   addDishToMenu(id) {
-    //TODO Lab 0 
+    let dish = this.getDish(id);
+    let pos = 0;
+    if(id < 100){
+      pos = 0;
+    }else if(100 >= id < 200){
+      pos = 1;
+    }else if(id >= 200){
+      pos = 2;
+    }
+
+    this.menu[pos] = dish;
   }
 
   //Removes dish from menu
   removeDishFromMenu(id) {
-    //TODO Lab 0
+    let pos = 0;
+    if(id < 100){
+      pos = 0;
+    }else if(100 >= id < 200){
+      pos = 1;
+    }else if(id >= 200){
+      pos = 2;
+    }
+    this.menu.splice(pos,1);
   }
 
 
@@ -65,28 +165,59 @@ class DinnerModel {
         });
         if (dish.name.indexOf(query) !== -1) {
           found = true;
+          return dish.type;
         }
+      } else if(type == null && query == null) {
+        return dish.type;
       }
+
+      if(type == null && query != null){
+        return dish = 1;
+      }
+      else{
       return dish.type === type && found;
+      }
     });
   }
 
+
+
   //Returns a dish of specific ID
   getDish(id) {
-    for (let dsh of this.dishes) {
+
+    return fetch("http://sunset.nada.kth.se:8080/iprog/group/10/recipes/" + id + "/information", {headers:{"X-Mashape-Key":this.key}})
+    .then(this.handleHTTPError)
+    .then(response => response.json())
+    .then(data => {
+      this.apiDishes.push(data);
+      console.log(this.apiDishes);
+      console.log(this.apiDishes[0].title)
+      return this.apiDishes[0];
+     })
+    .then(console.log)
+    .catch(console.error);
+
+
+//    return this.apiDishes[0];
+  /*  var dish = this.apiDishes.map(function (meny) {
+        return meny.title;
+      });
+    console.log(dish)
+    return this.apiDishes;*/
+  /*  for (let dsh of this.dishes) {
       if (dsh.id === id) {
         return dsh;
       }
     }
-    return undefined;
+    return undefined;*/
   }
 }
 
-// the dishes constant contains an array of all the 
+// the dishes constant contains an array of all the
 // dishes in the database. Each dish has id, name, type,
 // image (name of the image file), description and
-// array of ingredients. Each ingredient has name, 
-// quantity (a number), price (a number) and unit (string 
+// array of ingredients. Each ingredient has name,
+// quantity (a number), price (a number) and unit (string
 // defining the unit i.e. "g", "slices", "ml". Unit
 // can sometimes be empty like in the example of eggs where
 // you just say "5 eggs" and not "5 pieces of eggs" or anything else.
@@ -349,4 +480,3 @@ function deepFreeze(o) {
 }
 
 deepFreeze(dishesConst);
-

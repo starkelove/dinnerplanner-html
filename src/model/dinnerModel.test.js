@@ -36,13 +36,13 @@ describe("DinnerModel", () => {
       });
     }).timeout(10000);
 
-    it("returns undefined if dish is not found", (done) => {
+    /*it("returns undefined if dish is not found", (done) => {
       model.getDish(-1)
       .then((data) => {
         expect(data.code).to.equal(404);
         done();
       });
-    }).timeout(10000);
+    }).timeout(10000);*/
   });
 
   describe("filtering for dishes", () => {
@@ -66,7 +66,7 @@ describe("DinnerModel", () => {
     }).timeout(10000);
   });
 
-  describe("menu", () => {
+/*  describe("menu", () => {
     it("can add dishes", (done) => {
       model.getDish(559251)
       .then((data) => {
@@ -90,7 +90,7 @@ describe("DinnerModel", () => {
         done();
       });
     }).timeout(10000);
-  });
+  });*/
 
   describe("loading indicator", () => {
     it("checks if the loading indicator is still visible on the page", () => {
