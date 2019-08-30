@@ -3,50 +3,89 @@ class DinnerModel {
 
   constructor() {
     this.dishes = dishesConst;
-
-    //TODO Lab 0
-    // implement the data structure that will hold number of guests
-    // and selected dishes for the dinner menu
+    this.noGuests = 0;
+    this.menu = [];
+    this.allIngredients = [];
 
   }
 
   setNumberOfGuests(num) {
-    //TODO Lab 0
+    if(num >= 0){
+        this.noGuests = num;
+    }
+
   }
 
   getNumberOfGuests() {
-    //TODO Lab 0
+    return this.noGuests;
   }
 
-  //Returns the dish that is on the menu for selected type 
+  //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
-    //TODO Lab 0
+    if(type == 'starter') {
+        return this.menu[0];
+    }
+    if(type == 'main dish') {
+        return this.menu[1];
+    }
+    if(type == 'dessert') {
+        return this.menu[2];
+    }
   }
 
   //Returns all the dishes on the menu.
   getFullMenu() {
-    //TODO Lab 0
+    return this.menu;
   }
 
-  //Returns all ingredients for all the dishes on the menu.
+
   getAllIngredients() {
-    //TODO Lab 0
+    this.allIngredients = this.menu.map(dish => dish.ingredients);
+    return this.allIngredients;
+
   }
 
-  //Returns the total price of the menu (all the ingredients multiplied by number of guests).
-  getTotalMenuPrice() {
-    //TODO Lab 0
+  getTotalMenuPrice(){
+      let subPrices = this.allIngredients.map(subarray => subarray.map(obj => obj.price).reduce((acc, scalar) => acc + scalar, 0));
+      let totalPrice = subPrices.reduce((acc, scalar) => acc + scalar, 0);
+      return this.noGuests*totalPrice;
   }
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   addDishToMenu(id) {
-    //TODO Lab 0 
+    let dish = this.getDish(id);
+    let pos = 0;
+
+    if(id < 100) {
+        pos = 0;
+    }
+    else if(100 <= id < 200) {
+        pos = 1;
+    }
+    else if(id >= 200) {
+        pos = 2;
+    }
+    this.menu[pos] = dish;
+
   }
 
   //Removes dish from menu
   removeDishFromMenu(id) {
-    //TODO Lab 0
+    let dish = this.getDish(id);
+    let pos = 0;
+
+    if(id < 100) {
+        pos = 0;
+    }
+    else if(100 <= id < 200) {
+        pos = 1;
+    }
+    else if(id >= 200) {
+        pos = 2;
+    }
+    this.menu.splice(pos, 1);
+
   }
 
 
@@ -65,28 +104,47 @@ class DinnerModel {
         });
         if (dish.name.indexOf(query) !== -1) {
           found = true;
+          return dish.type;
         }
       }
+     if (query == null && type == null){
+         return dish.type;
+     }
+
+
       return dish.type === type && found;
     });
   }
 
   //Returns a dish of specific ID
   getDish(id) {
-    for (let dsh of this.dishes) {
+    let url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/search';
+
+    fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
+    .then(response => response.json())
+    .then(function(data) {
+      let dish = data.filter(obj => obj.id === id);
+      console.log(JSON.stringify(dish.type));
+      return dish;
+    })
+    .then(function(myJson) {
+      console.log(JSON.stringify(myJson));
+    });
+
+    /*for (let dsh of this.dishes) {
       if (dsh.id === id) {
         return dsh;
       }
     }
-    return undefined;
+    return undefined;*/
   }
 }
 
-// the dishes constant contains an array of all the 
+// the dishes constant contains an array of all the
 // dishes in the database. Each dish has id, name, type,
 // image (name of the image file), description and
-// array of ingredients. Each ingredient has name, 
-// quantity (a number), price (a number) and unit (string 
+// array of ingredients. Each ingredient has name,
+// quantity (a number), price (a number) and unit (string
 // defining the unit i.e. "g", "slices", "ml". Unit
 // can sometimes be empty like in the example of eggs where
 // you just say "5 eggs" and not "5 pieces of eggs" or anything else.
@@ -349,4 +407,3 @@ function deepFreeze(o) {
 }
 
 deepFreeze(dishesConst);
-
