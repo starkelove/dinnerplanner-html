@@ -41,7 +41,7 @@ class DinnerModel {
   //Returns all ingredients for all the dishes on the menu.
   getAllIngredients() {
     let ingredients = [];
-    for(let i = 0; i < 3; i++) {
+    for(let i = 0; i < this.menu.length; i++) {
       ingredients.push(this.menu[i].ingredients)
     }
     return ingredients;
