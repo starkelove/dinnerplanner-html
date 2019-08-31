@@ -101,27 +101,66 @@ class DinnerModel {
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
   //if you don't pass any query, all the dishes will be returned
   getAllDishes(type, query) {
-    return this.dishes.filter(function (dish) {
-      let found = true;
-      if (query) {
-        found = false;
-        dish.ingredients.forEach(function (ingredient) {
-          if (ingredient.name.indexOf(query) !== -1) {
-            found = true;
-          }
-        });
-        if (dish.name.indexOf(query) !== -1) {
-          found = true;
-          return dish.type;
-        }
-      }
-     if (query == null && type == null){
-         return dish.type;
-     }
-
-
-      return dish.type === type && found;
-    });
+  	let url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/search';
+  	let dishesAPI = [];
+  	let type_url = [];
+  	let url_w_query = '';
+	let url_w_type = '';
+	
+  	if(type) {
+  		type_url = type.split(' ');
+  	}
+  	
+  	// if query passed return specific type and query
+  	if(query) {
+  		if(type_url.length > 1){
+  			url_w_query = url + '?' + 'type=' + type_url[0] + '%20course&query=' + query;
+  			console.log(url_w_query);
+  		} else {
+  			url_w_query = url + '?' + 'type=' + type_url[0] + '&query=' + query;
+  			console.log(url_w_query);	
+  		}
+  		
+    	return fetch(url_w_query, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
+    	.then(this.handleErrors)
+    	.then(response => response.json())
+    	.then(data => {
+    		dishesAPI = data.results;
+    		console.log(dishesAPI);
+    		return dishesAPI;
+    	
+    	}); 
+    } else if(type && query == null){ // if only type, return all of that specific type
+    	if(type_url.length > 1) {
+    		url_w_type = url + '?' + 'type=' + type_url[0] + '%20course';
+    		console.log(url_w_type);	
+    	} else {
+    		url_w_type = url + '?' + 'type=' + type_url[0];
+    		console.log(url_w_type);
+    	}
+    	return fetch(url_w_type, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
+    	.then(this.handleErrors)
+    	.then(response => response.json())
+    	.then(data => {
+    		dishesAPI = data.results;
+    		console.log(dishesAPI);
+    		return dishesAPI;
+    	
+    	}); 	
+    } else {
+		// if you dont pass any query all the dishes will be returned
+	  	 return fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
+		.then(this.handleErrors)
+		.then(response => response.json())
+		.then(data => {
+			dishesAPI = data.results;
+			console.log(dishesAPI);
+			return dishesAPI;
+			
+		});
+    
+    }
+  	
   }
 
   //Returns a dish of specific ID

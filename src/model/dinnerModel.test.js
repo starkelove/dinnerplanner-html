@@ -27,7 +27,7 @@ describe("DinnerModel", () => {
     });
   });
 
-  describe("getting individual dishes", () => {
+ /* describe("getting individual dishes", () => {
     it("gets the correct dish", (done) => {
       model.getDish(559251)
       .then((data) => {
@@ -43,7 +43,7 @@ describe("DinnerModel", () => {
         done();
       });
     }).timeout(10000);
-  });
+  }); */
 
   describe("filtering for dishes", () => {
     it("returns all dishes if no args are specified", (done) => {
@@ -61,6 +61,24 @@ describe("DinnerModel", () => {
         console.log("filtered", data);
         const onlyHasPizzas = data.every(dish => dish.title.toLowerCase().indexOf("pizza") > -1);
         expect(onlyHasPizzas).to.equal(true);
+        done();
+      });
+    }).timeout(10000);
+    
+    it("returns the correct dish type of dessert and pie", (done) => {
+      model.getAllDishes("dessert", "pie")
+      .then((data) => {
+        console.log("filtered", data);
+        const onlyHasPies = data.every(dish => dish.title.toLowerCase().indexOf("pie") > -1);
+        expect(onlyHasPies).to.equal(true);
+        done();
+      });
+    }).timeout(10000);
+    
+    it("returns the correct dish type of dessert", (done) => {
+      model.getAllDishes("dessert")
+      .then((data) => {
+        console.log("filtered", data);
         done();
       });
     }).timeout(10000);
