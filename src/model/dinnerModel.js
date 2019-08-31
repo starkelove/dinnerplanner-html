@@ -6,6 +6,14 @@ class DinnerModel {
     this.noGuests = 0;
     this.menu = [];
     this.allIngredients = [];
+    
+    function handleErrors(response) {
+    	if (response.ok) {
+    		return response;
+    	}
+    	throw Error(response.statusText);
+    	
+	}
 
   }
 
@@ -118,25 +126,10 @@ class DinnerModel {
 
   //Returns a dish of specific ID
   getDish(id) {
-    let url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/search';
-
-    fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
-    .then(response => response.json())
-    .then(function(data) {
-      let dish = data.filter(obj => obj.id === id);
-      console.log(JSON.stringify(dish.type));
-      return dish;
-    })
-    .then(function(myJson) {
-      console.log(JSON.stringify(myJson));
-    });
-
-    /*for (let dsh of this.dishes) {
-      if (dsh.id === id) {
-        return dsh;
-      }
-    }
-    return undefined;*/
+    let url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/' + id + '/information';  
+    return fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
+    .then(this.handleErrors)
+    .then(response => response.json());
   }
 }
 
