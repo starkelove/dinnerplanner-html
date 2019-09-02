@@ -25,8 +25,8 @@ class DinnerModel {
     if(num >= 0){
         this.noGuests = num;
     }
-    var data = this.getDish(559251);
-    console.log(data);
+  //  var data = this.getDish(559251);
+    //console.log(data);
   }
 
   getNumberOfGuests() {
@@ -35,13 +35,18 @@ class DinnerModel {
 
   //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
-    if(type == 'starter'){
+    for(let i = 0; i < this.menu.length; i++){
+      if(this.menu[i].dishTypes == type){
+        return this.menu[i];
+      }
+    }
+    /*if(type == 'starter'){
       return this.menu[0];
     }else if(type == 'main dish'){
       return this.menu[1];
     }else if(type == 'dessert'){
       return this.menu[2];
-    }
+    }*/
   }
 
   //Returns all the dishes on the menu.
@@ -59,8 +64,8 @@ class DinnerModel {
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   getTotalMenuPrice() {
-    //let guests = this.noGuests;
-    //let ingredients = this.getAllIngredients();
+    let guests = this.noGuests;
+    let ingredients = this.getAllIngredients();
     console.log("we are in");
 
     // var accPrice = ingredients.map(function(subarray) {
@@ -69,83 +74,52 @@ class DinnerModel {
     //     })
     //     .reduce((acc, total) => acc + total, 0);
     // });
-/*
+
     var accPrice = ingredients.map(subarray => subarray.map(
       meny => meny.price).reduce((acc, total) => acc + total, 0)
     );
 
-    var totalPrice = accPrice.reduce((acc, total) => acc + total, 0);*/
-/*
-    var data = null;
+    var totalPrice = accPrice.reduce((acc, total) => acc + total, 0);
 
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
 
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === 4) {
-        console.log(this.responseText);
-      }
-    });
-
-    xhr.open("GET", "http://sunset.nada.kth.se:8080/iprog/group/10/recipes/559251/information");
-    xhr.setRequestHeader("X-Mashape-Key", "3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767");
-  //  xhr.setRequestHeader("User-Agent", "PostmanRuntime/7.15.2");
-  //  xhr.setRequestHeader("Accept", "*///*");
-  //  xhr.setRequestHeader("Cache-Control", "no-cache");
-  //  xhr.setRequestHeader("Postman-Token", "4c8f42fe-6916-4243-b924-6ea4509e1c69,48bfd71c-0c78-4084-abdd-10c98b0cf5c8");
-  //  xhr.setRequestHeader("cache-control", "no-cache");
-  /*  xhr.onreadystatechange = function() {
-      if(xhr.readyState === 4)
-        if(xhr.status === 200){
-           // here the API call result is known
-           console.log(xhr.responseText);
-        }else{
-           console.error(xhr.statusText);
-        }
-    }
-    xhr.send(data);*/
-    var body;
-    fetch("http://sunset.nada.kth.se:8080/iprog/group/10/recipes/559251/information", {headers:{"X-Mashape-Key":"3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767"}})
-    .then(response => response.json())
-    .then(data => {
-      body = data;
-      console.log(body)
-     })
-    .then(console.log)
-    .catch(console.error);
-
-    console.log(this.dishes);
-  //  console.log(body);
     return totalPrice*guests;
   }
 
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
-  addDishToMenu(id) {
-    let dish = this.getDish(id);
-    let pos = 0;
-    if(id < 100){
-      pos = 0;
-    }else if(100 >= id < 200){
-      pos = 1;
-    }else if(id >= 200){
-      pos = 2;
+  addDishToMenu(data) {
+    //let dish = this.getDish(id);
+    let types = data.dishTypes;
+    let type;
+
+    if(types.includes("starter")){
+      type = "starter";
+    }else if(types.includes("main dish" || "main course")){
+      type = "main dish";
+    }else if(types.includes("dessert")){
+      type = "dessert";
+    }
+    //this.getDish(id).then((data) => data.dishTypes.filter((names)=> names == 'main dish' || names == 'main course'));
+    if(this.menu.includes(type)){
+      let dish = getSelectedDish(type);
+      this.removeDishFromMenu(dish.id);
     }
 
-    this.menu[pos] = dish;
+    this.menu.push(data);
   }
 
   //Removes dish from menu
   removeDishFromMenu(id) {
     let pos = 0;
-    if(id < 100){
-      pos = 0;
-    }else if(100 >= id < 200){
-      pos = 1;
-    }else if(id >= 200){
-      pos = 2;
+  //  stopSpinning();
+    //let id = data.id;
+    for(let i = 0; i < this.menu.length; i++){
+      if(this.menu[i].id == id){
+        this.menu.splice(pos,1);
+      }
     }
+
     this.menu.splice(pos,1);
   }
 
@@ -154,48 +128,67 @@ class DinnerModel {
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
   //if you don't pass any query, all the dishes will be returned
   getAllDishes(type, query) {
-    return this.dishes.filter(function (dish) {
-      let found = true;
-      if (query) {
-        found = false;
-        dish.ingredients.forEach(function (ingredient) {
-          if (ingredient.name.indexOf(query) !== -1) {
-            found = true;
-          }
-        });
-        if (dish.name.indexOf(query) !== -1) {
-          found = true;
-          return dish.type;
-        }
-      } else if(type == null && query == null) {
-        return dish.type;
-      }
+  	let url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/search';
+  	let dishesAPI = [];
+  	let type_url = [];
 
-      if(type == null && query != null){
-        return dish = 1;
-      }
-      else{
-      return dish.type === type && found;
-      }
+  	if(type) {
+  		type_url = type.split(' ');
+  	}
+
+  	// if query passed return specific type and query
+    document.getElementById("loader").style.display = "block";
+  	if(query) {
+  		if(type_url.length > 1){
+  			url = url + '?' + 'type=' + type_url[0] + '%20course&query=' + query;
+  			console.log(url);
+  		} else {
+  			url = url + '?' + 'type=' + type_url[0] + '&query=' + query;
+  			console.log(url);
+  		}
+    } else if(type && query == null){ // if only type, return all of that specific type
+    	if(type_url.length > 1) {
+    		url = url + '?' + 'type=' + type_url[0] + '%20course';
+    		console.log(url);
+    	} else {
+    		url = url + '?' + 'type=' + type_url[0];
+    		console.log(url);
+    	}
+    }
+    return fetch(url, {headers: {'X-Mashape-Key' :this.key}})
+    .then(this.handleErrors)
+    .then(response => response.json())
+    .then(data => {
+      dishesAPI = data.results;
+      console.log(dishesAPI);
+      document.getElementById("loader").style.display = "none";
+      return dishesAPI;
+
     });
-  }
 
+  }
 
 
   //Returns a dish of specific ID
   getDish(id) {
-
+    if(this.apiDishes[id] != null){
+      console.log("Hej");
+      return this.apiDishes[id];
+    }
+    document.getElementById("loader").style.display = "block";
     return fetch("http://sunset.nada.kth.se:8080/iprog/group/10/recipes/" + id + "/information", {headers:{"X-Mashape-Key":this.key}})
     .then(this.handleHTTPError)
     .then(response => response.json())
     .then(data => {
-      this.apiDishes.push(data);
-      console.log(this.apiDishes);
-      console.log(this.apiDishes[0].title)
-      return this.apiDishes[0];
-     })
-    .then(console.log)
-    .catch(console.error);
+      this.apiDishes[id] = (data);
+    //  console.log(this.apiDishes);
+    //  console.log(this.apiDishes[0].title)
+      //stopSpinning();
+      document.getElementById("loader").style.display = "none";
+      return this.apiDishes[id];
+    });
+    //.then(console.log)
+    //.catch(console.error);
 
 
 //    return this.apiDishes[0];
