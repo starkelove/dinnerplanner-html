@@ -91,6 +91,10 @@ describe("DinnerModel", () => {
         model.addDishToMenu(data);
         expect(model.getFullMenu().length).to.equal(1);
         expect(model.getFullMenu()[0].id).to.equal(559251);
+        
+        model.addDishToMenu(data);
+        expect(model.getFullMenu().length).to.equal(1);
+        expect(model.getFullMenu()[0].id).to.equal(559251);
         done();
       });
     }).timeout(10000);

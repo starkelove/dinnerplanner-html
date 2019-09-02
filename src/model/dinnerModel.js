@@ -63,18 +63,16 @@ class DinnerModel {
         type = 'dessert';
     }
     
-    let result = this.menu.filter(obj => obj.dataTypes.includes(type));
-    console.log(result);
-    if(result.length > 0) {
-    	this.removeDishFromMenu(result[0].id);
-    	this.menu.push(data);
-    	
-    }else {
-    	this.menu.push(data);
+    if(this.menu.length > 0) {
+    	let result = this.menu.filter(obj => obj.dishTypes.includes(type));
+    	if(result.length > 0) {
+    		this.removeDishFromMenu(result[0].id); 	
+    	}
     
     }
-    
-    
+   
+    this.menu.push(data);
+     
   }
 
   //Removes dish from menu
