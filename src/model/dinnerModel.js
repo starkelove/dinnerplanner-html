@@ -25,8 +25,6 @@ class DinnerModel {
     if(num >= 0){
         this.noGuests = num;
     }
-  //  var data = this.getDish(559251);
-    //console.log(data);
   }
 
   getNumberOfGuests() {
@@ -66,7 +64,6 @@ class DinnerModel {
   getTotalMenuPrice() {
     let guests = this.noGuests;
     let ingredients = this.getAllIngredients();
-    console.log("we are in");
 
     // var accPrice = ingredients.map(function(subarray) {
     //   return subarray.map(function(meny) {
@@ -111,16 +108,15 @@ class DinnerModel {
 
   //Removes dish from menu
   removeDishFromMenu(id) {
-    let pos = 0;
+    //let pos = 0;
   //  stopSpinning();
     //let id = data.id;
     for(let i = 0; i < this.menu.length; i++){
       if(this.menu[i].id == id){
-        this.menu.splice(pos,1);
+        this.menu.splice(i,1);
       }
     }
 
-    this.menu.splice(pos,1);
   }
 
 
@@ -172,7 +168,6 @@ class DinnerModel {
   //Returns a dish of specific ID
   getDish(id) {
     if(this.apiDishes[id] != null){
-      console.log("Hej");
       return this.apiDishes[id];
     }
     document.getElementById("loader").style.display = "block";
@@ -181,28 +176,12 @@ class DinnerModel {
     .then(response => response.json())
     .then(data => {
       this.apiDishes[id] = (data);
-    //  console.log(this.apiDishes);
-    //  console.log(this.apiDishes[0].title)
-      //stopSpinning();
       document.getElementById("loader").style.display = "none";
       return this.apiDishes[id];
     });
     //.then(console.log)
     //.catch(console.error);
 
-
-//    return this.apiDishes[0];
-  /*  var dish = this.apiDishes.map(function (meny) {
-        return meny.title;
-      });
-    console.log(dish)
-    return this.apiDishes;*/
-  /*  for (let dsh of this.dishes) {
-      if (dsh.id === id) {
-        return dsh;
-      }
-    }
-    return undefined;*/
   }
 }
 
