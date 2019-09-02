@@ -5,6 +5,7 @@ class DinnerModel {
     this.dishes = dishesConst;
     this.noGuests = 0;
     this.menu = [];
+    //this.menu = new Map();
     this.allIngredients = [];
     
     function handleErrors(response) {
@@ -22,6 +23,14 @@ class DinnerModel {
         this.noGuests = num;
     }
 
+  }
+  
+  setMenu() {
+  	this.menu.set('starter');
+    this.menu.set('main dish');
+    this.menu.set('dessert');
+  	
+  
   }
 
   getNumberOfGuests() {
@@ -61,39 +70,36 @@ class DinnerModel {
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
-  addDishToMenu(id) {
-    let dish = this.getDish(id);
-    let pos = 0;
-
-    if(id < 100) {
-        pos = 0;
+  addDishToMenu(data) {
+  	let types = data.dishTypes;
+  	let type = '';
+    if(types.includes('starter')) {
+        type = 'starter';
     }
-    else if(100 <= id < 200) {
-        pos = 1;
+    else if(types.includes('main course' || 'main dish')) {
+        type = 'main dish';
     }
-    else if(id >= 200) {
-        pos = 2;
+    else if(types.includes('dessert')) {
+        type = 'dessert';
     }
-    this.menu[pos] = dish;
-
+    
+    let result = this.menu.filter(obj => obj.dataTypes.includes(type));
+    console.log(result);
+    if(result.length > 0) {
+    	this.removeDishFromMenu(result[0].id);
+    	this.menu.push(data);
+    	
+    }else {
+    	this.menu.push(data);
+    
+    }
+    
+    
   }
 
   //Removes dish from menu
   removeDishFromMenu(id) {
-    let dish = this.getDish(id);
-    let pos = 0;
-
-    if(id < 100) {
-        pos = 0;
-    }
-    else if(100 <= id < 200) {
-        pos = 1;
-    }
-    else if(id >= 200) {
-        pos = 2;
-    }
-    this.menu.splice(pos, 1);
-
+    this.menu = this.menu.filter(obj => (obj.id != id));
   }
 
 
@@ -110,6 +116,8 @@ class DinnerModel {
   	if(type) {
   		type_url = type.split(' ');
   	}
+  	
+  	document.getElementById("loader").style.display = "block";
   	
   	// if query passed return specific type and query
   	if(query) {
@@ -147,8 +155,7 @@ class DinnerModel {
     		return dishesAPI;
     	
     	}); 	
-    } else {
-		// if you dont pass any query all the dishes will be returned
+    } else { // if you dont pass any query all the dishes will be returned
 	  	 return fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
 		.then(this.handleErrors)
 		.then(response => response.json())
@@ -158,17 +165,22 @@ class DinnerModel {
 			return dishesAPI;
 			
 		});
-    
+		
+	
     }
+    
+    
   	
   }
 
   //Returns a dish of specific ID
   getDish(id) {
     let url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/' + id + '/information';  
+    document.getElementById("loader").style.display = "block";
     return fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
     .then(this.handleErrors)
     .then(response => response.json());
+ 
   }
 }
 

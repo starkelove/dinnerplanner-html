@@ -43,7 +43,7 @@ describe("DinnerModel", () => {
         done();
       });
     }).timeout(10000);
-  }); */
+  }); 
 
   describe("filtering for dishes", () => {
     it("returns all dishes if no args are specified", (done) => {
@@ -82,15 +82,25 @@ describe("DinnerModel", () => {
         done();
       });
     }).timeout(10000);
-  });
+  }); */
 
   describe("menu", () => {
-    it("can add dishes", (done) => {
+    it("can add dishes, pizza", (done) => {
       model.getDish(559251)
       .then((data) => {
         model.addDishToMenu(data);
         expect(model.getFullMenu().length).to.equal(1);
         expect(model.getFullMenu()[0].id).to.equal(559251);
+        done();
+      });
+    }).timeout(10000);
+    
+    it("can add dishes, pie", (done) => {
+      model.getDish(603172)
+      .then((data) => {
+        model.addDishToMenu(data);
+        expect(model.getFullMenu().length).to.equal(1);
+        expect(model.getFullMenu()[0].id).to.equal(603172);
         done();
       });
     }).timeout(10000);
