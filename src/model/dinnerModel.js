@@ -33,18 +33,15 @@ class DinnerModel {
 
   //Returns the dish that is on the menu for selected type
   getSelectedDish(type) {
+    //this.menu = this.menu.filter(obj => (obj.dishTypes != id));
+
     for(let i = 0; i < this.menu.length; i++){
-      if(this.menu[i].dishTypes == type){
-        return this.menu[i];
+      for(let j = 0; j < this.menu[i].dishTypes.length; j++){
+        if(this.menu[i].dishTypes[j] == type){
+          return this.menu[i];
+        }
       }
     }
-    /*if(type == 'starter'){
-      return this.menu[0];
-    }else if(type == 'main dish'){
-      return this.menu[1];
-    }else if(type == 'dessert'){
-      return this.menu[2];
-    }*/
   }
 
   //Returns all the dishes on the menu.
@@ -98,10 +95,13 @@ class DinnerModel {
       type = "dessert";
     }
     //this.getDish(id).then((data) => data.dishTypes.filter((names)=> names == 'main dish' || names == 'main course'));
-    if(this.menu.includes(type)){
-      let dish = getSelectedDish(type);
-      this.removeDishFromMenu(dish.id);
+    for(let i = 0; i < this.menu.length; i++){
+      if(this.menu[i].dishTypes.includes(type)){
+        let dish = this.getSelectedDish(type);
+        this.removeDishFromMenu(dish.id);
+      }
     }
+
 
     this.menu.push(data);
   }
@@ -111,11 +111,12 @@ class DinnerModel {
     //let pos = 0;
   //  stopSpinning();
     //let id = data.id;
-    for(let i = 0; i < this.menu.length; i++){
-      if(this.menu[i].id == id){
-        this.menu.splice(i,1);
-      }
-    }
+    this.menu = this.menu.filter(obj => (obj.id != id));
+    // for(let i = 0; i < this.menu.length; i++){
+    //   if(this.menu[i].id == id){
+    //     this.menu.splice(i,1);
+    //   }
+    // }
 
   }
 
@@ -167,9 +168,9 @@ class DinnerModel {
 
   //Returns a dish of specific ID
   getDish(id) {
-    if(this.apiDishes[id] != null){
+  /*  if(this.apiDishes[id] != null){
       return this.apiDishes[id];
-    }
+    }*/
     document.getElementById("loader").style.display = "block";
     return fetch("http://sunset.nada.kth.se:8080/iprog/group/10/recipes/" + id + "/information", {headers:{"X-Mashape-Key":this.key}})
     .then(this.handleHTTPError)
