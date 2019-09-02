@@ -37,9 +37,8 @@ class DinnerModel {
 
 
   getAllIngredients() {
-    this.allIngredients = this.menu.map(dish => dish.ingredients);
+    this.allIngredients = this.menu.map(dish => dish.extendedIngredients);
     return this.allIngredients;
-
   }
 
   getTotalMenuPrice(){
@@ -72,6 +71,7 @@ class DinnerModel {
     }
    
     this.menu.push(data);
+    console.log(this.getAllIngredients());
      
   }
 
