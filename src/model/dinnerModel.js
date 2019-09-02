@@ -5,8 +5,7 @@ class DinnerModel {
     this.dishes = dishesConst;
     this.noGuests = 0;
     this.menu = [];
-    this.allIngredients = [];
-    
+   
     function handleErrors(response) {
     	if (response.ok) {
     		return response;
@@ -37,12 +36,14 @@ class DinnerModel {
 
 
   getAllIngredients() {
-    this.allIngredients = this.menu.map(dish => dish.extendedIngredients);
-    return this.allIngredients;
+    let allIngredients = this.menu.map(dish => dish.extendedIngredients);
+    return allIngredients;
   }
 
   getTotalMenuPrice(){
-      let subPrices = this.allIngredients.map(subarray => subarray.map(obj => obj.price).reduce((acc, scalar) => acc + scalar, 0));
+  	  let allIngredients = getAllIngredients();
+      //let subPrices = this.allIngredients.map(subarray => subarray.map(obj => obj.price).reduce((acc, scalar) => acc + scalar, 0));
+      let subPrices = allIngredients.map(subarray => subarray.map(obj => obj.price).reduce((acc, scalar) => acc + scalar, 0));
       let totalPrice = subPrices.reduce((acc, scalar) => acc + scalar, 0);
       return this.noGuests*totalPrice;
   }
@@ -71,7 +72,6 @@ class DinnerModel {
     }
    
     this.menu.push(data);
-    console.log(this.getAllIngredients());
      
   }
 
