@@ -27,7 +27,7 @@ describe("DinnerModel", () => {
     });
   });
 
- /* describe("getting individual dishes", () => {
+  describe("getting individual dishes", () => {
     it("gets the correct dish", (done) => {
       model.getDish(559251)
       .then((data) => {
@@ -82,7 +82,7 @@ describe("DinnerModel", () => {
         done();
       });
     }).timeout(10000);
-  }); */
+  }); 
 
   describe("menu", () => {
     it("can add dishes, pizza", (done) => {

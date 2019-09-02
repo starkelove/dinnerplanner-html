@@ -5,7 +5,6 @@ class DinnerModel {
     this.dishes = dishesConst;
     this.noGuests = 0;
     this.menu = [];
-    //this.menu = new Map();
     this.allIngredients = [];
     
     function handleErrors(response) {
@@ -24,31 +23,12 @@ class DinnerModel {
     }
 
   }
-  
-  setMenu() {
-  	this.menu.set('starter');
-    this.menu.set('main dish');
-    this.menu.set('dessert');
-  	
-  
-  }
+
 
   getNumberOfGuests() {
     return this.noGuests;
   }
 
-  //Returns the dish that is on the menu for selected type
-  getSelectedDish(type) {
-    if(type == 'starter') {
-        return this.menu[0];
-    }
-    if(type == 'main dish') {
-        return this.menu[1];
-    }
-    if(type == 'dessert') {
-        return this.menu[2];
-    }
-  }
 
   //Returns all the dishes on the menu.
   getFullMenu() {
@@ -107,69 +87,50 @@ class DinnerModel {
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
   //if you don't pass any query, all the dishes will be returned
   getAllDishes(type, query) {
-  	let url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/search';
+  	let base_url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/search';
+  	let url = '';
   	let dishesAPI = [];
   	let type_url = [];
-  	let url_w_query = '';
-	let url_w_type = '';
+  
+	document.getElementById("loader").style.display = "block";
 	
   	if(type) {
   		type_url = type.split(' ');
   	}
   	
-  	document.getElementById("loader").style.display = "block";
-  	
-  	// if query passed return specific type and query
+  	// if query passed, return specific type and query
   	if(query) {
   		if(type_url.length > 1){
-  			url_w_query = url + '?' + 'type=' + type_url[0] + '%20course&query=' + query;
-  			console.log(url_w_query);
+  			url = base_url + '?' + 'type=' + type_url[0] + '%20course&query=' + query;
+  			console.log(url);
   		} else {
-  			url_w_query = url + '?' + 'type=' + type_url[0] + '&query=' + query;
-  			console.log(url_w_query);	
+  			url = base_url + '?' + 'type=' + type_url[0] + '&query=' + query;
+  			console.log(url);	
   		}
-  		
-    	return fetch(url_w_query, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
-    	.then(this.handleErrors)
-    	.then(response => response.json())
-    	.then(data => {
-    		dishesAPI = data.results;
-    		console.log(dishesAPI);
-    		return dishesAPI;
-    	
-    	}); 
-    } else if(type && query == null){ // if only type, return all of that specific type
-    	if(type_url.length > 1) {
-    		url_w_type = url + '?' + 'type=' + type_url[0] + '%20course';
-    		console.log(url_w_type);	
+  	
+  	} else if(type && query == null){ // if only type, return all of that specific type
+  		if(type_url.length > 1) {
+    		url = base_url + '?' + 'type=' + type_url[0] + '%20course';
+    		console.log(url);	
     	} else {
-    		url_w_type = url + '?' + 'type=' + type_url[0];
-    		console.log(url_w_type);
+    		url = base_url + '?' + 'type=' + type_url[0];
+    		console.log(url);
     	}
-    	return fetch(url_w_type, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
-    	.then(this.handleErrors)
-    	.then(response => response.json())
-    	.then(data => {
-    		dishesAPI = data.results;
-    		console.log(dishesAPI);
-    		return dishesAPI;
-    	
-    	}); 	
-    } else { // if you dont pass any query all the dishes will be returned
-	  	 return fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
+  	} else { // if you dont pass any query all the dishes will be returned
+  		url = base_url;	
+  	
+  	}
+ 
+  	return fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
 		.then(this.handleErrors)
 		.then(response => response.json())
 		.then(data => {
 			dishesAPI = data.results;
 			console.log(dishesAPI);
+			document.getElementById("loader").style.display = "none";
 			return dishesAPI;
 			
-		});
-		
-	
-    }
-    
-    
+		});   
   	
   }
 
@@ -179,7 +140,11 @@ class DinnerModel {
     document.getElementById("loader").style.display = "block";
     return fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
     .then(this.handleErrors)
-    .then(response => response.json());
+    .then(response => {
+    	document.getElementById("loader").style.display = "none";
+    	let data = response.json();
+    	return data;
+    });
  
   }
 }
