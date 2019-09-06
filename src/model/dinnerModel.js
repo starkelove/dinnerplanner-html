@@ -52,7 +52,7 @@ class DinnerModel {
   //Returns all ingredients for all the dishes on the menu.
   getAllIngredients() {
     var ingredients = this.menu.map(function (meny) {
-        return meny.ingredients;
+        return meny.extendedIngredients;
       });
     return ingredients;
   }
@@ -75,7 +75,7 @@ class DinnerModel {
 
     var totalPrice = accPrice.reduce((acc, total) => acc + total, 0);
 
-
+  //  console.log(totalPrice);
     return totalPrice*guests;
   }
 
