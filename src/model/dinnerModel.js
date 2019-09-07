@@ -42,8 +42,7 @@ class DinnerModel {
 
   getTotalMenuPrice(){
   	  let allIngredients = getAllIngredients();
-      //let subPrices = this.allIngredients.map(subarray => subarray.map(obj => obj.price).reduce((acc, scalar) => acc + scalar, 0));
-      let subPrices = allIngredients.map(subarray => subarray.map(obj => obj.price).reduce((acc, scalar) => acc + scalar, 0));
+      let subPrices = allIngredients.map(subarray => subarray.map(obj => obj.pricePerServing).reduce((acc, scalar) => acc + scalar, 0));
       let totalPrice = subPrices.reduce((acc, scalar) => acc + scalar, 0);
       return this.noGuests*totalPrice;
   }
@@ -51,17 +50,8 @@ class DinnerModel {
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   addDishToMenu(data) {
-  	let types = data.dishTypes;
+    let types = data.dishTypes;
   
-    /*if(this.menu.length > 0) {
-      for(let i = 0; i < this.menu.length; i++) {
-        let result = this.menu[i].dishTypes.filter(dishType => types.includes(dishType));
-        if(result.length > 0) {
-          this.removeDishFromMenu(this.menu[i].id);
-        }
-      }
-    }*/
-
     if(this.menu.length > 0) {
        this.menu.forEach(obj => {
         let result = obj.dishTypes.filter(dishType => types.includes(dishType));
