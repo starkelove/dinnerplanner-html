@@ -52,25 +52,25 @@ class DinnerModel {
   //it is removed from the menu and the new one added.
   addDishToMenu(data) {
   	let types = data.dishTypes;
-  	let type = '';
-    if(types.includes('starter')) {
-        type = 'starter';
-    }
-    else if(types.includes('main course' || 'main dish')) {
-        type = 'main dish';
-    }
-    else if(types.includes('dessert')) {
-        type = 'dessert';
-    }
-    
+  
+    /*if(this.menu.length > 0) {
+      for(let i = 0; i < this.menu.length; i++) {
+        let result = this.menu[i].dishTypes.filter(dishType => types.includes(dishType));
+        if(result.length > 0) {
+          this.removeDishFromMenu(this.menu[i].id);
+        }
+      }
+    }*/
+
     if(this.menu.length > 0) {
-    	let result = this.menu.filter(obj => obj.dishTypes.includes(type));
-    	if(result.length > 0) {
-    		this.removeDishFromMenu(result[0].id); 	
-    	}
-    
+       this.menu.forEach(obj => {
+        let result = obj.dishTypes.filter(dishType => types.includes(dishType));
+        if(result.length > 0) {
+          this.removeDishFromMenu(obj.id);
+        }
+      });
     }
-   
+    
     this.menu.push(data);
      
   }
