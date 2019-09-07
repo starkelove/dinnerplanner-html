@@ -1,5 +1,5 @@
-const assert = chai.assert;
-const expect = chai.expect;
+var assert = chai.assert;
+var expect = chai.expect;
 
 describe("DinnerModel", () => {
   let model = new DinnerModel();
@@ -28,6 +28,10 @@ describe("DinnerModel", () => {
   });
 
   describe("getting individual dishes", () => {
+    it("returns a promise", done => {
+      expect(model.getDish(559251) instanceof Promise).to.equal(true);
+      done();
+    });
     it("gets the correct dish", (done) => {
       model.getDish(559251)
       .then((data) => {
@@ -68,27 +72,21 @@ describe("DinnerModel", () => {
 
   describe("menu", () => {
     it("can add dishes", (done) => {
-      model.getDish(559251)
-      .then((data) => {
-        model.addDishToMenu(data);
-        expect(model.getFullMenu().length).to.equal(1);
-        expect(model.getFullMenu()[0].id).to.equal(559251);
-        done();
-      });
+      model.addDishToMenu(559251);
+      expect(model.getFullMenu().length).to.equal(1);
+      expect(model.getFullMenu()[0].id).to.equal(559251);
+      done();
     }).timeout(10000);
 
     it("can remove dishes", (done) => {
-      model.getDish(559251)
-      .then((data) => {
-        model.addDishToMenu(data);
-        expect(model.getFullMenu().length).to.equal(1);
-        expect(model.getFullMenu()[0].id).to.equal(559251);
+      model.addDishToMenu(559251);
+      expect(model.getFullMenu().length).to.equal(1);
+      expect(model.getFullMenu()[0].id).to.equal(559251);
 
-        model.removeDishFromMenu(559251);
-        expect(model.getFullMenu().length).to.equal(0);
-        expect(model.getFullMenu()).to.not.include(data);
-        done();
-      });
+      model.removeDishFromMenu(559251);
+      expect(model.getFullMenu().length).to.equal(0);
+      expect(model.getFullMenu()).to.not.include(data);
+      done();
     }).timeout(10000);
   });
 });
