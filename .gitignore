@@ -91,4 +91,4 @@ lerna-debug.log
 Thumbs.db
 
 #Config
-src/config.js
+src/model/config.js
