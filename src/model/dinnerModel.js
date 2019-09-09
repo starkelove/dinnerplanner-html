@@ -8,7 +8,6 @@ class DinnerModel {
     this.noGuests = 0;
     this.menu = [];
     this.apiDishes = [];
-    this.key = '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767';
     function handleHTTPError(response) {
       if(response.ok)
          return response;
@@ -125,10 +124,9 @@ class DinnerModel {
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
   //if you don't pass any query, all the dishes will be returned
   getAllDishes(type, query) {
-  	let url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/search';
+  	let url = endpoint + 'search';
   	let dishesAPI = [];
   	let type_url = [];
-
   	if(type) {
   		type_url = type.split(' ');
   	}
@@ -152,7 +150,7 @@ class DinnerModel {
     		console.log(url);
     	}
     }
-    return fetch(url, {headers: {'X-Mashape-Key' :this.key}})
+    return fetch(url, {headers: {'X-Mashape-Key' :apiKey}})
     .then(this.handleErrors)
     .then(response => response.json())
     .then(data => {
@@ -172,7 +170,7 @@ class DinnerModel {
       return this.apiDishes[id];
     }*/
     document.getElementById("loader").style.display = "block";
-    return fetch("http://sunset.nada.kth.se:8080/iprog/group/10/recipes/" + id + "/information", {headers:{"X-Mashape-Key":this.key}})
+    return fetch(endpoint + id + "/information", {headers:{"X-Mashape-Key":apiKey}})
     .then(this.handleHTTPError)
     .then(response => response.json())
     .then(data => {
