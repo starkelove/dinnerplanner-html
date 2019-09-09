@@ -3,9 +3,14 @@ window.onload = function () {
   //We instantiate our model
   const model = new DinnerModel();
 
-  const container = document.getElementsByClassName("page-content")[0]
-  const view = new OverviewView(container, model);
-  view.render()
+  const container = document.getElementsByClassName("page-content")[0];
+  //const view = new HomeView(container);
+  //const view = new OverviewView(container, model);
+  const view = new SearchView(container, model);
+  view.render();
+  
+
+
 
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
