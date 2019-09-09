@@ -5,13 +5,13 @@ class DinnerModel {
     this.dishes = dishesConst;
     this.noGuests = 0;
     this.menu = [];
-   
+
     function handleErrors(response) {
     	if (response.ok) {
     		return response;
     	}
     	throw Error(response.statusText);
-    	
+
 	}
 
   }
@@ -51,7 +51,7 @@ class DinnerModel {
   //it is removed from the menu and the new one added.
   addDishToMenu(data) {
     let types = data.dishTypes;
-  
+
     if(this.menu.length > 0) {
        this.menu.forEach(obj => {
         let result = obj.dishTypes.filter(dishType => types.includes(dishType));
@@ -60,9 +60,9 @@ class DinnerModel {
         }
       });
     }
-    
+
     this.menu.push(data);
-     
+
   }
 
   //Removes dish from menu
@@ -75,17 +75,17 @@ class DinnerModel {
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
   //if you don't pass any query, all the dishes will be returned
   getAllDishes(type, query) {
-  	let base_url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/search';
+  	let base_url = endpoint + 'search';
   	let url = '';
   	let dishesAPI = [];
   	let type_url = [];
-  
+
 	document.getElementById("loader").style.display = "block";
-	
+
   	if(type) {
   		type_url = type.split(' ');
   	}
-  	
+
   	// if query passed, return specific type and query
   	if(query) {
   		if(type_url.length > 1){
@@ -93,23 +93,23 @@ class DinnerModel {
   			console.log(url);
   		} else {
   			url = base_url + '?' + 'type=' + type_url[0] + '&query=' + query;
-  			console.log(url);	
+  			console.log(url);
   		}
-  	
+
   	} else if(type && query == null){ // if only type, return all of that specific type
   		if(type_url.length > 1) {
     		url = base_url + '?' + 'type=' + type_url[0] + '%20course';
-    		console.log(url);	
+    		console.log(url);
     	} else {
     		url = base_url + '?' + 'type=' + type_url[0];
     		console.log(url);
     	}
   	} else { // if you dont pass any query all the dishes will be returned
-  		url = base_url;	
-  	
+  		url = base_url;
+
   	}
- 
-  	return fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
+
+  	return fetch(url, {headers: {'X-Mashape-Key' : apiKey}})
 		.then(this.handleErrors)
 		.then(response => response.json())
 		.then(data => {
@@ -117,23 +117,23 @@ class DinnerModel {
 			console.log(dishesAPI);
 			document.getElementById("loader").style.display = "none";
 			return dishesAPI;
-			
-		});   
-  	
+
+		});
+
   }
 
   //Returns a dish of specific ID
   getDish(id) {
-    let url = 'http://sunset.nada.kth.se:8080/iprog/group/10/recipes/' + id + '/information';  
+    let url = endpoint + id + '/information';  
     document.getElementById("loader").style.display = "block";
-    return fetch(url, {headers: {'X-Mashape-Key' : '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}})
+    return fetch(url, {headers: {'X-Mashape-Key' : apiKey}})
     .then(this.handleErrors)
     .then(response => {
     	document.getElementById("loader").style.display = "none";
     	let data = response.json();
     	return data;
     });
- 
+
   }
 }
 
