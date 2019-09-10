@@ -49,6 +49,8 @@ class DinnerModel {
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
+  //Adds the passed dish to the menu. If the dish of that type already exists on the menu
+  //it is removed from the menu and the new one added.
   addDishToMenu(data) {
     let types = data.dishTypes;
 
@@ -123,17 +125,20 @@ class DinnerModel {
   }
 
   //Returns a dish of specific ID
-  getDish(id) {
-    let url = endpoint + id + '/information';  
+  async getDish(id) {
+    let url = endpoint + id + '/information';
     document.getElementById("loader").style.display = "block";
-    return fetch(url, {headers: {'X-Mashape-Key' : apiKey}})
+    let promise = fetch(url, {headers: {'X-Mashape-Key' : apiKey}})
     .then(this.handleErrors)
     .then(response => {
     	document.getElementById("loader").style.display = "none";
     	let data = response.json();
+      //console.log("I getDish");
     	return data;
     });
+    let result = await promise;
 
+    return result;
   }
 }
 
