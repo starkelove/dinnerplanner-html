@@ -21,7 +21,40 @@
     <div id="loader" class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
     </div>
-</div>
+</div> 
+
+<div class="row">
+        <style>div{border:0px solid; padding-left: 30px;}</style>
+        <div class="col-3">
+            <script>
+                window.onload = function () {
+                    const model = new DinnerModel();
+                    console.log(document.querySelector("#sideBarView"));
+                    //const container = document.getElementsByClassName("#sideBarView");
+                    //const view = new SideBarView(container, model);
+                    const view = new SideBarView(document.querySelector("#page-content"), model);
+                    view.render();
+                };
+            </script>
+        </div>
+</div> 
+
+
+
+
+
+<!-- <div class="row">
+    <style>div{border:0px solid; padding-left: 30px;}</style>
+    <div class="col-3"> 
+        <script>
+            const model = new DinnerModel();
+            const container = document.getElementsByClassName("page-content")[0];
+            const view = new SideBarView(container, model);
+            view.render();
+        </script> 
+    </div>
+    <div class="col-9"> hello </div>
+</div> -->
 
 
 
@@ -40,11 +73,10 @@
 
 <!-- The application JavaScript code -->
 <script src="src/model/dinnerModel.js"></script>
-<script src="src/app.js"></script>
+<!-- <script src="src/app.js"></script> -->
 <script src="src/model/dinnerModel.test.js"></script>
 <script src="src/view/homeView.js"></script>
 <script src="src/view/searchView.js"></script>
-<script src="src/view/overviewView.js"></script>
 <script src="src/view/sideBarView.js"></script>
 
 </body>
