@@ -44,6 +44,7 @@
     }
     .sidebar a {float: left;}
     div.content {margin-left: 0;}
+    .col-3{max-width: 100%;}
   }
 
    /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
@@ -52,6 +53,8 @@
       text-align: center;
       float: none;
     }
+
+  }
 
     form {
       width: 300px;
@@ -104,4 +107,8 @@
 .btn{ 
   text-align: center; 
 }
+
   
+.body{
+  text-align: center;
+}
