@@ -6,12 +6,18 @@ describe("DinnerPlanner App", () => {
   let homeView = null;
   let searchView = null;
   let overviewView = null;
+  let sideBarView = null;
 
   beforeEach(() => {
     model = new DinnerModel();
     homeView = new HomeView(document.querySelector("#page-content"));
     searchView = new SearchView(document.querySelector("#page-content"), model);
     overviewView = new OverviewView(document.querySelector("#page-content"), model);
+    //const view = new HomeView(container);
+    //const view = new OverviewView(container, model);
+    //const view = new SearchView(container, model);
+    //view.render();
+    sideBarView = new SideBarView(document.querySelector("#page-content"), model);
   });
 
   describe("Home View", () => {
@@ -26,6 +32,7 @@ describe("DinnerPlanner App", () => {
     beforeEach(() => {
       model.getDish(559251).then(data => {model.addDishToMenu(data)});
       searchView.render();
+      sideBarView.render();
     });
 
     it("has a sidebar", () => {
@@ -56,6 +63,8 @@ describe("DinnerPlanner App", () => {
 
     it("Has a number of guests value", () => {
       const valueHolders = document.getElementsByClassName("value-num-guests");
+    //  const valueHolders = document.getElementById("value-num-guests").value;
+      console.log(document.getElementById("value-num-guests").value);
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");

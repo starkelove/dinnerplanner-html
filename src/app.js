@@ -3,13 +3,14 @@ window.onload = function () {
   //We instantiate our model
   const model = new DinnerModel();
 
-  const view = new HomeView(container, model);
+  //const view = new HomeView(container, model);
 
   console.log(document.getElementsByClassName("page-content")[0]);
   const container = document.getElementsByClassName("page-content")[0];
   //const view = new HomeView(container);
   //const view = new OverviewView(container, model);
   //const view = new SearchView(container, model);
+  //view.render();
   const view = new SideBarView(container, model);
   view.render();
 

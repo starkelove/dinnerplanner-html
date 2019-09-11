@@ -127,11 +127,11 @@ class DinnerModel {
   //Returns a dish of specific ID
   async getDish(id) {
     let url = endpoint + id + '/information';
-    document.getElementById("loader").style.display = "block";
+  //  document.getElementById("loader").style.display = "block";
     let promise = fetch(url, {headers: {'X-Mashape-Key' : apiKey}})
     .then(this.handleErrors)
     .then(response => {
-    	document.getElementById("loader").style.display = "none";
+//    	document.getElementById("loader").style.display = "none";
     	let data = response.json();
       //console.log("I getDish");
     	return data;
