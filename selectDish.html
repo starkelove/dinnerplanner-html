@@ -36,12 +36,15 @@
                         <div class="col-4">
                             <form>
                                 <p class="text"> People </p>
-                                <div class="value-num-guests">
+                                <!-- <div class="value-num-guests">
                                     <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
                                         <input type="number" id="number" value="0" />
                                     <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
-
-                                </div>
+                                </div> -->
+                                <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
+                                    <input type="number" id="value-num-guests" value="0" />
+                                <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
+                                
                             </form>    
                         </div>
                     
@@ -88,12 +91,12 @@
 <script src="https://unpkg.com/chai/chai.js"></script>
 
 <!-- The application JavaScript code -->
-<script src="src/model/dinnerModel.js"></script>
-<script src="src/app.js"></script>
-<script src="src/model/dinnerModel.test.js"></script>
-<script src="src/view/homeView.js"></script>
-<script src="src/view/searchView.js"></script>
-<script src="src/view/sideBarView.js"></script>
+<script src="model/dinnerModel.js"></script>
+<script src="app.js"></script>
+<script src="model/dinnerModel.test.js"></script>
+<script src="view/homeView.js"></script>
+<script src="view/searchView.js"></script>
+<script src="view/sideBarView.js"></script>
 
 </body>
 </html>

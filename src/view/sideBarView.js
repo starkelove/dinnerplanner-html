@@ -6,13 +6,15 @@ class SideBarView {
     }
 
     render() {
-        document.getElementById("number").defaultValue = this.model.getNumberOfGuests();
+        document.getElementById("value-num-guests").value = this.model.getNumberOfGuests();
+        console.log(document.getElementById("value-num-guests").value);
         this.afterRender();
 
     }
 
     afterRender() {
         this.sideBarView = document.getElementById("sideBarView");
+        console.log(this.sideBarView = document.getElementById("sideBarView"));
     }
 
 }

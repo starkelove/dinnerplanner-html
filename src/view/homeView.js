@@ -27,6 +27,7 @@ class HomeView {
   }
 
   afterRender() {
-    this.startBtn = document.getElementById("startBtn");
+    //this.startBtn = document.getElementById("startBtn");
+    this.startBtn = this.container.getElementsByClassName("#startBtn");
   }
 }
