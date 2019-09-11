@@ -6,6 +6,7 @@ class SideBarView {
     }
 
     render() {
+        document.getElementById("number").defaultValue = this.model.getNumberOfGuests();
         this.afterRender();
 
     }

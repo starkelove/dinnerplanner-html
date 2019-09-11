@@ -7,9 +7,14 @@ window.onload = function () {
   //const container = document.getElementsByClassName("page-content")[0];
 
   const container = document.getElementById("selectDish-container");
-  console.log(container)
-  const view = new SideBarView(container, model);
-  view.render();
+  const view1 = new SideBarView(container, model);
+  console.log(document.getElementById("number").defaultValue);
+  console.log(document.getElementsByClassName("value-num-guests"));
+  view1.render();
+
+
+  //const view2 = new SearchView(container, model);
+  //view2.render();
   
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
