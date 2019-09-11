@@ -56,48 +56,49 @@
 
   }
 
-    form {
-      width: 300px;
-      margin: 0 auto;
-      text-align: center;
-      padding-top: 0px;
-    }
+  form {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 0px;
+    float: left;
+  }
 
-    .value-button:hover {
-      cursor: pointer;
-    }
-    
-    form #decrease {
-      margin-right: -4px;
-      border-radius: 8px 0 0 8px;
-    }
-    
-    form #increase {
-      margin-left: -4px;
-      border-radius: 0 8px 8px 0;
-    }
-    
-    form #input-wrap {
-      margin: 0px;
-      padding: 0px;
-    }
-    
-    input#number {
-      text-align: center;
-      border: none;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      margin: 0px;
-      width: 40px;
-      height: 40px;
-    }
-    
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-  } 
+  .value-button:hover {
+    cursor: pointer;
+  }
+  
+  form #decrease {
+    margin-right: -4px;
+    border-radius: 8px 0 0 8px;
+  }
+  
+  form #increase {
+    margin-left: -4px;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  form #input-wrap {
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  input#number {
+    text-align: center;
+    border: none;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 0px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+  
 
 /* Max width of the page */
 .container {
@@ -107,8 +108,15 @@
 .btn{ 
   text-align: center; 
 }
-
   
 .body{
   text-align: center;
+}
+
+/*.value-button {
+  float: left;
+}*/
+
+.text {
+  float: left;
 }
