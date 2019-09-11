@@ -12,7 +12,7 @@
   .sidebar a {
     display: block;
     color: black;
-    padding: 16px;
+    padding: 7px;
     text-decoration: none;
   }
   
@@ -98,6 +98,10 @@
 
 /* Max width of the page */
 .container {
-    max-width: 100%;
+  max-width: 100%;
+}
+
+.btn{ 
+  text-align: center; 
 }
   
