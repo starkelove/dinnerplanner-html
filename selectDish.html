@@ -16,29 +16,43 @@
 
 </head>
 <body>
-<div class="container page-content">
-    <h1>Dinner planner</h1>
-    <div id="loader" class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
+
+<div id="selectDish-container">
+    <style>div{border:0px solid; padding-left: 30px;}</style>
+    <div class="header d-flex align-items-center justify-content-center">
+        <h1>Dinner Planner</h1>
     </div>
-</div> 
 
-<div class="row">
-        <style>div{border:0px solid; padding-left: 30px;}</style>
+    <div class="row">
         <div class="col-3">
-            <script>
-                window.onload = function () {
-                    const model = new DinnerModel();
-                    console.log(document.querySelector("#sideBarView"));
-                    //const container = document.getElementsByClassName("#sideBarView");
-                    //const view = new SideBarView(container, model);
-                    const view = new SideBarView(document.querySelector("#page-content"), model);
-                    view.render();
-                };
-            </script>
+            <div id="sideBarView" class="sidebar">
+                    <div class="row">
+                        <div class="col-9">
+                            <h4> My dinner </h4>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-3"> People </div>
+                            <div class="col-9">
+                                <form>
+                                    <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
+                                        <input type="number" id="number" value="0" />
+                                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
+                                </form>
+                            </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-6"> Dish Name</div>
+                        <div class="col-6"> Cost </div>
+                    </div>
+                </div>            
         </div>
+        </div class="col-9"> </div>    
+    </div>
+    
 </div> 
-
 
 
 
@@ -73,7 +87,7 @@
 
 <!-- The application JavaScript code -->
 <script src="src/model/dinnerModel.js"></script>
-<!-- <script src="src/app.js"></script> -->
+<script src="src/app.js"></script>
 <script src="src/model/dinnerModel.test.js"></script>
 <script src="src/view/homeView.js"></script>
 <script src="src/view/searchView.js"></script>
