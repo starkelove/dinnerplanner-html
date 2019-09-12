@@ -8,16 +8,17 @@ class SearchView {
 
   render(dishId) {
     this.container.innerHTML = content;
-    document.getElementById("number").innerHTML = this.model.getNumberOfGuests();
-    console.log(this.container)
+    //document.getElementById("value-num-guests").innerHTML = this.model.getNumberOfGuests();
+    document.getElementsByClassName("value-num-guests").innerHTML = this.model.getNumberOfGuests();
+    document.getElementById("number").value = this.model.getNumberOfGuests();
+    //console.log(document.getElementsByClassName("value-num-guests").innerHTML);
     this.afterRender();
   }
   
   afterRender() {
     //this.dishSearchView = this.container.getElementById("dishSearchView");
-    this.dishSearchView = document.getElementsByClassName("#dishSearchView");
+    this.dishSearchView = document.getElementById("#dishSearchView");
     this.sideBarView = document.getElementById("sideBarView");
-    console.log(this.sideBarView);
   }
   
 }
@@ -42,13 +43,10 @@ const content = /* template */ `
                           <div class="col-4">
                               <form>
                                   <p class="text"> People </p>
-                                  <div class="value-num-guests">
-                                      <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
-                                          <input type="number" id="number" value="0" />
-                                      <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
-                                  </div>
-                                  
-                                  
+                                    <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
+                                        <input type="number" class="value-num-guests" id="number" value="0" />
+                                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
+                                 
                               </form>    
                           </div>
                       

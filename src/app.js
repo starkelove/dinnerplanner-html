@@ -2,14 +2,9 @@ window.onload = function () {
   console.log("start");
   //We instantiate our model
   const model = new DinnerModel();
-
-  //console.log(document.getElementsByClassName("page-content")[0]);
-  //const container = document.getElementsByClassName("page-content")[0];
-
-  const container = document.getElementById("selectDish-container");
-  const view = new SideBarView(container, model);
-  //console.log(document.getElementById("number").defaultValue);
-  console.log(document.getElementById("value-num-guests").value);
+  const container = document.getElementsByClassName("selectDish-container")[0];
+  console.log(container);
+  const view = new SearchView(container, model);
   view.render();
   
   /**
