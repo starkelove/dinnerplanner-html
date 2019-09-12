@@ -9,9 +9,10 @@ class SearchView {
   render(dishId) {
     this.container.innerHTML = content;
     //document.getElementById("value-num-guests").innerHTML = this.model.getNumberOfGuests();
-    document.getElementsByClassName("value-num-guests").innerHTML = this.model.getNumberOfGuests();
+    document.getElementsByClassName("value-num-guests").innerHTML = ""+this.model.getNumberOfGuests();
     document.getElementById("number").value = this.model.getNumberOfGuests();
-    //console.log(document.getElementsByClassName("value-num-guests").innerHTML);
+    console.log("value-num-gest");
+    console.log(document.getElementsByClassName("value-num-guests"));
     this.afterRender();
   }
   
@@ -42,14 +43,12 @@ const content = /* template */ `
                       <div class="row">   
                           <div class="col-4">
                               <form>
-                                  <p class="text"> People </p>
-                                    <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
-                                        <input type="number" class="value-num-guests" id="number" value="0" />
-                                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
-                                 
+                                <p class="text"> People </p>
+                                <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
+                                    <input type="number" class="value-num-guests" id="number" value="0" />
+                                <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
                               </form>    
                           </div>
-                      
                       </div>
                       
                       <div class="row">

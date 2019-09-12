@@ -55,12 +55,9 @@ describe("DinnerPlanner App", () => {
     }).timeout(3000);
 
     it("Has a number of guests value", () => {
-      const valueHolders = document.getElementsByClassName("value-num-guests");
-      expect(valueHolders.length).to.be.above(0);
-      for (let v of valueHolders) {
-        expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal(""+model.getNumberOfGuests());
-      }
+      const valueHolder = document.getElementsByClassName("value-num-guests");
+      expect(valueHolder.length).to.be.above(0);
+      expect(valueHolder.innerHTML).to.equal(""+model.getNumberOfGuests());
     });
 
     it("Has data on current dishes", () => {

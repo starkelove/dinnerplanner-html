@@ -3,7 +3,7 @@ window.onload = function () {
   //We instantiate our model
   const model = new DinnerModel();
   const container = document.getElementsByClassName("selectDish-container")[0];
-  console.log(container);
+  //console.log(container);
   const view = new SearchView(container, model);
   view.render();
   
