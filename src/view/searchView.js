@@ -7,7 +7,22 @@ class SearchView {
   }
 
   render(dishId) {
-    var content = /* template */ `
+    this.container.innerHTML = content;
+    document.getElementById("number").innerHTML = this.model.getNumberOfGuests();
+    console.log(this.container)
+    this.afterRender();
+  }
+  
+  afterRender() {
+    //this.dishSearchView = this.container.getElementById("dishSearchView");
+    this.dishSearchView = document.getElementsByClassName("#dishSearchView");
+    this.sideBarView = document.getElementById("sideBarView");
+    console.log(this.sideBarView);
+  }
+  
+}
+
+const content = /* template */ `
     <div id="selectDish-container">
     <style>div{border:0px solid; padding-left: 30px; padding-right: 30px;}</style>
     <div class="header d-flex align-items-center justify-content-center">
@@ -64,15 +79,3 @@ class SearchView {
       </div>
   </div> 
     `;
-  
-    //this.container.innerHTML = content;
-    this.afterRender();
-  }
-  
-  afterRender() {
-    //this.dishSearchView = this.container.getElementById("dishSearchView");
-    this.dishSearchView = document.getElementsByClassName("#dishSearchView");
-    this.sideBarView = document.getElementById("sideBarView");
-    console.log(this.sideBarView);
-  }
-}
