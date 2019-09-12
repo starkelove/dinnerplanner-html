@@ -41,9 +41,7 @@ class DinnerModel {
   }
 
   getTotalMenuPrice(){
-  	  let allIngredients = getAllIngredients();
-      let subPrices = allIngredients.map(subarray => subarray.map(obj => obj.pricePerServing).reduce((acc, scalar) => acc + scalar, 0));
-      let totalPrice = subPrices.reduce((acc, scalar) => acc + scalar, 0);
+      let totalPrice = this.menu.map(obj => obj.pricePerServing).reduce((acc, scalar) => acc + scalar, 0);
       return this.noGuests*totalPrice;
   }
 
