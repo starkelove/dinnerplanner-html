@@ -7,8 +7,12 @@ describe("DinnerPlanner App", () => {
   let searchView = null;
   let overviewView = null;
 
-  beforeEach(() => {
+  beforeEach(async() => {
     model = new DinnerModel();
+    await model.getDish(559251).then(data => {
+      model.addDishToMenu(data);
+    });
+    model.setNumberOfGuests(1); 
     homeView = new HomeView(document.querySelector("#page-content"));
     searchView = new SearchView(document.querySelector("#page-content"), model);
     overviewView = new OverviewView(document.querySelector("#page-content"), model);
@@ -24,7 +28,6 @@ describe("DinnerPlanner App", () => {
 
   describe("Search view", () => {
     beforeEach(() => {
-      model.addDishToMenu(559251);
       searchView.render();
     });
 
@@ -55,9 +58,12 @@ describe("DinnerPlanner App", () => {
     }).timeout(3000);
 
     it("Has a number of guests value", () => {
-      const valueHolder = document.getElementsByClassName("value-num-guests");
-      expect(valueHolder.length).to.be.above(0);
-      expect(valueHolder.innerHTML).to.equal(""+model.getNumberOfGuests());
+      const valueHolders = document.getElementsByClassName("value-num-guests");
+      expect(valueHolders.length).to.be.above(0);
+      for (let v of valueHolders) {
+        expect(v).to.not.be.a("null");
+        expect(v.innerHTML).to.equal(""+model.getNumberOfGuests());
+      }
     });
 
     it("Has data on current dishes", () => {
@@ -81,7 +87,6 @@ describe("DinnerPlanner App", () => {
 
   describe("Confirmation page", () => {
     beforeEach(() => {
-      model.addDishToMenu(559251);
       overviewView.render();
     });
 

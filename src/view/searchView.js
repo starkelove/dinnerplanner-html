@@ -6,31 +6,35 @@ class SearchView {
     this.sideBarView = null;
   }
 
-  render(dishId) {
+  async render(dishId) {
     this.container.innerHTML = content;
-    //document.getElementById("value-num-guests").innerHTML = this.model.getNumberOfGuests();
-    document.getElementsByClassName("value-num-guests").innerHTML = ""+this.model.getNumberOfGuests();
+   
+    document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
     document.getElementById("number").value = this.model.getNumberOfGuests();
-    console.log("value-num-gest");
-    console.log(document.getElementsByClassName("value-num-guests"));
+
+    document.getElementsByClassName("value-main-course-name")[0].innerHTML = this.model.menu[0].title;
+    document.getElementsByClassName("value-total-price")[0].innerHTML += (this.model.getTotalMenuPrice()*this.model.getNumberOfGuests());
+
     this.afterRender();
   }
   
   afterRender() {
-    //this.dishSearchView = this.container.getElementById("dishSearchView");
     this.dishSearchView = document.getElementById("#dishSearchView");
     this.sideBarView = document.getElementById("sideBarView");
+    document.getElementById("loader").style.display = "none";
   }
   
 }
 
 const content = /* template */ `
+    <div id="loader" class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
     <div id="selectDish-container">
     <style>div{border:0px solid; padding-left: 30px; padding-right: 30px;}</style>
     <div class="header d-flex align-items-center justify-content-center">
         <h1>Dinner Planner</h1>
     </div>
-
     <div class="row">
           <div class="col-3">
               <div id="sideBarView" class="sidebar">
@@ -52,12 +56,16 @@ const content = /* template */ `
                       </div>
                       
                       <div class="row">
-                          <div class="col-6"> Dish Name</div>
-                          <div class="col-6"> Cost </div>
+                            <div class="col-6"> Dish Name </div>
+                            <div class="col-6"> Cost </div>  
                       </div>
                       <div class="row">
-                          <div class="col-6"> </div>
-                          <div class="col-6"> SEK </div>
+                          <div class="col-6">
+                            <p class="value-main-course-name"> </p>
+                          </div>
+                          <div class="col-6"> 
+                          <p class="value-total-price"></p>
+                          </div>
                       </div>
                       <div class="row">
                           <div class="col-12">
@@ -70,7 +78,11 @@ const content = /* template */ `
           </div>
           <div class="col-9">
               <div id="dishSearchView">
-                  <p class="text"> FIND A DISH </p>
+                  <p class="text-center p-max-width">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel laoreet orci. Nullam ut iaculis diam. Aliquam
+                    magna nulla, congue ut elementum hendrerit, dignissim at mauris. Quisque ac felis sed nibh elementum euismod a sit amet
+                    arcu. Maecenas a efficitur leo.
+                </p>
               </div>
           </div>    
       </div>
