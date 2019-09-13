@@ -23,7 +23,6 @@ class DinnerModel {
 
   }
 
-
   getNumberOfGuests() {
     return this.noGuests;
   }
@@ -41,17 +40,16 @@ class DinnerModel {
   }
 
   getTotalMenuPrice(){
-  	  let allIngredients = getAllIngredients();
-      let subPrices = allIngredients.map(subarray => subarray.map(obj => obj.pricePerServing).reduce((acc, scalar) => acc + scalar, 0));
-      let totalPrice = subPrices.reduce((acc, scalar) => acc + scalar, 0);
-      return this.noGuests*totalPrice;
+      let items = this.getFullMenu();
+      let prices = items.map(obj => obj.pricePerServing).reduce((acc, scalar) => acc + scalar, 0);
+      return this.noGuests*prices;
   }
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
-  addDishToMenu(data) {
+  async addDishToMenu(data) {
     let types = data.dishTypes;
 
     if(this.menu.length > 0) {
@@ -63,8 +61,7 @@ class DinnerModel {
       });
     }
 
-    this.menu.push(data);
-
+    await this.menu.push(data);
   }
 
   //Removes dish from menu
@@ -151,10 +148,11 @@ class DinnerModel {
 // can sometimes be empty like in the example of eggs where
 // you just say "5 eggs" and not "5 pieces of eggs" or anything else.
 const dishesConst = [{
-  'id': 1,
-  'name': 'French toast',
+  'id': 559251,
+  'title': 'Breakfast Pizza',
   'type': 'starter',
   'image': 'toast.jpg',
+  'pricePerServing': '169',
   'description': "In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.",
   'ingredients': [{
     'name': 'eggs',
@@ -187,6 +185,7 @@ const dishesConst = [{
   'name': 'Sourdough Starter',
   'type': 'starter',
   'image': 'sourdough.jpg',
+  'pricePerServing': '169',
   'description': "Here is how you make it... Lore ipsum...",
   'ingredients': [{
     'name': 'active dry yeast',
@@ -392,6 +391,7 @@ const dishesConst = [{
   }]
 }
 ];
+
 
 // Deepfreeze
 // https://github.com/substack/deep-freeze/blob/master/index.js

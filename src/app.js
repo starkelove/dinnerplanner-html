@@ -1,17 +1,19 @@
 window.onload = function () {
-  console.log("start");
+  //console.log("start");
   //We instantiate our model
   const model = new DinnerModel();
 
   //const view = new HomeView(container, model);
 
-  console.log(document.getElementsByClassName("page-content")[0]);
-  const container = document.getElementsByClassName("page-content")[0];
+//  console.log(document.getElementsByClassName("page-content"));
+  const container = document.getElementsByClassName("selectDish-container")[0];
+//  console.log(container);
   //const view = new HomeView(container);
   //const view = new OverviewView(container, model);
-  //const view = new SearchView(container, model);
+  const view = new SearchView(container, model);
   //view.render();
-  const view = new SideBarView(container, model);
+  //const view = new SearchView(document.querySelector("#page-content"), model);
+
   view.render();
 
 

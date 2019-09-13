@@ -16,7 +16,13 @@
 
 </head>
 <body>
-  <div class="container page-content">
+<div class="container selectDish-container">
+      <h1>Dinner planner</h1>
+      <div id="loader" class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+      </div>
+</div>
+  <!--div class="container page-content">
       <h1>Dinner planner</h1>
       <div id="loader" class="spinner-border" role="status">
           <span class="sr-only">Loading...</span>
@@ -43,8 +49,9 @@
                             <div class="col-9">
                                 <form>
                                     <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
-                                        <input type="number" id="value-num-guests" value="0" />
-                                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
+                                        <input type="number" class="value-num-guests" value="0">
+                                        <!-div class="value-num-guests" type="number">0</div-->
+                                    <!--div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
                                 </form>
                             </div>
                     </div>
@@ -69,7 +76,7 @@
         </div class="col-9"> </div>
     </div>
 
-</div>
+</div-->
 
 
 
@@ -103,12 +110,13 @@
 <script src="https://unpkg.com/chai/chai.js"></script>
 
 <!-- The application JavaScript code -->
-<script src="src/model/dinnerModel.js"></script>
 <script src="src/app.js"></script>
-<script src="src/model/dinnerModel.test.js"></script>
-<script src="src/view/homeView.js"></script>
 <script src="src/view/searchView.js"></script>
-<script src="src/view/sideBarView.js"></script>
+<script src="src/model/dinnerModel.js"></script>
+<script src="src/model/config.js"></script>
+<!--script src="src/model/dinnerModel.test.js"></script>
+<script src="src/view/homeView.js"></script>
+<script src="src/view/sideBarView.js"></script-->
 
 </body>
 </html>
