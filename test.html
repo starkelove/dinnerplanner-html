@@ -20,6 +20,7 @@
     </div>
 
     <div id="mocha"></div>
+    
 
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
     <!-- It also includes jQuery, only for use by Bootstrap -->
@@ -39,14 +40,17 @@
 
     <!-- The application JavaScript code -->
     <script src="src/model/dinnerModel.js"></script>
+    <script src="src/model/config.js"></script>
     <script src="src/view/homeView.js"></script>
     <script src="src/view/searchView.js"></script>
+    <script src="src/view/sideBarView.js"></script>
     <script src="src/view/overviewView.js"></script>
     <script src="src/view/sidebarView.js"></script>
     <script src="src/controller/sidebarController.js"></script>
 
     <script src="src/model/dinnerModel.test.js"></script>
     <script src="src/app.test.js"></script>
+
 
     <script class="mocha-exec">
       mocha.run();

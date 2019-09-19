@@ -1,7 +1,14 @@
-window.onload = function () {
+window.onload = async function () {
   console.log("start");
   //We instantiate our model
   const model = new DinnerModel();
+  await model.getDish(559251).then(data => {
+    model.addDishToMenu(data);
+  });
+  model.setNumberOfGuests(1);
+  const container = document.getElementsByClassName("selectDish-container")[0];
+  const view = new SearchView(container, model);
+  view.render();
 
   const container = document.getElementsByClassName("page-content")[0]
   const view = new OverviewView(container, model);
