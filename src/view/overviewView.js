@@ -42,33 +42,14 @@ class OverviewView {
       `;
 
       this.container.innerHTML = content;
-      /*
-      const paragraph = this.container.appendChild(document.createElement('P'))
-      paragraph.innerHTML = "This dinner will be Awesome!";
 
-      const num_people_val = 3;
-      const paragraph2 = this.container.appendChild(document.createElement('P'))
-      const num_people = paragraph2.appendChild(document.createElement('SPAN'))
-      num_people.innerHTML = num_people_val;
-      paragraph2.innerHTML += " people are coming!";
-
-      const paragraph3 = this.container.appendChild(document.createElement('P'))
-      paragraph3.innerHTML = "We will be eating the following:";
-
-      const list = this.container.appendChild(document.createElement('UL'))
-
-      for(const food of ["Bread!", "Ham!", "Pizza!"]) {
-        list.appendChild(document.createElement('UL')).innerHTML = food;
-      }
-      */
       document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
-      //document.getElementById("number").value = this.model.getNumberOfGuests();
       document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
 
       let array = this.model.getFullMenu();
       let title = array.map(dish => dish.title);
       document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
-    //  document.getElementsByClassName("dishItems")[0].innerHTML = title;
+
       this.afterRender();
     }
 
