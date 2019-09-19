@@ -13,12 +13,13 @@ class SearchView {
     this.container.innerHTML = content;
     document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
     document.getElementById("number").value = this.model.getNumberOfGuests();
-    document.getElementsByClassName("value-main-course-name")[0].innerHTML = this.model.getFullMenu()[0].title;
+
     document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
 
     let array = this.model.getFullMenu();
     let title = array.map(dish => dish.title);
-
+    document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
+    document.getElementsByClassName("dishItems")[0].innerHTML = title;
     this.afterRender();
   }
 
@@ -84,11 +85,31 @@ const content =/* template */ `
      </div>
      <div class="col-9">
          <div id="dishSearchView">
+         <div class="row">
+         Find a dish!
 
+         </div>
+         <div class="row">
+         <div class="col-3">
+            <input type="text" id="text" value="" />
+            </div>
+            <div class="col-3">
+            <select>
+              <option value="empty"></option>
+              <option value="starter">Starter</option>
+              <option value="main">Main Course</option>
+              <option value="dessert">Dessert</option>
+              </select>
+            </div>
+            <a id="searchBtn" class="btn btn-info">
+                Search
+            </a>
+          </div>
+          <div class="row">
+          <div class="dishItems" id="dishItems"></div>
+          </div>
              <p class="text-center p-max-width">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel laoreet orci. Nullam ut iaculis diam. Aliquam
-                    magna nulla, congue ut elementum hendrerit, dignissim at mauris. Quisque ac felis sed nibh elementum euismod a sit amet
-                    arcu. Maecenas a efficitur leo.
+
                 </p>
          </div>
      </div>
