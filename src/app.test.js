@@ -9,8 +9,11 @@ describe("DinnerPlanner App", () => {
   let sidebarView = null;
   let sidebarController = null;
 
-  beforeEach(() => {
+
+  beforeEach(async() => {
     model = new DinnerModel();
+    await model.getDish(559251).then(data => {model.addDishToMenu(data)});
+    model.setNumberOfGuests(1);
     homeView = new HomeView(document.querySelector("#page-content"));
     searchView = new SearchView(document.querySelector("#page-content"), model);
     overviewView = new OverviewView(document.querySelector("#page-content"), model);
