@@ -27,6 +27,14 @@ window.onload = async function () {
     const view = new OverviewView(container, model);
     view.render();
   }
+
+  if(document.getElementsByClassName("detailDish-container")[0]){
+    const container = document.getElementsByClassName("detailDish-container")[0];
+    const view = new DetailView(container, model);
+    view.render();
+  }
+
+  
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
    * query for elements in the whole document.
