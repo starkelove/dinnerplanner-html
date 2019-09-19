@@ -34,7 +34,12 @@ window.onload = async function () {
     view.render();
   }
 
-  
+  if(document.getElementsByClassName("printView-container")[0]){
+    const container = document.getElementsByClassName("printView-container")[0];
+    const view = new PrintView(container, model);
+    view.render();
+  }
+
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
    * query for elements in the whole document.
