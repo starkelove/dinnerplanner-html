@@ -5,6 +5,7 @@ class DinnerModel {
     this.dishes = dishesConst;
     this.noGuests = 0;
     this.menu = [];
+    this.observers = [];
 
     function handleErrors(response) {
     	if (response.ok) {
@@ -16,10 +17,22 @@ class DinnerModel {
 
   }
 
+  addObserver(observer) {
+    this.observers.push(observer);
+
+  }
+
+  notifyObservers(changeDetails) {
+    for(var i=0; i<this.observers.length; i++) {
+          this.observers[i].update(changeDetails);
+    }	
+  }
+
   setNumberOfGuests(num) {
     if(num >= 0){
         this.noGuests = num;
     }
+    this.notifyObservers("numberOfGuestsUpdate");
 
   }
 
@@ -62,11 +75,13 @@ class DinnerModel {
     }
 
     await this.menu.push(data);
+    this.notifyObservers("menuUpdate");
   }
 
   //Removes dish from menu
   removeDishFromMenu(id) {
     this.menu = this.menu.filter(obj => (obj.id != id));
+    this.notifyObservers("menuUpdate");
   }
 
 
