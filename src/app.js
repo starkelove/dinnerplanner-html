@@ -6,9 +6,39 @@ window.onload = async function () {
     model.addDishToMenu(data);
   });
   model.setNumberOfGuests(1);
-  const container = document.getElementsByClassName("selectDish-container")[0];
-  const view = new SearchView(container, model);
-  view.render();
+  /*const container = document.getElementsByClassName("overView-container")[0];
+  const view = new OverviewView(container, model);
+  view.render();*/
+  if(document.getElementsByClassName("home-container")[0]){
+    const container = document.getElementsByClassName("home-container")[0];
+    const view = new HomeView(container, model);
+    view.render();
+  }
+
+
+  if(document.getElementsByClassName("selectDish-container")[0]){
+    const container = document.getElementsByClassName("selectDish-container")[0];
+    const view = new SearchView(container, model);
+    view.render();
+  }
+
+  if(document.getElementsByClassName("overView-container")[0]){
+    const container = document.getElementsByClassName("overView-container")[0];
+    const view = new OverviewView(container, model);
+    view.render();
+  }
+
+  if(document.getElementsByClassName("detailDish-container")[0]){
+    const container = document.getElementsByClassName("detailDish-container")[0];
+    const view = new DetailView(container, model);
+    view.render();
+  }
+
+  if(document.getElementsByClassName("printView-container")[0]){
+    const container = document.getElementsByClassName("printView-container")[0];
+    const view = new PrintView(container, model);
+    view.render();
+  }
 
   const container = document.getElementsByClassName("page-content")[0]
   const view = new OverviewView(container, model);
