@@ -6,7 +6,7 @@ class SearchView {
     this.sideBarView = null;
   }
 
-  async render(dishId) {
+  render(dishId) {
     this.container.innerHTML = content;
    
     document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
