@@ -3,6 +3,7 @@ class SearchView {
     this.container = container;
     this.model = model;
     this.dishSearchView = null;
+    this.model.addObserver(this);
   }
 
 
@@ -29,8 +30,14 @@ class SearchView {
 
   }
 
-  update(payload) {
-    // TODO lab3
+  update(newModel, payload) {
+    this.model = newModel;
+    if(payload == "numberOfGuestsUpdate") {
+      document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
+      document.getElementById("number").value = this.model.getNumberOfGuests();
+      document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+    }
+    console.log(document.getElementById("number").value);
   }
 }
 
@@ -56,11 +63,6 @@ const content =/* template */ `
                      <div class="col-4">
                          <form>
                              <p class="text"> People </p>
-                             <!-- <div class="value-num-guests">
-                                 <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
-                                     <input type="number" id="number" value="0" />
-                                 <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
-                             </div> -->
                              <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
                                  <input type="number" class="value-num-guests" id="number" value="0" />
                              <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>

@@ -1,15 +1,19 @@
 class SidebarView {
-  constructor(container) {
+  constructor(container, model) {
     this.container = container;
+    this.model = model;
+    this.model.addObserver(this);
     this.guestsInput = null;
+    this.sideBarView = null;
+
   }
   
   render() {
     var content = /* template */ `
     <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
-      <input type="number" class="input-num-guests" value="1">
-        Guests
-      </inut>
+      <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
+        <input type="number" class="input-num-guests" id="number" value="1" />
+      <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
     </div>
     `;
     this.container.innerHTML = content;
@@ -21,6 +25,9 @@ class SidebarView {
   }
 
   update(payload) {
-    // TODO Lab3
+    if(payload == "numberOfGuestsUpdate") {
+      document.getElementsByClassName("input-num-guests")[0].value = this.model.getNumberOfGuests();
+    }
   }
+  
 }
