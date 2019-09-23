@@ -10,9 +10,12 @@ window.onload = async function () {
   let searchView = null;
   let overviewView = null;
   let sidebarView = null;
+  let detailView = null;
   let sidebarController = null;
   let homeController = null;
-  let detailView = null;
+  let searchController = null;
+  let detailController = null;
+
 
   homeView = new HomeView(document.getElementsByClassName("home-container")[0]);
   homeController = new HomeController(homeView);
@@ -24,12 +27,14 @@ window.onload = async function () {
   sidebarController.renderView();
 
   searchView = new SearchView(document.getElementsByClassName("mainpageSearch-container")[0], model);
-  searchView.render();
+  searchController = new SearchController(searchView, model)
+  searchController.renderView();
 
   detailView = new DetailView(document.getElementsByClassName("mainpageDetail-container")[0], model);
-  detailView.render();
+  detailController = new DetailController(detailView, model);
+  detailController.renderView();
 
-  //document.cookie = "";
+  document.cookie = "";
   //document.cookie = "sidebarView";
 
   for(let i = 0; i < pages.length; i++){
@@ -41,7 +46,7 @@ window.onload = async function () {
     if(document.cookie == "dishSearchView"){
       x = document.getElementById("sidebarView");
       x.style.display = "block";
-      x = document.getElementById("detailView");
+      x = document.getElementById("dishSearchView");
       x.style.display = "block";
     }
   }else{
