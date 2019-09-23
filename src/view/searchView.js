@@ -44,9 +44,7 @@ class SearchView {
 const content =/* template */ `
 
 
-<div class="row">
 
-     <div class="col-9">
          <div id="dishSearchView">
          <div class="row">
          Find a dish!
@@ -99,8 +97,6 @@ const content =/* template */ `
                 </p>
          </div>
      </div>
- </div>
 
-</div>
 
 `;

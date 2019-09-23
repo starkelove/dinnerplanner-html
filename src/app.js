@@ -39,6 +39,7 @@ window.onload = async function () {
 //  x.style.display = "block";
   //document.cookie = "";
   //document.cookie = "sidebarView";
+
   if(document.cookie != ""){
     //console.log("hej");
     //console.log(document.cookie);
@@ -50,6 +51,9 @@ window.onload = async function () {
       x = document.getElementById("dishSearchView");
       x.style.display = "block";
     }
+  }else{
+    x = document.getElementById("homeView");
+    x.style.display = "block";
   }
   document.getElementById("loader").style.display = "none";
 
