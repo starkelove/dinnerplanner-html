@@ -8,13 +8,7 @@ class OverviewView {
     // An example of creating HTML procedurally. Think about the pros and cons of this approach.
     render() {
       let content = `
-      <div id="loader" class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-      </div>
-      <style>div{border:0px solid; padding-left: 30px; padding-right: 30px;}</style>
-      <div class="header d-flex align-items-center justify-content-center">
-          <h1>Dinner Planner</h1>
-      </div>
+
       <div id="overviewView">
         <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
         <div class="row">
@@ -55,7 +49,7 @@ class OverviewView {
 
     afterRender() {
       this.overviewView = document.getElementById("overviewView");
-      document.getElementById("loader").style.display = "none";
+    //  document.getElementById("loader").style.display = "none";
     }
 
     update(payload) {

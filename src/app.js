@@ -15,6 +15,8 @@ window.onload = async function () {
   let homeController = null;
   let searchController = null;
   let detailController = null;
+  let overviewController = null;
+
 
 
   homeView = new HomeView(document.getElementsByClassName("home-container")[0]);
@@ -33,6 +35,11 @@ window.onload = async function () {
   detailView = new DetailView(document.getElementsByClassName("mainpageDetail-container")[0], model);
   detailController = new DetailController(detailView, model);
   detailController.renderView();
+
+
+  overviewView = new OverviewView(document.getElementsByClassName("overview-container")[0], model);
+  overviewController = new OverviewController(overviewView, model);
+  overviewController.renderView();
 
   document.cookie = "";
   //document.cookie = "sidebarView";
@@ -82,6 +89,14 @@ function changeMyView(id){
     x.style.display = "block";
     document.cookie="dishSearchView";
   }
+  if(id == "sidebarView"){
+    x = document.getElementById("dishSearchView");
+    x.style.display = "none";
+    x = document.getElementById("detailView");
+    x.style.display = "none";
+    x = document.getElementById("overviewView");
+    x.style.display = "block";
+  }
 };
 
-const pages = ["homeView","sidebarView", "dishSearchView", "detailView"];
+const pages = ["homeView","sidebarView", "dishSearchView", "detailView", "overviewView"];

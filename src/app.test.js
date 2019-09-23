@@ -15,9 +15,11 @@ describe("DinnerPlanner App", () => {
     await model.getDish(559251).then(data => {model.addDishToMenu(data)});
     model.setNumberOfGuests(1);
     homeView = new HomeView(document.querySelector("#page-content"));
-    searchView = new SearchView(document.querySelector("#page-content"), model);
+  //  searchView = new SearchView(document.querySelector("#mainpageSearch"), model);
     overviewView = new OverviewView(document.querySelector("#page-content"), model);
-    sidebarView = new SidebarView(document.querySelector("#page-content"), model);
+    //sidebarView = new SidebarView(document.querySelector("#sidebar-container"), model);
+    sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);
+    searchView = new SearchView(document.getElementsByClassName("mainpageSearch-container")[0], model);
   });
 
   describe("Home View", () => {
@@ -37,12 +39,13 @@ describe("DinnerPlanner App", () => {
 
   describe("Search view", () => {
     beforeEach(() => {
-      model.addDishToMenu(559251);
+      //model.addDishToMenu(559251);
+      sidebarView.render();
       searchView.render();
     });
 
     it("has a sidebar", () => {
-      const sidebar = document.getElementById("sideBarView");
+      const sidebar = document.getElementById("sidebarView");
       expect(sidebar).to.not.be.a("null");
     });
 
@@ -93,7 +96,7 @@ describe("DinnerPlanner App", () => {
 
   describe("Confirmation page", () => {
     beforeEach(() => {
-      model.addDishToMenu(559251);
+    //  model.addDishToMenu(559251);
       overviewView.render();
     });
 

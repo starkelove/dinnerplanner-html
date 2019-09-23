@@ -2,7 +2,7 @@ class DetailView {
   constructor(container, model) {
     this.container = container;
     this.model = model;
-    this.dishSearchView = null;
+    this.detailView = null;
   }
 
 
@@ -66,7 +66,7 @@ class DetailView {
   }
 
   afterRender() {
-    this.dishSearchView = document.getElementById("dishSearchView");
+    this.detailView = document.getElementById("detailView");
     document.getElementById("loader").style.display = "none";
 
   }

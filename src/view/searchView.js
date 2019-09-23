@@ -10,17 +10,17 @@ class SearchView {
 
   render(dishId) { //glöm ej lägga till id="dishSearchView"
     this.container.innerHTML = content;
-    
+
     let array = this.model.getFullMenu();
     let title = array.map(dish => dish.title);
-    document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
+    //document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
     document.getElementsByClassName("dishItems")[0].innerHTML = title;
     this.afterRender();
   }
 
   afterRender() {
     this.dishSearchView = document.getElementById("dishSearchView");
-    document.getElementById("loader").style.display = "none";
+    //document.getElementById("loader").style.display = "none";
 
   }
 

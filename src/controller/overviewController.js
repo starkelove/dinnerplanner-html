@@ -1,4 +1,4 @@
-class SidebarController {
+class OverviewController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
@@ -18,12 +18,6 @@ class SidebarController {
 
       document.getElementById("number").addEventListener("input", updateGuests, false);
       document.getElementById("number").addEventListener("click", updateGuests, false);
-
-      var notifyGSC = function() {
-        changeMyView("sidebarView");
-      }
-
-      document.getElementById("confirmBtn").addEventListener("click", notifyGSC, false);
 
     }
 
