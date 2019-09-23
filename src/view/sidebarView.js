@@ -7,7 +7,7 @@ class SidebarView {
     this.sideBarView = null;
 
   }
-  
+
   render() {
     var content = /* template */ `
     <div class="row">
@@ -64,5 +64,5 @@ class SidebarView {
       document.getElementsByClassName("input-num-guests")[0].value = this.model.getNumberOfGuests();
     }
   }
-  
+
 }
