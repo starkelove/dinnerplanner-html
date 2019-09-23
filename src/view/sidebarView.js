@@ -10,8 +10,6 @@ class SidebarView {
 
   render() {
     var content = /* template */ `
-    <div class="row">
-      <div class="col-3">
           <div id="sidebarView" class="sidebar">
                   <div class="row">
                       <div class="col-9">
@@ -46,9 +44,6 @@ class SidebarView {
                       </div>
                   </div>
               </div>
-      </div>
-      <div class="col-9"> </div>
-    </div>
 
     `;
     this.container.innerHTML = content;
