@@ -9,14 +9,11 @@ class HomeController {
     renderView() {
       this.view.render();
 
-      //var self = this;
-      var updateGuests = function() {
-        //console.log("hello");
+      var notifyGSC = function() {
         changeMyView("homeView");
       }
-
-      //document.getElementById("startBtn").addEventListener("input", updateGuests, false);
-      document.getElementById("startBtn").addEventListener("click", updateGuests, false);
+      
+      document.getElementById("startBtn").addEventListener("click", notifyGSC, false);
 
     }
 
