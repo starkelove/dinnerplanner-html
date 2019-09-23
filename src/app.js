@@ -1,7 +1,7 @@
 window.onload = async function () {
   console.log("start");
   //We instantiate our model
-  const model = new DinnerModel();
+  let model = new DinnerModel();
   await model.getDish(559251).then(data => {
     model.addDishToMenu(data);
   });
@@ -9,6 +9,48 @@ window.onload = async function () {
   /*const container = document.getElementsByClassName("overView-container")[0];
   const view = new OverviewView(container, model);
   view.render();*/
+//  let model = null;
+  let homeView = null;
+  let searchView = null;
+  let overviewView = null;
+  let sidebarView = null;
+  let sidebarController = null;
+  let homeController = null;
+
+  homeView = new HomeView(document.getElementsByClassName("home-container")[0]);
+  //homeView.render();
+  var x = document.getElementById("homeView");
+  homeController = new HomeController(homeView);
+  homeController.renderView();
+  //x.style.display = "none";
+  //x.style.display = "block";
+
+  sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);
+  sidebarView.render();
+  x = document.getElementById("sidebarView");
+  x.style.display = "none";
+
+  x = document.getElementById("homeView");
+//  x.style.display = "block";
+  document.cookie = "";
+  //document.cookie = "sidebarView";
+  if(document.cookie != ""){
+    console.log("hej");
+    console.log(document.cookie);
+    x = document.getElementById(document.cookie);
+    x.style.display = "block";
+  }
+
+  function changeView(id){
+    console.log("hejhejhej");
+  }
+
+/*
+  searchView = new SearchView(document.querySelector("#page-content"), model);
+  overviewView = new OverviewView(document.querySelector("#page-content"), model);
+  sidebarView = new SidebarView(document.querySelector("#page-content"), model);
+
+/*
   if(document.getElementsByClassName("home-container")[0]){
     const container = document.getElementsByClassName("home-container")[0];
     const view = new HomeView(container, model);
@@ -20,6 +62,8 @@ window.onload = async function () {
     const container = document.getElementsByClassName("selectDish-container")[0];
     const view = new SearchView(container, model);
     view.render();
+    var x = document.getElementById("sideBarView");
+    x.style.display = "none";
   }
 
   if(document.getElementsByClassName("overView-container")[0]){
