@@ -6,32 +6,21 @@ class SearchView {
     this.model.addObserver(this);
   }
 
-
-
   render(dishId) { //glöm ej lägga till id="dishSearchView"
     this.container.innerHTML = content;
 
     let array = this.model.getFullMenu();
     let title = array.map(dish => dish.title);
-    //document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
     document.getElementsByClassName("dishItems")[0].innerHTML = title;
     this.afterRender();
   }
 
   afterRender() {
     this.dishSearchView = document.getElementById("dishSearchView");
-    //document.getElementById("loader").style.display = "none";
-
   }
 
-  update(newModel, payload) {
-    this.model = newModel;
-    if(payload == "numberOfGuestsUpdate") {
-      document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
-      document.getElementById("number").value = this.model.getNumberOfGuests();
-      document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
-    }
-    console.log(document.getElementById("number").value);
+  update(payload) {
+    if(payload) {}
   }
 }
 
