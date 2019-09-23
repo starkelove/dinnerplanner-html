@@ -1,50 +1,48 @@
 window.onload = async function () {
-  console.log("start");
   //We instantiate our model
   let model = new DinnerModel();
   await model.getDish(559251).then(data => {
     model.addDishToMenu(data);
   });
   model.setNumberOfGuests(1);
-  /*const container = document.getElementsByClassName("overView-container")[0];
-  const view = new OverviewView(container, model);
-  view.render();*/
-//  let model = null;
+
   let homeView = null;
   let searchView = null;
   let overviewView = null;
   let sidebarView = null;
+  let detailView = null;
   let sidebarController = null;
   let homeController = null;
+  let searchController = null;
+  let detailController = null;
+
 
   homeView = new HomeView(document.getElementsByClassName("home-container")[0]);
-  //homeView.render();
-
   homeController = new HomeController(homeView);
   homeController.renderView();
-  var x = document.getElementById("homeView");
-  x.style.display = "none";
-  //x.style.display = "block";
+
 
   sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);
-  sidebarView.render();
-  x = document.getElementById("sidebarView");
-  x.style.display = "none";
-  searchView = new SearchView(document.getElementsByClassName("mainpage-container")[0], model);
-  searchView.render();
-  x = document.getElementById("dishSearchView");
-  x.style.display = "none";
+  sidebarController = new SidebarController(sidebarView, model)
+  sidebarController.renderView();
 
-  x = document.getElementById("homeView");
-//  x.style.display = "block";
-  //document.cookie = "";
+  searchView = new SearchView(document.getElementsByClassName("mainpageSearch-container")[0], model);
+  searchController = new SearchController(searchView, model)
+  searchController.renderView();
+
+  detailView = new DetailView(document.getElementsByClassName("mainpageDetail-container")[0], model);
+  detailController = new DetailController(detailView, model);
+  detailController.renderView();
+
+  document.cookie = "";
   //document.cookie = "sidebarView";
 
+  for(let i = 0; i < pages.length; i++){
+    let x = document.getElementById(pages[i]);
+    x.style.display = "none";
+  }
+
   if(document.cookie != ""){
-    //console.log("hej");
-    //console.log(document.cookie);
-    //x = document.getElementById(document.cookie);
-    //x.style.display = "block";
     if(document.cookie == "dishSearchView"){
       x = document.getElementById("sidebarView");
       x.style.display = "block";
@@ -55,57 +53,14 @@ window.onload = async function () {
     x = document.getElementById("homeView");
     x.style.display = "block";
   }
+
+  //Remove loader when done
   document.getElementById("loader").style.display = "none";
 
 
   function changeView(id){
     console.log("hejhejhej");
   }
-
-
-
-/*
-  searchView = new SearchView(document.querySelector("#page-content"), model);
-  overviewView = new OverviewView(document.querySelector("#page-content"), model);
-  sidebarView = new SidebarView(document.querySelector("#page-content"), model);
-
-/*
-  if(document.getElementsByClassName("home-container")[0]){
-    const container = document.getElementsByClassName("home-container")[0];
-    const view = new HomeView(container, model);
-    view.render();
-  }
-
-
-  if(document.getElementsByClassName("selectDish-container")[0]){
-    const container = document.getElementsByClassName("selectDish-container")[0];
-    const view = new SearchView(container, model);
-    view.render();
-    var x = document.getElementById("sideBarView");
-    x.style.display = "none";
-  }
-
-  if(document.getElementsByClassName("overView-container")[0]){
-    const container = document.getElementsByClassName("overView-container")[0];
-    const view = new OverviewView(container, model);
-    view.render();
-  }
-
-  if(document.getElementsByClassName("detailDish-container")[0]){
-    const container = document.getElementsByClassName("detailDish-container")[0];
-    const view = new DetailView(container, model);
-    view.render();
-  }
-
-  if(document.getElementsByClassName("printView-container")[0]){
-    const container = document.getElementsByClassName("printView-container")[0];
-    const view = new PrintView(container, model);
-    view.render();
-  }
-
-  const container = document.getElementsByClassName("page-content")[0]
-  const view = new OverviewView(container, model);
-  view.render()
 
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
@@ -128,3 +83,5 @@ function changeMyView(id){
     document.cookie="dishSearchView";
   }
 };
+
+const pages = ["homeView","sidebarView", "dishSearchView", "detailView"];
