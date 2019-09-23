@@ -30,7 +30,7 @@ window.onload = async function () {
   sidebarView.render();
   x = document.getElementById("sidebarView");
   x.style.display = "none";
-  searchView = new SearchView(document.getElementsByClassName("search-container")[0], model);
+  searchView = new SearchView(document.getElementsByClassName("mainpage-container")[0], model);
   searchView.render();
   x = document.getElementById("dishSearchView");
   x.style.display = "none";
