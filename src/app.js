@@ -19,31 +19,46 @@ window.onload = async function () {
 
   homeView = new HomeView(document.getElementsByClassName("home-container")[0]);
   //homeView.render();
-  var x = document.getElementById("homeView");
+
   homeController = new HomeController(homeView);
   homeController.renderView();
-  //x.style.display = "none";
+  var x = document.getElementById("homeView");
+  x.style.display = "none";
   //x.style.display = "block";
 
   sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);
   sidebarView.render();
   x = document.getElementById("sidebarView");
   x.style.display = "none";
+  searchView = new SearchView(document.getElementsByClassName("search-container")[0], model);
+  searchView.render();
+  x = document.getElementById("dishSearchView");
+  x.style.display = "none";
 
   x = document.getElementById("homeView");
 //  x.style.display = "block";
-  document.cookie = "";
+  //document.cookie = "";
   //document.cookie = "sidebarView";
   if(document.cookie != ""){
-    console.log("hej");
-    console.log(document.cookie);
-    x = document.getElementById(document.cookie);
-    x.style.display = "block";
+    //console.log("hej");
+    //console.log(document.cookie);
+    //x = document.getElementById(document.cookie);
+    //x.style.display = "block";
+    if(document.cookie == "dishSearchView"){
+      x = document.getElementById("sidebarView");
+      x.style.display = "block";
+      x = document.getElementById("dishSearchView");
+      x.style.display = "block";
+    }
   }
+  document.getElementById("loader").style.display = "none";
+
 
   function changeView(id){
     console.log("hejhejhej");
   }
+
+
 
 /*
   searchView = new SearchView(document.querySelector("#page-content"), model);
@@ -95,4 +110,17 @@ window.onload = async function () {
    * of the specific view you're working with.
    */
 
+};
+
+function changeMyView(id){
+  console.log("hejhejhej");
+  var x = document.getElementById(id);
+  x.style.display = "none";
+  if(id == "homeView"){
+    x = document.getElementById("sidebarView");
+    x.style.display = "block";
+    x = document.getElementById("dishSearchView");
+    x.style.display = "block";
+    document.cookie="dishSearchView";
+  }
 };

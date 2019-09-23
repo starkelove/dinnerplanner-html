@@ -12,7 +12,7 @@ class SidebarView {
     var content = /* template */ `
     <div class="row">
       <div class="col-3">
-          <div id="sideBarView" class="sidebar">
+          <div id="sidebarView" class="sidebar">
                   <div class="row">
                       <div class="col-9">
                           <h4> My dinner </h4>

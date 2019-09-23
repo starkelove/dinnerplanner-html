@@ -10,14 +10,13 @@ class HomeController {
       this.view.render();
 
       //var self = this;
-    /*  var updateGuests = function() {
-        let num = document.getElementsByClassName("input-num-guests")[0].value;
-        self.model.setNumberOfGuests(num);
-        console.log("hello");
-      }*/
+      var updateGuests = function() {
+        //console.log("hello");
+        changeMyView("homeView");
+      }
 
       //document.getElementById("startBtn").addEventListener("input", updateGuests, false);
-      document.getElementById("startBtn").addEventListener("click", changeView(1), false);
+      document.getElementById("startBtn").addEventListener("click", updateGuests, false);
 
     }
 
