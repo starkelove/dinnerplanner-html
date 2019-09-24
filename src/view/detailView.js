@@ -12,31 +12,26 @@ class DetailView {
     //this.model.setNumberOfGuests(2);
     let content =/* template */ `
 
+          <div id="detailView">
+            <div class="row align-items-center">
+               <div class="detail" id="detail">
+                 <div id="dishLoader" class="spinner-border" role="status">
+                     <span class="sr-only">Loading...</span>
+                 </div>
 
-
-             <div id="detailView">
-             <div class="row align-items-center">
-             Dish
-             <div class="value-main-course-nameinview"></div>
-             </div>
-             <div class="row">
-             <div class="col-md-5">
-             Ingredients
-             <div class="value-main-ingredients"></div>
-             </div>
-             <div class="col-md-5">
-             <div class="value-picture"></div>
-             </div>
-             </div>
-             <div class="row">
-             Total price per serving:
-             <div class="value-total-priceinview"></div>
-             </div>
-              </div>
-                 <p class="text-center p-max-width">
-
-                    </p>
-             </div>
+               </div>
+               <div class="row">
+                  <div class="col">
+                  <a id="addToMenuhBtn" class="btn btn-info">
+                      Add to menu
+                  </a>
+                </div>
+                <div class="col">
+                <a id="returnSearchBtn" class="btn btn-info">
+                    Return to search
+                </a>
+                </div>
+           </div>
          </div>
 
 
@@ -47,6 +42,7 @@ class DetailView {
     document.getElementById("number").value = this.model.getNumberOfGuests();
     */
     //document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+    /*
     document.getElementsByClassName("value-total-priceinview")[0].innerHTML = this.model.getTotalMenuPrice();
 
 
@@ -60,7 +56,7 @@ class DetailView {
     document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
     document.getElementsByClassName("value-main-course-nameinview")[0].innerHTML = title;
     document.getElementsByClassName("value-main-ingredients")[0].innerHTML = ingredients;
-    document.getElementsByClassName("value-picture")[0].innerHTML = imgString;
+    document.getElementsByClassName("value-picture")[0].innerHTML = imgString;*/
     //document.getElementsByClassName("dishItems")[0].innerHTML = title;
     this.afterRender();
   }
@@ -69,5 +65,13 @@ class DetailView {
     this.detailView = document.getElementById("detailView");
     document.getElementById("loader").style.display = "none";
 
+  }
+
+  update(payload) {
+
+    if(payload[0] == "updateDetail") {
+          console.log(document.getElementsByClassName("detail")[0]);
+          document.getElementsByClassName("detail")[0].innerHTML = payload[1];
+    }
   }
 }

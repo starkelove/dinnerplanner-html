@@ -20,6 +20,82 @@ class DetailController {
 
     }
 
+    async newDish(id){
+      console.log(id);
+      let dish = await this.model.getDish(id);
+      let title = dish.title;
+      let ingredients = dish.extendedIngredients;
+      console.log(ingredients);
+      ingredients = ingredients.map(dishen => dishen.original);
+      console.log(ingredients);
+      //let pic = array.map(dish => dish.image);
+
+      let imgString = "<img src=https://spoonacular.com/recipeImages/" + id + "-312x231.jpg>";
+      let totalPrice = dish.pricePerServing;
+      /*document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
+      document.getElementsByClassName("value-main-course-nameinview")[0].innerHTML = title;
+      document.getElementsByClassName("value-main-ingredients")[0].innerHTML = ingredients;
+      document.getElementsByClassName("value-picture")[0].innerHTML = imgString;*/
+
+      let showDish = "";
+      showDish += detailCont1;
+      showDish += title;
+      showDish += detailCont2;
+      showDish += ingredients;
+      showDish += detailCont3;
+      showDish += imgString;
+      showDish += detailCont4;
+      showDish += totalPrice;
+      showDish += detailCont5;
+
+
+      console.log(showDish);
+      let payload = ["updateDetail", showDish];
+      this.view.update(payload);
+    }
+
     // TODO Lab 3
 
 }
+
+const detailCont1 =/* template */ `
+         <div class="row align-items-center">
+         Dish
+         <div class="value-main-course-nameinview">
+`;
+
+const detailCont2 =/* template */ `
+                </div>
+         </div>
+         <div class="row">
+         <div class="col-md-5">
+         Ingredients
+         <div class="value-main-ingredients">
+`;
+
+
+const detailCont3 =/* template */ `
+            </div>
+         </div>
+         <div class="col-md-5">
+         <div class="value-picture">
+`;
+
+const detailCont4 =/* template */ `
+            </div>
+         </div>
+         </div>
+         <div class="row">
+         Total price per serving:
+         <div class="value-total-priceinview">
+`;
+
+const detailCont5 =/* template */ `
+</div>
+         </div>
+          </div>
+             <p class="text-center p-max-width">
+
+                </p>
+         </div>
+`;

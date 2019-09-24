@@ -11,24 +11,25 @@ class OverviewView {
 
       <div id="overviewView">
         <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
-        <div class="row">
-        <div class="value-num-guests"></div>
-          people are coming.
-        </div>
-        <div class="row">
-        They will eat
-        <div class="value-main-course-name"></div>
-        </div>
-        <div class="row">
-          It will cost
-          <div class="value-total-price">0</div> SEK</div>
-        </div>
-        <div class="row">
-        </div>
           <div class="row">
+            <div class="col"><div class="value-num-guests"></div> people are coming.</div>
+          </div>
+          <div class="row">
+            <div class="col">They will eat<div class="value-main-course-name"></div></div>
+          </div>
+          <div class="row">
+            <div class="col">
+            It will cost
+            <div class="value-total-price">0</div> SEK</div>
+            </div>
+          </div>
+                  <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
+          <div class="row">
+            <div class="col">
             <a id="toPrintBtn" class="btn btn-info">
               Print dinner man
             </a>
+            </div>
           </div>
         </div>
       </div>

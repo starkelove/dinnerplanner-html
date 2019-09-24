@@ -16,7 +16,7 @@ class SearchView {
 
   afterRender() {
     this.dishSearchView = document.getElementById("dishSearchView");
-    document.getElementById("loader").style.display = "none";
+    document.getElementById("dishLoader").style.display = "none";
     //console.log("HSEJHSJESJAEJK");
   }
 

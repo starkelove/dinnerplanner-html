@@ -2,6 +2,7 @@ class SearchController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
+        this.pic = [];
 
         // TODO lab 3
     }
@@ -16,6 +17,13 @@ class SearchController {
         console.log("hello");
       }
 
+      var hej = function(){
+        let i = this.id - 1;
+        console.log(self.pic);
+        changeViewToDetail(self.pic[i]);
+      }
+
+
       //Updates dishes if search button is pressed based on the textview and drop-down type
       var searchFunc = async function(){
         let s = document.getElementById("textSearch").value;
@@ -24,7 +32,7 @@ class SearchController {
       //  let type = document.getElementById("").value;
         let list = await self.model.getAllDishes(selValue, s);
         let title = list.map(dish => dish.title);
-        let pic = list.map(dish => dish.id);
+        self.pic = list.map(dish => dish.id);
         let showFood = "";
         if(list.length == 0){
           showFood= "No results for that search!";
@@ -36,10 +44,13 @@ class SearchController {
           let tempInsert1 = insertFood1;
           let tempInsert2 = insertFood2;
           let tempInsert3 = insertFood3;
-          tempInsert1 += "https://spoonacular.com/recipeImages/" + pic[i] + "-240x150.jpg";
+          let tempInsert4 = insertFood4;
+          tempInsert1 += "<div class=imageFood id="+(i+1)+">";
           tempInsert1 += tempInsert2;
-          tempInsert1 += title[i];
+          tempInsert1 += "https://spoonacular.com/recipeImages/" + self.pic[i] + "-240x150.jpg";
           tempInsert1 += tempInsert3;
+          tempInsert1 += title[i];
+          tempInsert1 += tempInsert4;
           showFood += tempInsert1;
         }
 
@@ -47,6 +58,15 @@ class SearchController {
         }
         let payload = ["updateSearch", showFood];
         self.view.update(payload);
+
+        for(let i = 0; i < list.length; i++){
+          //console.log("imageFood" + (i+1));
+          let s = (i+1);
+          document.getElementById(s).addEventListener("click", hej, false);
+        //  document.getElementById("imageFood " + (i+1)).addEventListener("click", hej, false);
+          //document.images[i].addEventListener("click", hej, false);
+
+        }
 
       }
       //document.getElementById("textSearch").addEventListener("input", updateGuests, false);
@@ -61,13 +81,16 @@ class SearchController {
 const insertFood1 = `
 <div class="col">
   <div class="row">
-    <div class="col">
-      <div class="imageFood">
+    <div class="col" style="cursor: pointer">
+
+`;
+
+const insertFood2 = `
           <img src="
 `;
 
 
-const insertFood2 = `
+const insertFood3 = `
         ">
       </div>
     </div>
@@ -77,7 +100,7 @@ const insertFood2 = `
       <div class="imageName">
 `;
 
-const insertFood3 = `
+const insertFood4 = `
       </div>
     </div>
   </div>

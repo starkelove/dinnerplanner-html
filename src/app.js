@@ -1,3 +1,4 @@
+let detailController = null;
 window.onload = function () {
   //We instantiate our model
   let model = new DinnerModel();
@@ -12,7 +13,7 @@ window.onload = function () {
   let sidebarController = null;
   let homeController = null;
   let searchController = null;
-  let detailController = null;
+
   let overviewController = null;
 
 
@@ -39,7 +40,7 @@ window.onload = function () {
   overviewController = new OverviewController(overviewView, model);
   overviewController.renderView();
 
-  document.cookie = "";
+  //document.cookie = "";
   //document.cookie = "sidebarView";
 
   for(let i = 0; i < pages.length; i++){
@@ -64,7 +65,7 @@ window.onload = function () {
 
 
   function changeView(id){
-    console.log("hejhejhej");
+    //console.log("hejhejhej");
   }
 
   /**
@@ -77,9 +78,11 @@ window.onload = function () {
 };
 
 function changeMyView(id){
-  console.log("hejhejhej");
-  var x = document.getElementById(id);
+  //Hide the view currently used
+  let x = document.getElementById(id);
   x.style.display = "none";
+
+  //If homeview was the current view, load sidebarview and dishsearchview
   if(id == "homeView"){
     x = document.getElementById("sidebarView");
     x.style.display = "block";
@@ -89,6 +92,8 @@ function changeMyView(id){
     x.style.display = "none";
     document.cookie="dishSearchView";
   }
+
+  //if leaving sidebarview for overview, hide hide dishsearch or detailview and show overview
   if(id == "sidebarView"){
     x = document.getElementById("dishSearchView");
     x.style.display = "none";
@@ -97,6 +102,16 @@ function changeMyView(id){
     x = document.getElementById("overviewView");
     x.style.display = "block";
   }
+};
+
+function changeViewToDetail(id){
+  //Hide the view currently used
+  let x = document.getElementById("dishSearchView");
+  x.style.display = "none";
+  x = document.getElementById("detailView");
+  x.style.display = "block";
+  detailController.newDish(id);
+//  detailController.newDish(id);
 };
 
 const pages = ["homeView","sidebarView", "dishSearchView", "detailView", "overviewView"];
