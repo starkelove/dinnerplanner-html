@@ -52,6 +52,7 @@ class SidebarView {
     let title = array.map(dish => dish.title);
     document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
     document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+
     this.afterRender();
   }
 

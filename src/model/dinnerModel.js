@@ -25,7 +25,7 @@ class DinnerModel {
   notifyObservers(changeDetails) {
     for(var i=0; i<this.observers.length; i++) {
           this.observers[i].update(changeDetails);
-    }	
+    }
   }
 
   setNumberOfGuests(num) {
@@ -105,7 +105,10 @@ class DinnerModel {
   		if(type_url.length > 1){
   			url = base_url + '?' + 'type=' + type_url[0] + '%20course&query=' + query;
   			console.log(url);
-  		} else {
+  		} else if(type_url == ""){
+        url = base_url + '?' + 'type=' + '&query=' + query;
+        console.log(url);
+      }else {
   			url = base_url + '?' + 'type=' + type_url[0] + '&query=' + query;
   			console.log(url);
   		}

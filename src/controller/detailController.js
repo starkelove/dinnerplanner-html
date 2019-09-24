@@ -13,7 +13,6 @@ class DetailController {
       var updateGuests = function() {
         let num = document.getElementsByClassName("input-num-guests")[0].value;
         self.model.setNumberOfGuests(num);
-        console.log("hello");
       }
 
       document.getElementById("number").addEventListener("input", updateGuests, false);

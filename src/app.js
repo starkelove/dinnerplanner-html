@@ -1,9 +1,7 @@
-window.onload = async function () {
+window.onload = function () {
   //We instantiate our model
   let model = new DinnerModel();
-  await model.getDish(559251).then(data => {
-    model.addDishToMenu(data);
-  });
+
   model.setNumberOfGuests(1);
 
   let homeView = null;
@@ -87,6 +85,8 @@ function changeMyView(id){
     x.style.display = "block";
     x = document.getElementById("dishSearchView");
     x.style.display = "block";
+    x = document.getElementById("dishLoader")
+    x.style.display = "none";
     document.cookie="dishSearchView";
   }
   if(id == "sidebarView"){
