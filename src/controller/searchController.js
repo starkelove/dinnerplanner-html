@@ -14,7 +14,7 @@ class SearchController {
       var updateGuests = function() {
         let num = document.getElementsByClassName("input-num-guests")[0].value;
         self.model.setNumberOfGuests(num);
-        console.log("hello");
+      //  console.log("hello");
       }
 
       var hej = function(){

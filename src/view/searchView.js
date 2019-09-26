@@ -30,9 +30,7 @@ class SearchView {
 
 const content =/* template */ `
   <div id="dishSearchView">
-  <div id="dishLoader" class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-  </div>
+
   <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
     <div class="row">
     Find a dish!
@@ -67,6 +65,9 @@ const content =/* template */ `
     .tg .tg-1235{text-decoration:underline;font-size:13px;border-color:inherit;text-align:left;vertical-align:top}
     .tg .tg-0lax{text-align:left;vertical-align:top}
     </style>
+    <div id="dishLoader" class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
     <div class="foodtable">
     <div class="row" style="height: 50px;">
       Search for dishes!

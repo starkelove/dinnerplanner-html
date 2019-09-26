@@ -101,7 +101,7 @@ class DinnerModel {
   	let dishesAPI = [];
   	let type_url = [];
 
-	document.getElementById("loader").style.display = "block";
+	document.getElementById("dishLoader").style.display = "block";
 
   	if(type) {
   		type_url = type.split(' ');
@@ -139,7 +139,7 @@ class DinnerModel {
 		.then(data => {
 			dishesAPI = data.results;
 			console.log(dishesAPI);
-			document.getElementById("loader").style.display = "none";
+			document.getElementById("dishLoader").style.display = "none";
 			return dishesAPI;
 
 		});

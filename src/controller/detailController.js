@@ -34,6 +34,7 @@ class DetailController {
 
     async newDish(id){
       console.log(id);
+      document.getElementsByClassName("detail")[0].innerHTML = loader;
       this.id = id;
       let dish = await this.model.getDish(id);
       let title = dish.title;
@@ -112,3 +113,9 @@ const detailCont5 =/* template */ `
                 </p>
          </div>
 `;
+
+const loader = `
+<div id="loader" class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+</div>
+`

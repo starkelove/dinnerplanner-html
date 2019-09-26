@@ -115,9 +115,10 @@ function changeViewToDetail(id){
   //Hide the view currently used
   let x = document.getElementById("dishSearchView");
   x.style.display = "none";
+  detailController.newDish(id);
   x = document.getElementById("detailView");
   x.style.display = "block";
-  detailController.newDish(id);
+
 //  detailController.newDish(id);
 };
 
