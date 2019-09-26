@@ -8,7 +8,7 @@ window.onload = function () {
 
   let homeView = null;
   let searchView = null;
-
+  let printView = null;
   let sidebarView = null;
   let detailView = null;
   let sidebarController = null;
@@ -16,6 +16,7 @@ window.onload = function () {
   let searchController = null;
 
   let overviewController = null;
+  let printController = null;
 
 
 
@@ -40,6 +41,10 @@ window.onload = function () {
   overviewView = new OverviewView(document.getElementsByClassName("overview-container")[0], model);
   overviewController = new OverviewController(overviewView, model);
   overviewController.renderView();
+
+  printView = new PrintView(document.getElementsByClassName("print-container")[0], model);
+  printController = new PrintController(printView, model);
+  printController.renderView();
 
   //document.cookie = "";
   //document.cookie = "sidebarView";
@@ -84,7 +89,7 @@ function changeMyView(id){
   x.style.display = "none";
 
   //If homeview was the current view, load sidebarview and dishsearchview
-  if(id == "homeView"){
+  if(id == "homeView" || id == "overviewView" || id == "printView"){
     x = document.getElementById("sidebarView");
     x.style.display = "block";
     x = document.getElementById("dishSearchView");
@@ -126,4 +131,14 @@ function changeViewToSearch(id){
 //  detailController.newDish(id);
 };
 
-const pages = ["homeView","sidebarView", "dishSearchView", "detailView", "overviewView"];
+function changeToPrint(id){
+  //Hide the view currently used
+  let x = document.getElementById(id);
+  x.style.display = "none";
+  x = document.getElementById("printView");
+  x.style.display = "block";
+  //detailController.newDish(id);
+//  detailController.newDish(id);
+};
+
+const pages = ["homeView","sidebarView", "dishSearchView", "detailView", "overviewView", "printView"];

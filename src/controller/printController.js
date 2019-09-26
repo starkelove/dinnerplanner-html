@@ -1,4 +1,4 @@
-class OverviewController {
+class PrintController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
@@ -12,15 +12,15 @@ class OverviewController {
       var self = this;
 
       var returnToSearch = function(){
-        changeMyView("overviewView");
+        changeMyView("printView");
       }
 
       var goToPrint = function(){
-        changeToPrint("overviewView");
+
       }
 
-      document.getElementById("returnFromOverview").addEventListener("click", returnToSearch, false);
-      document.getElementById("toPrintBtn").addEventListener("click", goToPrint, false);
+      document.getElementById("returnFromPrint").addEventListener("click", returnToSearch, false);
+//      document.getElementById("toPrintBtn").addEventListener("click", goToPrint, false);
 
 
     }
