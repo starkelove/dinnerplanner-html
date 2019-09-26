@@ -64,12 +64,19 @@ class DinnerModel {
   //it is removed from the menu and the new one added.
   async addDishToMenu(data) {
     let types = data.dishTypes;
+    for(let i = 0; i < this.menu.length; i++){
+      if(this.menu[i].id == data.id){
+        this.removeDishFromMenu(data.id);
+      }
+
+    }
 
     if(this.menu.length > 0) {
        this.menu.forEach(obj => {
         let result = obj.dishTypes.filter(dishType => types.includes(dishType));
         if(result.length > 0) {
           this.removeDishFromMenu(obj.id);
+          console.log("removing result");
         }
       });
     }

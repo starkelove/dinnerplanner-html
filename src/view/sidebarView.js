@@ -30,11 +30,15 @@ class SidebarView {
               </div>
 
               <div class="row">
-                  <div class="col-6"> Dish Name</div>
-                  <div class="col-6"> Cost </div>
+                  <div class="col-6"> Menu</div>
+              </div>
+              <div class="sideBarMenu">
+                <div class="row">
+                    <div class="col"><div class="value-main-course-name"></div></div>
+                </div>
               </div>
               <div class="row">
-                  <div class="col-6"><div class="value-main-course-name"></div></div>
+                  <div class="col-6">Cost</div>
                   <div class="col-6"><div class="value-total-price">0</div> SEK</div>
               </div>
               <div class="row">
@@ -48,10 +52,24 @@ class SidebarView {
     `;
     this.container.innerHTML = content;
 
+    //let array = this.model.getFullMenu();
+    //let title = array.map(dish => dish.title);
     let array = this.model.getFullMenu();
-    let title = array.map(dish => dish.title);
-    document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
+    //let title = array.map(dish => dish.title);
+    let tempS = "";
+    let title = "";
+    for(let i = 0; i < array.length; i++){
+      title = array[i].title;
+      console.log(array[i].title);
+      let s = i+1 + ". " +title;
+      console.log(s);
+      tempS += dishMenu1;
+      tempS += s;
+      tempS += dishMenu2;
+    }
+    document.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
     document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+  
 
     this.afterRender();
   }
@@ -65,10 +83,37 @@ class SidebarView {
       document.getElementsByClassName("input-num-guests")[0].value = this.model.getNumberOfGuests();
       document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
     }
+    if(payload == "menuUpdate"){
+      let array = this.model.getFullMenu();
+      //let title = array.map(dish => dish.title);
+      let tempS = "";
+      let title = "";
+      for(let i = 0; i < array.length; i++){
+        title = array[i].title;
+        console.log(array[i].title);
+        let s = i+1 + ". " +title;
+        console.log(s);
+        tempS += dishMenu1;
+        tempS += s;
+        tempS += dishMenu2;
+      }
+      document.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
+      document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+    }
   }
 
 }
 
+
+const dishMenu1 =
+`
+<div class="row">
+    <div class="col"><div class="value-main-course-name">`
+
+const dishMenu2 =
+`
+</div></div>
+</div>`
 /*const content = `
   <div id="sidebarView" class="sidebar">
     <div class="row">

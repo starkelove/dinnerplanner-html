@@ -2,6 +2,7 @@ class DetailController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
+        this.id = null;
 
         // TODO lab 3
     }
@@ -15,13 +16,25 @@ class DetailController {
         self.model.setNumberOfGuests(num);
       }
 
+      var addToMenu = async function(){
+        let dish = await self.model.getDish(self.id);
+        self.model.addDishToMenu(dish);
+
+      }
+      var returnToSearch = function() {
+        changeViewToSearch("detailView");
+      }
+
       document.getElementById("number").addEventListener("input", updateGuests, false);
       document.getElementById("number").addEventListener("click", updateGuests, false);
+      document.getElementById("addToMenuhBtn").addEventListener("click", addToMenu, false);
+      document.getElementById("returnSearchBtn").addEventListener("click", returnToSearch, false);
 
     }
 
     async newDish(id){
       console.log(id);
+      this.id = id;
       let dish = await this.model.getDish(id);
       let title = dish.title;
       let ingredients = dish.extendedIngredients;

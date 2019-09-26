@@ -4,24 +4,49 @@ class OverviewView {
         this.model = model;
         this.overviewView = null;
     }
-
+        //<div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
     // An example of creating HTML procedurally. Think about the pros and cons of this approach.
     render() {
       let content = `
 
       <div id="overviewView">
-        <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
+                  <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
           <div class="row">
-            <div class="col"><div class="value-num-guests"></div> people are coming.</div>
+            <div class="col-5">My dinner:<div class="value-num-guests"></div>guests</div>
+            <div class="col-5">                <a id="returnFromOverview" class="btn btn-info">
+                                Go back and edit dinner
+                            </a></div>
           </div>
-          <div class="row">
-            <div class="col">They will eat<div class="value-main-course-name"></div></div>
-          </div>
+
+          <div class="show">
+            <div class="dishListImg">
+                <div class="row">
+                  <div class="col">
+                  </div>
+                </div>
+              </div>
+
+                <div class="dishListName">
+                <div class="row">
+                  <div class="col">
+                  </div>
+                </div>
+              </div>
+
+                <div class="dishListPrice">
+                <div class="row">
+                  <div class="col">
+                  </div>
+                </div>
+              </div>
+</div>
+
           <div class="row">
             <div class="col">
-            It will cost
-            <div class="value-total-price">0</div> SEK</div>
+            Total price:
+            <div class="value-total-price"></div> SEK</div>
             </div>
+          </div>
           </div>
                   <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
           <div class="row">
@@ -30,7 +55,7 @@ class OverviewView {
               Print dinner man
             </a>
             </div>
-          </div>
+
         </div>
       </div>
 
@@ -41,11 +66,12 @@ class OverviewView {
       document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
       document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
 
-      let array = this.model.getFullMenu();
-      let title = array.map(dish => dish.title);
-      document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
+      this.updateMenuView();
+
+    //  document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
 
       this.afterRender();
+
     }
 
     afterRender() {
@@ -53,7 +79,60 @@ class OverviewView {
     //  document.getElementById("loader").style.display = "none";
     }
 
+    updateMenuView(){
+      let array = this.model.getFullMenu();
+      //let title = array.map(dish => dish.title);
+      let tempImg = `<div class="row">`;
+      let tempName = `<div class="row">`;
+      let tempPrice = `<div class="row">`;
+      let title = "";
+      let id = 0;
+      let price = 0;
+      for(let i = 0; i < array.length; i++){
+        title = array[i].title;
+        id = array[i].id;
+        price = array[i].pricePerServing;
+      //  console.log(array[i].title);
+        //let s = i+1 + ". " +title;
+        //console.log(s);
+        tempImg += col1;
+        tempImg += "<img src=https://spoonacular.com/recipeImages/" + id + "-240x150.jpg>";
+        tempImg += col2;
+        tempName += col1;
+        tempName += title;
+        tempName += col2;
+        tempPrice += col1;
+        tempPrice += price + " SEK";
+        tempPrice += col2;
+      }
+
+      tempImg += "</div>";
+      tempName += "</div>";
+      tempPrice += "</div>";
+      document.getElementsByClassName("dishListImg")[0].innerHTML = tempImg;
+      document.getElementsByClassName("dishListName")[0].innerHTML = tempName;
+      document.getElementsByClassName("dishListPrice")[0].innerHTML = tempPrice;
+
+      console.log(this.model.getTotalMenuPrice());
+      console.log(document.getElementsByClassName("value-total-price")[0].innerHTML);
+    }
+
     update(payload) {
       // TODO Lab3
+      if(payload == "updateMenu"){
+        this.updateMenuView();
+        document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
+        document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+      }
     }
 }
+
+const col1 =
+`
+<div class="col">
+`
+
+const col2 =
+`
+</div>
+`

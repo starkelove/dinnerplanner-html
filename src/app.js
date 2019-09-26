@@ -1,4 +1,5 @@
 let detailController = null;
+let overviewView = null;
 window.onload = function () {
   //We instantiate our model
   let model = new DinnerModel();
@@ -7,7 +8,7 @@ window.onload = function () {
 
   let homeView = null;
   let searchView = null;
-  let overviewView = null;
+
   let sidebarView = null;
   let detailView = null;
   let sidebarController = null;
@@ -99,6 +100,7 @@ function changeMyView(id){
     x.style.display = "none";
     x = document.getElementById("detailView");
     x.style.display = "none";
+    overviewView.update("updateMenu");
     x = document.getElementById("overviewView");
     x.style.display = "block";
   }
@@ -111,6 +113,16 @@ function changeViewToDetail(id){
   x = document.getElementById("detailView");
   x.style.display = "block";
   detailController.newDish(id);
+//  detailController.newDish(id);
+};
+
+function changeViewToSearch(id){
+  //Hide the view currently used
+  let x = document.getElementById(id);
+  x.style.display = "none";
+  x = document.getElementById("dishSearchView");
+  x.style.display = "block";
+  //detailController.newDish(id);
 //  detailController.newDish(id);
 };
 
