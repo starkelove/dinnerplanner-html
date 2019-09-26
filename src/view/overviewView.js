@@ -10,7 +10,8 @@ class OverviewView {
       let content = `
 
       <div id="overviewView">
-                  <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
+
+        <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
           <div class="row">
             <div class="col-5">My dinner:<div class="value-num-guests"></div>guests</div>
             <div class="col-5">                <a id="returnFromOverview" class="btn btn-info">
@@ -39,7 +40,7 @@ class OverviewView {
                   </div>
                 </div>
               </div>
-</div>
+
 
           <div class="row">
             <div class="col">
@@ -47,18 +48,18 @@ class OverviewView {
             <div class="value-total-price"></div> SEK</div>
             </div>
           </div>
-          </div>
-                  <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
+
+
           <div class="row">
             <div class="col">
             <a id="toPrintBtn" class="btn btn-info">
               Print dinner man
             </a>
-            </div>
 
+            </div>
+        </div>
         </div>
       </div>
-
       `;
 
       this.container.innerHTML = content;
