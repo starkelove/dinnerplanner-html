@@ -32,6 +32,7 @@ class DinnerModel {
     if(num >= 0){
         this.noGuests = num;
     }
+    window.localStorage.setItem('numberOfGuests', this.noGuests);
     this.notifyObservers("numberOfGuestsUpdate");
 
   }
@@ -81,16 +82,30 @@ class DinnerModel {
       });
     }
 
+  //  console.log(this.menu.length);
     await this.menu.push(data);
+  //  console.log(this.menu.length);
+    let s = 'dish' + this.menu.length;
+  //  console.log(s);
+    window.localStorage.setItem(s, data.id);
     this.notifyObservers("menuUpdate");
   }
 
   //Removes dish from menu
   removeDishFromMenu(id) {
     this.menu = this.menu.filter(obj => (obj.id != id));
+    this.updateLocalStorage();
     this.notifyObservers("menuUpdate");
   }
 
+  updateLocalStorage(){
+    window.localStorage.clear();
+    window.localStorage.setItem('numberOfGuests', this.noGuests);
+    for(let i = 0; i < this.menu.length; i++){
+      let s = 'dish' + (i+1);
+      window.localStorage.setItem(s, this.menu[i].id);
+    }
+  }
 
   //Returns all dishes of specific type (i.e. "starter", "main dish" or "dessert").
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.

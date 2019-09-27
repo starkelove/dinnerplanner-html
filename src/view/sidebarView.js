@@ -60,9 +60,9 @@ class SidebarView {
     let title = "";
     for(let i = 0; i < array.length; i++){
       title = array[i].title;
-      console.log(array[i].title);
+      //console.log(array[i].title);
       let s = i+1 + ". " +title;
-      console.log(s);
+      //console.log(s);
       tempS += dishMenu1;
       tempS += s;
       tempS += dishMenu2;
@@ -70,7 +70,7 @@ class SidebarView {
     this.container.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
     this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
 
-    console.log(this.container);
+    //console.log(this.container);
     this.afterRender();
   }
 

@@ -78,9 +78,10 @@ class OverviewView {
       //console.log(this.overviewView);
     }
 
-    updateMenuView(){
-      let array = this.model.getFullMenu();
+    async updateMenuView(){
+      let array = await this.model.getFullMenu();
       //let title = array.map(dish => dish.title);
+      console.log(array);
       let tempImg = `<div class="row">`;
       let tempName = `<div class="row">`;
       let tempPrice = `<div class="row">`;
@@ -116,6 +117,7 @@ class OverviewView {
     update(payload) {
       // TODO Lab3
       if(payload == "updateMenu"){
+        console.log("IN UPDATE MENU");
         this.updateMenuView();
         this.overviewView.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
         this.overviewView.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();

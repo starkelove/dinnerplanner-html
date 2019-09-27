@@ -1,10 +1,11 @@
 let detailController = null;
 let overviewView = null;
+let model = null;
 window.onload = function () {
   //We instantiate our model
-  let model = new DinnerModel();
+  model = new DinnerModel();
 
-  model.setNumberOfGuests(1);
+  //model.setNumberOfGuests(1);
 
   let homeView = null;
   let searchView = null;
@@ -49,28 +50,63 @@ window.onload = function () {
   //document.cookie = "";
   //document.cookie = "sidebarView";
   hideAllViews();
-/*
-  for(let i = 0; i < pages.length; i++){
-    let x = document.getElementById(pages[i]);
-    x.style.display = "none";
-  }*/
 
-  if(document.cookie != ""){
-    if(document.cookie == "dishSearchView"){
-      x = document.getElementById("sidebarView");
-      x.style.display = "block";
-      x = document.getElementById("dishSearchView");
-      x.style.display = "block";
-    }
-  }else{
-    x = document.getElementById("homeView");
-    x.style.display = "block";
+  //window.localStorage.clear();
+  //let int = window.localStorage.getItem('numberOfGuests');
+  model.setNumberOfGuests(window.localStorage.getItem('numberOfGuests'));
+  console.log(window.localStorage.getItem('dish1'));
+  dish1 = window.localStorage.getItem('dish1');
+  dish2 = window.localStorage.getItem('dish2');
+  dish3 = window.localStorage.getItem('dish3');
+
+  console.log(dish1);
+  if(dish1 != null){
+    addStoredDish(dish1);
+  }
+  if(dish2 != null){
+    addStoredDish(dish2);
+  }
+  if(dish3 != null){
+    addStoredDish(dish3);
   }
 
+  let arr = document.cookie.split(';');
+
+/*  if (document.cookie.split(';').filter((item) => console.log(item) {
+    console.log('The cookie "reader" has "1" for value')
+  }*/
+//  console.log(tempModel.getNumberOfGuests());
+console.log(document.cookie);
+  if(arr[0] != ""){
+    //this.model = document.cookie;
+    let subarr = arr[0].split('=');
+    console.log(subarr[1]);
+    if(subarr[1] == "dishSearchView"){
+
+      changeViewToSearch(1);
+    }else if(subarr[1] == 'detailView'){
+      let subarr2 = arr[1].split('=');
+      let id = subarr2[1];
+      changeViewToDetail(id);
+    }else if(subarr[1] == 'overviewView'){
+      changeMyView('sidebarView');
+    }else if(subarr[1] == 'printView'){
+      changeToPrint(1);
+    }
+  }else{
+    document.getElementById("homeView").style.display = "block";
+  }
+
+
+
+  //document.getElementById("homeView").style.display = "block";
   //Remove loader when done
   document.getElementById("loader").style.display = "none";
 
-
+  async function addStoredDish(id){
+    let data = await model.getDish(id);
+    model.addDishToMenu(data);
+  }
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
    * query for elements in the whole document.
@@ -79,6 +115,8 @@ window.onload = function () {
    */
 
 };
+
+
 
 function hideAllViews(){
   document.getElementById("homeView").style.display = "none";
@@ -97,15 +135,21 @@ function changeMyView(id){
 
   //If homeview was the current view, load sidebarview and dishsearchview
   if(id == "homeView" || id == "overviewView" || id == "printView"){
+    document.cookie = 'currentView = dishSearchView';
+    document.cookie = 'currentDish = 4';
     document.getElementById("sidebarView").style.display = "block";
     document.getElementById("dishSearchView").style.display = "block";
 
-    document.cookie="dishSearchView";
+    //document.cookie="dishSearchView";
+
   }
 
   //if leaving sidebarview for overview, hide dishsearch or detailview and show overview
   if(id == "sidebarView"){
+    console.log("updating menu");
     overviewView.update("updateMenu");
+    document.cookie = 'currentView = overviewView';
+    document.cookie = 'currentDish = 3';
     document.getElementById("overviewView").style.display = "block";
   }
 };
@@ -113,6 +157,9 @@ function changeMyView(id){
 function changeViewToDetail(id){
   //Hide the view currently used
   hideAllViews();
+  let s = 'currentDish = ' + id;
+  document.cookie = 'currentView = detailView';
+  document.cookie = s;
   detailController.newDish(id);
   document.getElementById("sidebarView").style.display = "block";
   document.getElementById("detailView").style.display = "block";
@@ -122,6 +169,8 @@ function changeViewToDetail(id){
 function changeViewToSearch(id){
   //Hide the view currently used
   hideAllViews();
+  document.cookie = 'currentView = dishSearchView';
+  document.cookie = 'currentDish = 2';
   document.getElementById("sidebarView").style.display = "block";
   document.getElementById("dishSearchView").style.display = "block";
 };
@@ -129,9 +178,9 @@ function changeViewToSearch(id){
 function changeToPrint(id){
   //Hide the view currently used
   hideAllViews();
+  document.cookie = 'currentView = printView';
+  document.cookie = 'currentDish = 1';
   document.getElementById("printView").style.display = "block";
-  //detailController.newDish(id);
-//  detailController.newDish(id);
 };
 
 const pages = ["homeView","sidebarView", "dishSearchView", "detailView", "overviewView", "printView"];
