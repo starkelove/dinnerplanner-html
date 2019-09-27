@@ -6,7 +6,7 @@ class SearchView {
     this.model.addObserver(this);
   }
 
-  render(dishId) { //glöm ej lägga till id="dishSearchView"
+  render(dishId) { 
     this.container.innerHTML = content;
 
     let array = this.model.getFullMenu();
