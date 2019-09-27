@@ -70,10 +70,6 @@ window.onload = function () {
   document.getElementById("loader").style.display = "none";
 
 
-  function changeView(id){
-    //console.log("hejhejhej");
-  }
-
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
    * query for elements in the whole document.
