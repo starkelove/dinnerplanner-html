@@ -95,7 +95,7 @@ function changeMyView(id){
     document.cookie="dishSearchView";
   }
 
-  //if leaving sidebarview for overview, hide hide dishsearch or detailview and show overview
+  //if leaving sidebarview for overview, hide dishsearch or detailview and show overview
   if(id == "sidebarView"){
     x = document.getElementById("dishSearchView");
     x.style.display = "none";
