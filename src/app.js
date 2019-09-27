@@ -115,7 +115,6 @@ function changeViewToDetail(id){
   x = document.getElementById("detailView");
   x.style.display = "block";
 
-//  detailController.newDish(id);
 };
 
 function changeViewToSearch(id){
@@ -124,8 +123,6 @@ function changeViewToSearch(id){
   x.style.display = "none";
   x = document.getElementById("dishSearchView");
   x.style.display = "block";
-  //detailController.newDish(id);
-//  detailController.newDish(id);
 };
 
 function changeToPrint(id){
@@ -134,8 +131,6 @@ function changeToPrint(id){
   x.style.display = "none";
   x = document.getElementById("printView");
   x.style.display = "block";
-  //detailController.newDish(id);
-//  detailController.newDish(id);
 };
 
 const pages = ["homeView","sidebarView", "dishSearchView", "detailView", "overviewView", "printView"];
