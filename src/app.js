@@ -71,8 +71,6 @@ window.onload = function () {
   document.getElementById("loader").style.display = "none";
 
 
-
-
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
    * query for elements in the whole document.
@@ -105,7 +103,7 @@ function changeMyView(id){
     document.cookie="dishSearchView";
   }
 
-  //if leaving sidebarview for overview, hide hide dishsearch or detailview and show overview
+  //if leaving sidebarview for overview, hide dishsearch or detailview and show overview
   if(id == "sidebarView"){
     overviewView.update("updateMenu");
     document.getElementById("overviewView").style.display = "block";
@@ -119,7 +117,6 @@ function changeViewToDetail(id){
   document.getElementById("sidebarView").style.display = "block";
   document.getElementById("detailView").style.display = "block";
 
-//  detailController.newDish(id);
 };
 
 function changeViewToSearch(id){
@@ -127,8 +124,6 @@ function changeViewToSearch(id){
   hideAllViews();
   document.getElementById("sidebarView").style.display = "block";
   document.getElementById("dishSearchView").style.display = "block";
-  //detailController.newDish(id);
-//  detailController.newDish(id);
 };
 
 function changeToPrint(id){
