@@ -11,10 +11,11 @@ class SidebarController {
 
       var self = this;
       var updateGuests = function() {
-        let num = document.getElementsByClassName("input-num-guests")[0].value;
+        let num = self.view.container.getElementsByClassName("input-num-guests")[0].value;
         self.model.setNumberOfGuests(num);
       }
 
+      console.log(this.view.container);
       document.getElementById("number").addEventListener("input", updateGuests, false);
       document.getElementById("number").addEventListener("click", updateGuests, false);
 

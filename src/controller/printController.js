@@ -20,8 +20,6 @@ class PrintController {
       }
 
       document.getElementById("returnFromPrint").addEventListener("click", returnToSearch, false);
-//      document.getElementById("toPrintBtn").addEventListener("click", goToPrint, false);
-
 
     }
 

@@ -29,7 +29,6 @@ class SearchController {
         let s = document.getElementById("textSearch").value;
         let sel = document.getElementById('selector');
         let selValue = sel[sel.selectedIndex].text;
-      //  let type = document.getElementById("").value;
         let list = await self.model.getAllDishes(selValue, s);
         let title = list.map(dish => dish.title);
         self.pic = list.map(dish => dish.id);
@@ -63,13 +62,11 @@ class SearchController {
           //console.log("imageFood" + (i+1));
           let s = (i+1);
           document.getElementById(s).addEventListener("click", hej, false);
-        //  document.getElementById("imageFood " + (i+1)).addEventListener("click", hej, false);
-          //document.images[i].addEventListener("click", hej, false);
 
         }
 
       }
-      //document.getElementById("textSearch").addEventListener("input", updateGuests, false);
+
       document.getElementById("searchBtn").addEventListener("click", searchFunc, false);
 
     }

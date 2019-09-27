@@ -67,21 +67,23 @@ class SidebarView {
       tempS += s;
       tempS += dishMenu2;
     }
-    document.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
-    document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
-  
+    this.container.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
+    this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
 
+    console.log(this.container);
     this.afterRender();
   }
 
   afterRender() {
+    this.sideBarView = document.getElementById("sideBarView");
+    //console.log(this.sideBarView);
     this.startBtn = this.container.getElementsByClassName("value-num-guests");
   }
 
   update(payload) {
     if(payload == "numberOfGuestsUpdate") {
-      document.getElementsByClassName("input-num-guests")[0].value = this.model.getNumberOfGuests();
-      document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+      this.container.getElementsByClassName("input-num-guests")[0].value = this.model.getNumberOfGuests();
+      this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
     }
     if(payload == "menuUpdate"){
       let array = this.model.getFullMenu();
@@ -97,8 +99,8 @@ class SidebarView {
         tempS += s;
         tempS += dishMenu2;
       }
-      document.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
-      document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+      this.container.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
+      this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
     }
   }
 

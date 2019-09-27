@@ -64,12 +64,10 @@ class OverviewView {
 
       this.container.innerHTML = content;
 
-      document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
-      document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+      this.container.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
+      this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
 
       this.updateMenuView();
-
-    //  document.getElementsByClassName("value-main-course-name")[0].innerHTML = title;
 
       this.afterRender();
 
@@ -77,7 +75,7 @@ class OverviewView {
 
     afterRender() {
       this.overviewView = document.getElementById("overviewView");
-    //  document.getElementById("loader").style.display = "none";
+      //console.log(this.overviewView);
     }
 
     updateMenuView(){
@@ -110,20 +108,17 @@ class OverviewView {
       tempImg += "</div>";
       tempName += "</div>";
       tempPrice += "</div>";
-      document.getElementsByClassName("dishListImg")[0].innerHTML = tempImg;
-      document.getElementsByClassName("dishListName")[0].innerHTML = tempName;
-      document.getElementsByClassName("dishListPrice")[0].innerHTML = tempPrice;
-
-      console.log(this.model.getTotalMenuPrice());
-      console.log(document.getElementsByClassName("value-total-price")[0].innerHTML);
+      this.container.getElementsByClassName("dishListImg")[0].innerHTML = tempImg;
+      this.container.getElementsByClassName("dishListName")[0].innerHTML = tempName;
+      this.container.getElementsByClassName("dishListPrice")[0].innerHTML = tempPrice;
     }
 
     update(payload) {
       // TODO Lab3
       if(payload == "updateMenu"){
         this.updateMenuView();
-        document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
-        document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+        this.overviewView.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
+        this.overviewView.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
       }
     }
 }

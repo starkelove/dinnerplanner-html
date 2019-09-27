@@ -16,14 +16,13 @@ class SearchView {
 
   afterRender() {
     this.dishSearchView = document.getElementById("dishSearchView");
-    document.getElementById("dishLoader").style.display = "none";
-    //console.log("HSEJHSJESJAEJK");
+    this.container.getElementsByClassName("spinner-border")[0].style.display = "none";
   }
 
   update(payload) {
 
     if(payload[0] == "updateSearch") {
-          document.getElementsByClassName("foodtable")[0].innerHTML = payload[1];
+          this.dishSearchView.getElementsByClassName("foodtable")[0].innerHTML = payload[1];
     }
   }
 }
