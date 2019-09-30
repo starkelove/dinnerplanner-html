@@ -7,7 +7,9 @@ describe("DinnerPlanner App", () => {
   let searchView = null;
   let overviewView = null;
   let sidebarView = null;
+  let detailView = null;
   let sidebarController = null;
+  let detailController = null;
 
 
   beforeEach(async() => {
@@ -164,6 +166,43 @@ describe("DinnerPlanner App", () => {
       input.value = 5;
       input.dispatchEvent(new Event("input"));
       expect(""+model.getNumberOfGuests()).to.equal("5");
+    });
+
+    it("Observer updates the view", () => {
+      model.setNumberOfGuests(6);
+      const input = document.getElementsByClassName("input-num-guests")[0];
+      expect(""+input.value).to.equal("6");
+    });
+  });
+
+  describe("Detaildish view", () => {
+    beforeEach(async() => {
+      model = new DinnerModel();
+      detailView = new DetailView(document.getElementById("page-content"), model);
+      detailController = new DetailController(detailView, model);
+      detailController.renderView();
+      await detailController.newDish(559251);
+    });
+
+    it("Has a dish", () => {
+      const input = document.getElementsByClassName("value-main-course-nameinview")[0];
+      expect(input).to.not.be.a("null");
+      let arr = input.innerHTML.split('\n');
+      let arr2 = arr[1].split('\n');
+      expect(arr2[0]).to.equal("Breakfast Pizza");
+    });
+
+    //A test to see if addToMenu adds a dish to menu
+    it("Controller modifies the model", async() => {
+      const input = document.getElementById("addToMenuBtn");
+      //input.value = 5;
+      console.log(input);
+
+      await input.dispatchEvent(new Event("click"));
+      let array = await model.getFullMenu();
+    //  console.log(array[0].title);
+      console.log(model.getFullMenu());
+      expect(""+array[0].title).to.equal("Breakfast pizza");
     });
 
     it("Observer updates the view", () => {
