@@ -133,22 +133,17 @@ class DinnerModel {
   	if(query) {
   		if(type_url.length > 1){
   			url = base_url + '?' + 'type=' + type_url[0] + '%20course&query=' + query;
-  			console.log(url);
   		} else if(type_url == ""){
         url = base_url + '?' + 'type=' + '&query=' + query;
-        console.log(url);
       }else {
   			url = base_url + '?' + 'type=' + type_url[0] + '&query=' + query;
-  			console.log(url);
   		}
 
-  	} else if(type && query == null){ // if only type, return all of that specific type
+  	} else if(type != null && query == ""){ // if only type, return all of that specific type
   		if(type_url.length > 1) {
     		url = base_url + '?' + 'type=' + type_url[0] + '%20course';
-    		console.log(url);
     	} else {
     		url = base_url + '?' + 'type=' + type_url[0];
-    		console.log(url);
     	}
   	} else { // if you dont pass any query all the dishes will be returned
   		url = base_url;

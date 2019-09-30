@@ -100,11 +100,8 @@ class SidebarView {
       let title = "";
       for(let i = 0; i < array.length; i++){
         title = array[i].title;
-        console.log(array[i].title);
         let s = i+1 + ". " +title;
-        console.log(s);
         this.idMenu[i] = array[i].id;
-        console.log(this.idMenu[i]);
         tempS += dishMenu1;
         tempS += s;
         tempS += dishMenu2;
