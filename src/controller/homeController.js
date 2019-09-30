@@ -1,9 +1,6 @@
 class HomeController {
     constructor(view) {
         this.view = view;
-        //this.model = model;
-
-        // TODO lab 3
     }
 
     renderView() {
@@ -13,10 +10,9 @@ class HomeController {
         changeMyView("homeView");
       }
       
-      document.getElementById("startBtn").addEventListener("click", notifyGSC, false);
+      this.view.startBtn.addEventListener("click", notifyGSC, false);
 
     }
 
-    // TODO Lab 3
-
+  
 }
