@@ -3,13 +3,15 @@ class DetailView {
     this.container = container;
     this.model = model;
     this.detailView = null;
+    this.dishLoader = null;
+    this.addToMenuBtn = null;
+    this.returnSearchBtn = null;
+    this.detail = null;
+
   }
 
+  render(dishId) { 
 
-
-  render(dishId) { //glöm ej lägga till id="dishSearchView"
-
-    //this.model.setNumberOfGuests(2);
     let content =/* template */ `
 
           <div id="detailView">
@@ -22,7 +24,7 @@ class DetailView {
                </div>
                <div class="row">
                   <div class="col">
-                  <a id="addToMenuhBtn" class="btn btn-info">
+                  <a id="addToMenuBtn" class="btn btn-info">
                       Add to menu
                   </a>
                 </div>
@@ -42,14 +44,17 @@ class DetailView {
 
   afterRender() {
     this.detailView = document.getElementById("detailView");
-    this.container.getElementsByClassName("spinner-border")[0].style.display = "none";
+    this.dishLoader = document.getElementById("dishLoader");
+    this.addToMenuBtn = document.getElementById("addToMenuBtn");
+    this.returnSearchBtn = document.getElementById("returnSearchBtn");
+    this.detail = document.getElementById("detail");
 
+    this.dishLoader.style.display = "none";
   }
 
   update(payload) {
-
     if(payload[0] == "updateDetail") {
-          this.detailView.getElementsByClassName("detail")[0].innerHTML = payload[1];
+          this.detail.innerHTML = payload[1];
     }
   }
 }
