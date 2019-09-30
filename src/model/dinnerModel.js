@@ -56,7 +56,7 @@ class DinnerModel {
   getTotalMenuPrice(){
       let items = this.getFullMenu();
       let prices = items.map(obj => obj.pricePerServing).reduce((acc, scalar) => acc + scalar, 0);
-      return this.noGuests*prices;
+      return Math.round(this.noGuests*prices*100)/100;
   }
 
   removeAllDishes() {
