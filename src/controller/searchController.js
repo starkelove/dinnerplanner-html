@@ -3,21 +3,12 @@ class SearchController {
         this.view = view;
         this.model = model;
         this.pic = [];
-
-        // TODO lab 3
     }
 
     renderView() {
       this.view.render();
-
       var self = this;
-      var updateGuests = function() {
-        let num = document.getElementsByClassName("input-num-guests")[0].value;
-        self.model.setNumberOfGuests(num);
-      //  console.log("hello");
-      }
-
-      var hej = function(){
+      var goToDetailView = function(){
         let i = this.id - 1;
         console.log(self.pic);
         changeViewToDetail(self.pic[i]);
@@ -26,36 +17,36 @@ class SearchController {
 
       //Updates dishes if search button is pressed based on the textview and drop-down type
       var searchFunc = async function(){
-        let s = document.getElementById("textSearch").value;
-        let sel = document.getElementById('selector');
+        let s = self.view.textSearch.value;
+        let sel = self.view.selector;
         let selValue = sel[sel.selectedIndex].text;
         window.localStorage.setItem('searchType', selValue);
         window.localStorage.setItem('searchQuery', s);
         let list = await self.model.getAllDishes(selValue, s);
-        let title = list.map(dish => dish.title);
-        self.pic = list.map(dish => dish.id);
+        //let title = list.map(dish => dish.title);
+        //self.pic = list.map(dish => dish.id);
         let showFood = "";
-        if(list.length == 0){
+        if(list == undefined){
           showFood= "No results for that search!";
         }else{
+          let title = list.map(dish => dish.title);
+          self.pic = list.map(dish => dish.id);
 
-
-        showFood =     '<div class="row" style="height: 50px;">';
-        for(let i = 0; i < list.length; i++){
-          let tempInsert1 = insertFood1;
-          let tempInsert2 = insertFood2;
-          let tempInsert3 = insertFood3;
-          let tempInsert4 = insertFood4;
-          tempInsert1 += "<div class=imageFood id="+(i+1)+">";
-          tempInsert1 += tempInsert2;
-          tempInsert1 += "https://spoonacular.com/recipeImages/" + self.pic[i] + "-240x150.jpg";
-          tempInsert1 += tempInsert3;
-          tempInsert1 += title[i];
-          tempInsert1 += tempInsert4;
-          showFood += tempInsert1;
-        }
-
-        showFood += '</div>';
+          showFood =     '<div class="row" style="height: 50px;">';
+          for(let i = 0; i < list.length; i++){
+            let tempInsert1 = insertFood1;
+            let tempInsert2 = insertFood2;
+            let tempInsert3 = insertFood3;
+            let tempInsert4 = insertFood4;
+            tempInsert1 += "<div class=imageFood id="+(i+1)+">";
+            tempInsert1 += tempInsert2;
+            tempInsert1 += "https://spoonacular.com/recipeImages/" + self.pic[i] + "-240x150.jpg";
+            tempInsert1 += tempInsert3;
+            tempInsert1 += title[i];
+            tempInsert1 += tempInsert4;
+            showFood += tempInsert1;
+          }
+          showFood += '</div>';
         }
         let payload = ["updateSearch", showFood];
         self.view.update(payload);
@@ -63,17 +54,15 @@ class SearchController {
         for(let i = 0; i < list.length; i++){
           //console.log("imageFood" + (i+1));
           let s = (i+1);
-          document.getElementById(s).addEventListener("click", hej, false);
+          document.getElementById(s).addEventListener("click", goToDetailView , false);
 
         }
 
       }
-
-      document.getElementById("searchBtn").addEventListener("click", searchFunc, false);
+      this.view.searchBtn.addEventListener("click", searchFunc, false);
 
     }
 
-    // TODO Lab 3
 
 }
 
