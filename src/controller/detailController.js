@@ -4,18 +4,12 @@ class DetailController {
         this.model = model;
         this.id = null;
 
-        // TODO lab 3
     }
 
     renderView() {
       this.view.render();
 
       var self = this;
-      var updateGuests = function() {
-        let num = document.getElementsByClassName("input-num-guests")[0].value;
-        self.model.setNumberOfGuests(num);
-      }
-
       var addToMenu = async function(){
         let dish = await self.model.getDish(self.id);
         self.model.addDishToMenu(dish);
@@ -25,15 +19,13 @@ class DetailController {
         changeViewToSearch("detailView");
       }
 
-      document.getElementById("number").addEventListener("input", updateGuests, false);
-      document.getElementById("number").addEventListener("click", updateGuests, false);
-      document.getElementById("addToMenuhBtn").addEventListener("click", addToMenu, false);
-      document.getElementById("returnSearchBtn").addEventListener("click", returnToSearch, false);
+      this.view.addToMenuBtn.addEventListener("click", addToMenu, false);
+      this.view.returnSearchBtn.addEventListener("click", returnToSearch, false);
 
     }
 
     async newDish(id){
-      this.view.container.getElementsByClassName("detail")[0].innerHTML = loader;
+      this.view.detail.innerHTML = loader;
       this.id = id;
       let dish = await this.model.getDish(id);
       let title = dish.title;
@@ -58,8 +50,6 @@ class DetailController {
       let payload = ["updateDetail", showDish];
       this.view.update(payload);
     }
-
-    // TODO Lab 3
 
 }
 
