@@ -29,17 +29,15 @@ class SidebarController {
 
       }
 
-      console.log(this.view.container);
-      document.getElementById("number").addEventListener("input", updateGuests, false);
-      document.getElementById("number").addEventListener("click", updateGuests, false);
-
       var notifyGSC = function() {
         changeMyView("sidebarView");
       }
 
-      document.getElementById("confirmBtn").addEventListener("click", notifyGSC, false);
-
-      document.getElementById("deleteBtn").addEventListener("click", deleteMenu, false);
+      console.log(this.view.container);
+      this.view.number.addEventListener("input", updateGuests, false);
+      this.view.number.addEventListener("click", updateGuests, false);
+      this.view.confirmBtn.addEventListener("click", notifyGSC, false);
+      this.view.deleteBtn.addEventListener("click", deleteMenu, false);
 
     }
 
