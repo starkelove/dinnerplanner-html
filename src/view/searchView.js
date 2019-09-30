@@ -3,6 +3,9 @@ class SearchView {
     this.container = container;
     this.model = model;
     this.dishSearchView = null;
+    this.textSearch = null;
+    this.searchBtn = null;
+    this.selector = null;
     this.model.addObserver(this);
   }
 
@@ -16,6 +19,9 @@ class SearchView {
 
   afterRender() {
     this.dishSearchView = document.getElementById("dishSearchView");
+    this.searchBtn = document.getElementById("searchBtn");
+    this.textSearch = document.getElementById("textSearch");
+    this.selector =  document.getElementById("selector");
     this.container.getElementsByClassName("spinner-border")[0].style.display = "none";
   }
 
