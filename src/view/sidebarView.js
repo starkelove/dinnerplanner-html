@@ -3,8 +3,13 @@ class SidebarView {
     this.container = container;
     this.model = model;
     this.model.addObserver(this);
+
     this.guestsInput = null;
     this.sideBarView = null;
+    this.confirmBtn = null;
+    this.deleteBtn = null;
+    this.number = null;
+    
     this.idMenu = [];
 
   }
@@ -84,8 +89,9 @@ class SidebarView {
 
   afterRender() {
     this.sideBarView = document.getElementById("sideBarView");
-    //console.log(this.sideBarView);
-    this.startBtn = this.container.getElementsByClassName("value-num-guests");
+    this.confirmBtn = document.getElementById("confirmBtn");
+    this.deleteBtn = document.getElementById("deleteBtn");
+    this.number = document.getElementById("number");
   }
 
   update(payload) {
