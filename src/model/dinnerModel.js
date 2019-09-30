@@ -125,7 +125,7 @@ class DinnerModel {
 
 	document.getElementById("dishLoader").style.display = "block";
 
-  	if(type) {
+  	if(type != undefined) {
   		type_url = type.split(' ');
   	}
 

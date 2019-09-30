@@ -1,5 +1,6 @@
 let detailController = null;
 let overviewView = null;
+let printController = null;
 let model = null;
 window.onload = function () {
   //We instantiate our model
@@ -15,9 +16,7 @@ window.onload = function () {
   let sidebarController = null;
   let homeController = null;
   let searchController = null;
-
   let overviewController = null;
-  let printController = null;
 
 
 
@@ -180,6 +179,7 @@ function changeToPrint(id){
   hideAllViews();
   document.cookie = 'currentView = printView';
   document.cookie = 'currentDish = 1';
+  printController.printMenu();
   document.getElementById("printView").style.display = "block";
 };
 
