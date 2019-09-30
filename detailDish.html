@@ -16,12 +16,24 @@
 
 </head>
 <body>
-<div class="container detailDish-container">
-      <h1>Dinner planner</h1>
-      <div id="loader" class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-      </div>
-</div>
+  <div class="container detailDish-container">
+        <h1>Dinner planner</h1>
+
+        <div class="container search-container">
+          <div class="row">
+            <div id class="col-3">
+              <div class="container sidebar-container">
+              </div>
+            </div>
+            <div id class="col-9">
+              <div class="container detail-container">
+                <div id="loader" class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+    </div>
+  </div>
+  </div>
 
 
 <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
@@ -42,6 +54,7 @@
 <script src="src/view/detailView.js"></script>
 <script src="src/model/dinnerModel.js"></script>
 <script src="src/model/config.js"></script>
+<script src="src/view/sidebarView.js"></script>
 <!--script src="src/model/dinnerModel.test.js"></script>
 <script src="src/view/homeView.js"></script>
 <script src="src/view/sideBarView.js"></script-->

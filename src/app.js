@@ -17,20 +17,10 @@ window.onload = async function () {
 
 
   if(document.getElementsByClassName("selectDish-container")[0]){
-
     sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);
-  //  view = new SidebarController(sidebarView, model);
     sidebarView.render();
-    //sidebarController.renderView();
-
     searchView = new SearchView(document.getElementsByClassName("mainpageSearch-container")[0], model);
     searchView.render();
-    /*
-    searchController = new SearchController(searchView, model)
-    searchController.renderView();
-    const container = document.getElementsByClassName("selectDish-container")[0];
-    const view = new SearchView(container, model);
-    view.render();*/
   }
 
   if(document.getElementsByClassName("overView-container")[0]){
@@ -40,9 +30,10 @@ window.onload = async function () {
   }
 
   if(document.getElementsByClassName("detailDish-container")[0]){
-    const container = document.getElementsByClassName("detailDish-container")[0];
-    const view = new DetailView(container, model);
-    view.render();
+    sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);
+    sidebarView.render();
+    detailView = new DetailView(document.getElementsByClassName("detail-container")[0], model);
+    detailView.render();
   }
 
   if(document.getElementsByClassName("printView-container")[0]){
