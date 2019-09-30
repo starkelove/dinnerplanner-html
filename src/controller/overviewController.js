@@ -19,6 +19,12 @@ class OverviewController {
         changeToPrint("overviewView");
       }
 
+      /*
+      let butt = this.view.overviewView.innerHTML;
+      console.log(butt);
+      let bitt = (butt.getElementById("returnFromOverview"));
+      bitt.addEventListener("click", returnToSearch, false);*/
+      //this.view.returnFromOverview.addEventListener("click", returnToSearch, false);
       document.getElementById("returnFromOverview").addEventListener("click", returnToSearch, false);
       document.getElementById("toPrintBtn").addEventListener("click", goToPrint, false);
 

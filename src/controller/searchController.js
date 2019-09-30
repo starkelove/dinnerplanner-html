@@ -29,6 +29,8 @@ class SearchController {
         let s = document.getElementById("textSearch").value;
         let sel = document.getElementById('selector');
         let selValue = sel[sel.selectedIndex].text;
+        window.localStorage.setItem('searchType', selValue);
+        window.localStorage.setItem('searchQuery', s);
         let list = await self.model.getAllDishes(selValue, s);
         let title = list.map(dish => dish.title);
         self.pic = list.map(dish => dish.id);

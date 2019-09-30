@@ -55,23 +55,23 @@ describe("DinnerPlanner App", () => {
     });
 
     it("displays a loading message", (done) => {
-      const loader = document.getElementById("loader");
+      const loader = document.getElementById("dishLoader");
       expect(loader).to.not.be.a("null");
         done();
     }).timeout(3000);
 
     it("displays dishes", (done) => {
-      const dishes = document.getElementById("dishItems");
+      const dishes = document.getElementsByClassName("sideBarMenu");
       expect(dishes).to.not.be.a("null");
       done();
     }).timeout(3000);
 
     it("Has a number of guests value", () => {
-      const valueHolders = document.getElementsByClassName("value-num-guests");
+      const valueHolders = document.getElementsByClassName("input-num-guests");
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal(""+model.getNumberOfGuests());
+        expect(v.value).to.equal(""+model.getNumberOfGuests());
       }
     });
 
@@ -80,7 +80,9 @@ describe("DinnerPlanner App", () => {
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal("Breakfast Pizza");
+        let arr = v.innerHTML.split('. ');
+        let arr2 = arr[1].split('\n');
+        expect(arr2[0]).to.equal("Breakfast Pizza");
       }
     });
 
@@ -110,7 +112,7 @@ describe("DinnerPlanner App", () => {
       expect(printBtn).to.not.be.a("null");
     });
 
-    /* REDUNDANT TEST SINCE WE HAVE THE INPUT-NUM-GUEST test
+    // REDUNDANT TEST SINCE WE HAVE THE INPUT-NUM-GUEST test
     it("Has a number of guests value", () => {
       const valueHolders = document.getElementsByClassName("value-num-guests");
       expect(valueHolders.length).to.be.above(0);
@@ -118,14 +120,17 @@ describe("DinnerPlanner App", () => {
         expect(v).to.not.be.a("null");
         expect(v.innerHTML).to.equal(""+model.getNumberOfGuests());
       }
-    });*/
+    });
 
     it("Has data on current dishes", () => {
       const valueHolders = document.getElementsByClassName("value-main-course-name");
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal("Breakfast Pizza");
+        expect(v).to.not.be.a("null");
+        let arr = v.innerHTML.split('. ');
+        let arr2 = arr[1].split('\n');
+        expect(arr2[0]).to.equal("Breakfast Pizza");
       }
     });
 
