@@ -3,6 +3,8 @@ class OverviewView {
         this.container = container;
         this.model = model;
         this.overviewView = null;
+        this.returnFromOverview = null;
+        this.toPrintBtn = null;
     }
         //<div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
     // An example of creating HTML procedurally. Think about the pros and cons of this approach.
@@ -68,14 +70,14 @@ class OverviewView {
       this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
 
       this.updateMenuView();
-
       this.afterRender();
 
     }
 
     afterRender() {
       this.overviewView = document.getElementById("overviewView");
-      //console.log(this.overviewView);
+      this.returnFromOverview = document.getElementById("returnFromOverview");
+      this.toPrintBtn = document.getElementById("toPrintBtn");
     }
 
     async updateMenuView(){
@@ -115,7 +117,6 @@ class OverviewView {
     }
 
     update(payload) {
-      // TODO Lab3
       if(payload == "updateMenu"){
         console.log("IN UPDATE MENU");
         this.updateMenuView();
