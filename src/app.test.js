@@ -6,7 +6,7 @@ describe("DinnerPlanner App", () => {
   let homeView = null;
   let searchView = null;
   let overviewView = null;
-  let sideBarView = null;
+  let sidebarView = null;
 
 
   beforeEach(async () => {
@@ -16,8 +16,8 @@ describe("DinnerPlanner App", () => {
     model.setNumberOfGuests(1);
     homeView = new HomeView(document.querySelector("#page-content"));
     overviewView = new OverviewView(document.querySelector("#page-content"), model);
-    sideBarView = new SideBarView(document.querySelector("#page-content"), model);
-    searchView = new SearchView(document.querySelector("#page-content"), model);
+    sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);
+    searchView = new SearchView(document.getElementsByClassName("mainpageSearch-container")[0], model);
   });
 
   describe("Home View", () => {
@@ -31,11 +31,11 @@ describe("DinnerPlanner App", () => {
   describe("Search view", () => {
     beforeEach(() => {
       searchView.render();
-      sideBarView.render();
+      sidebarView.render();
     });
 
     it("has a sidebar", () => {
-      const sidebar = document.getElementById("sideBarView");
+      const sidebar = document.getElementById("sidebarView");
       expect(sidebar).to.not.be.a("null");
     });
 
@@ -61,11 +61,11 @@ describe("DinnerPlanner App", () => {
     }).timeout(3000);
 
     it("Has a number of guests value", () => {
-      const valueHolders = document.getElementsByClassName("value-num-guests");
+      const valueHolders = document.getElementsByClassName("input-num-guests");
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal(""+model.getNumberOfGuests());
+        expect(v.value).to.equal(""+model.getNumberOfGuests());
       }
     });
 
@@ -74,7 +74,9 @@ describe("DinnerPlanner App", () => {
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal("Breakfast Pizza");
+        let arr = v.innerHTML.split('. ');
+        let arr2 = arr[1].split('\n');
+        expect(arr2[0]).to.equal("Breakfast Pizza");
       }
     });
 
@@ -118,6 +120,11 @@ describe("DinnerPlanner App", () => {
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
+        /*
+        console.log(v.innerHTML);
+        let arr = v.innerHTML.split('. ');
+        console.log(arr);
+        let arr2 = arr[1].split('\n');*/
         expect(v.innerHTML).to.equal("Breakfast Pizza");
       }
     });

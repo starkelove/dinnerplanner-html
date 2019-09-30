@@ -17,9 +17,20 @@ window.onload = async function () {
 
 
   if(document.getElementsByClassName("selectDish-container")[0]){
+
+    sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);
+  //  view = new SidebarController(sidebarView, model);
+    sidebarView.render();
+    //sidebarController.renderView();
+
+    searchView = new SearchView(document.getElementsByClassName("mainpageSearch-container")[0], model);
+    searchView.render();
+    /*
+    searchController = new SearchController(searchView, model)
+    searchController.renderView();
     const container = document.getElementsByClassName("selectDish-container")[0];
     const view = new SearchView(container, model);
-    view.render();
+    view.render();*/
   }
 
   if(document.getElementsByClassName("overView-container")[0]){

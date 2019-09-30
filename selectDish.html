@@ -18,9 +18,21 @@
 <body>
 <div class="container selectDish-container">
       <h1>Dinner planner</h1>
-      <div id="loader" class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-      </div>
+
+      <div class="container search-container">
+        <div class="row">
+          <div id class="col-3">
+            <div class="container sidebar-container">
+            </div>
+          </div>
+          <div id class="col-9">
+            <div class="container mainpageSearch-container">
+              <div id="loader" class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+  </div>
+</div>
 </div>
 
 
@@ -42,6 +54,7 @@
 <script src="src/view/searchView.js"></script>
 <script src="src/model/dinnerModel.js"></script>
 <script src="src/model/config.js"></script>
+<script src="src/view/sidebarView.js"></script>
 <!--script src="src/model/dinnerModel.test.js"></script>
 <script src="src/view/homeView.js"></script>
 <script src="src/view/sideBarView.js"></script-->
