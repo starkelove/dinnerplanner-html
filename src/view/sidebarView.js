@@ -5,6 +5,7 @@ class SidebarView {
     this.model.addObserver(this);
     this.guestsInput = null;
     this.sideBarView = null;
+    this.idMenu = [];
 
   }
 
@@ -45,6 +46,13 @@ class SidebarView {
                   <div class="col-12">
                       <a id="confirmBtn" class="btn btn-info">
                           Confirm Dinner
+                      </a>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                      <a id="deleteBtn" class="btn btn-info" style="background-color:red">
+                          Remove all dishes
                       </a>
                   </div>
               </div>
@@ -95,15 +103,33 @@ class SidebarView {
         console.log(array[i].title);
         let s = i+1 + ". " +title;
         console.log(s);
+        this.idMenu[i] = array[i].id;
+        console.log(this.idMenu[i]);
         tempS += dishMenu1;
         tempS += s;
         tempS += dishMenu2;
       }
       this.container.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
       this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
+      //sidebarController.addCross(this.idMenu);
+      //this.addCross();
     }
   }
 
+/*
+  addCross(){
+    console.log(this.idMenu);
+    var closebtns = document.getElementsByClassName("close");
+    console.log(closebtns);
+    for(let i = 0; i < this.idMenu.length; i++){
+      closebtns[i].addEventListener("click", this.addCrossToID(), false);
+    }
+    //document.getElementsByClassName("close").addEventListener("click", this.addCrossToID, false);
+  }
+
+  addCrossToID(){
+    console.log("poo");
+  }*/
 }
 
 

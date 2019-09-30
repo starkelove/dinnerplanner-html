@@ -20,7 +20,7 @@ class OverviewController {
       }
 
       /*
-      let butt = this.view.overviewView.innerHTML;
+      let butt = this.view.overviewView.firstChild;
       console.log(butt);
       let bitt = (butt.getElementById("returnFromOverview"));
       bitt.addEventListener("click", returnToSearch, false);*/
