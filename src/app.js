@@ -6,15 +6,12 @@ window.onload = async function () {
     model.addDishToMenu(data);
   });
   model.setNumberOfGuests(1);
-  /*const container = document.getElementsByClassName("overView-container")[0];
-  const view = new OverviewView(container, model);
-  view.render();*/
+
   if(document.getElementsByClassName("home-container")[0]){
     const container = document.getElementsByClassName("home-container")[0];
     const view = new HomeView(container, model);
     view.render();
   }
-
 
   if(document.getElementsByClassName("selectDish-container")[0]){
     sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);

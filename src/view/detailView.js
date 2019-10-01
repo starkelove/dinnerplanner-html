@@ -5,10 +5,7 @@ class DetailView {
     this.dishSearchView = null;
   }
 
-
-
-  render(dishId) { //glöm ej lägga till id="dishSearchView"
-
+  render(dishId) { 
     //this.model.setNumberOfGuests(2);
     this.container.innerHTML = content;
     //document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
