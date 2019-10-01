@@ -65,13 +65,11 @@ class DetailView {
   async showDetails(dishId) {
     
     let dish = await this.model.getDish(dishId);
-    console.log(dish);
     let title = dish.title;
     let ingredients = dish.extendedIngredients;
     ingredients = ingredients.map(dishen => dishen.original);
-    //let pic = array.map(dish => dish.image);
 
-    let imgString = "<img src=https://spoonacular.com/recipeImages/" + id + "-312x231.jpg>";
+    let imgString = "<img src=https://spoonacular.com/recipeImages/" + dishId + "-312x231.jpg>";
     let totalPrice = dish.pricePerServing;
 
     let showDish = "";
@@ -86,8 +84,7 @@ class DetailView {
     showDish += detailCont5;
 
     document.getElementById("detail").innerHTML = showDish;
-    console.log( document.getElementById("detail").innerHTML);
-
+    
   }
 }
 
