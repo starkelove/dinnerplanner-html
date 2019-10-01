@@ -64,10 +64,7 @@ class SidebarView {
     `;
     this.container.innerHTML = content;
 
-    //let array = this.model.getFullMenu();
-    //let title = array.map(dish => dish.title);
     let array = this.model.getFullMenu();
-    //let title = array.map(dish => dish.title);
     let tempS = "";
     let title = "";
     for(let i = 0; i < array.length; i++){
@@ -82,7 +79,6 @@ class SidebarView {
     this.container.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
     this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
 
-    //console.log(this.container);
     this.afterRender();
   }
 
@@ -93,45 +89,6 @@ class SidebarView {
     this.number = document.getElementById("number");
   }
 
-  update(payload) {
-    if(payload == "numberOfGuestsUpdate") {
-      this.container.getElementsByClassName("input-num-guests")[0].value = this.model.getNumberOfGuests();
-      this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
-    }
-    if(payload == "menuUpdate"){
-      let array = this.model.getFullMenu();
-      //let title = array.map(dish => dish.title);
-      let tempS = "";
-      let title = "";
-      for(let i = 0; i < array.length; i++){
-        title = array[i].title;
-        let s = i+1 + ". " +title;
-        this.idMenu[i] = array[i].id;
-        tempS += dishMenu1;
-        tempS += s;
-        tempS += dishMenu2;
-      }
-      this.container.getElementsByClassName("sideBarMenu")[0].innerHTML = tempS;
-      this.container.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
-      //sidebarController.addCross(this.idMenu);
-      //this.addCross();
-    }
-  }
-
-/*
-  addCross(){
-    console.log(this.idMenu);
-    var closebtns = document.getElementsByClassName("close");
-    console.log(closebtns);
-    for(let i = 0; i < this.idMenu.length; i++){
-      closebtns[i].addEventListener("click", this.addCrossToID(), false);
-    }
-    //document.getElementsByClassName("close").addEventListener("click", this.addCrossToID, false);
-  }
-
-  addCrossToID(){
-    console.log("poo");
-  }*/
 }
 
 
