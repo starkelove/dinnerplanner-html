@@ -76,20 +76,21 @@ window.onload = function () {
   }*/
 //  console.log(tempModel.getNumberOfGuests());
 console.log(document.cookie);
-  if(arr[0] != ""){
+let stringCurrent = window.localStorage.getItem('currentView');
+  if(stringCurrent != null){
     //this.model = document.cookie;
-    let subarr = arr[0].split('=');
-    console.log(subarr[1]);
-    if(subarr[1] == "dishSearchView"){
+  //  let subarr = arr[0].split('=');
+    console.log(stringCurrent);
+    if(stringCurrent == "dishSearchView"){
 
       changeViewToSearch(1);
-    }else if(subarr[1] == 'detailView'){
-      let subarr2 = arr[1].split('=');
-      let id = subarr2[1];
+    }else if(stringCurrent == 'detailView'){
+      //let subarr2 = arr[1].split('=');
+      let id = window.localStorage.getItem('currentDish');
       changeViewToDetail(id);
-    }else if(subarr[1] == 'overviewView'){
+    }else if(stringCurrent == 'overviewView'){
       changeMyView('sidebarView');
-    }else if(subarr[1] == 'printView'){
+    }else if(stringCurrent == 'printView'){
       changeToPrint(1);
     }
   }else{
@@ -134,8 +135,7 @@ function changeMyView(id){
 
   //If homeview was the current view, load sidebarview and dishsearchview
   if(id == "homeView" || id == "overviewView" || id == "printView"){
-    document.cookie = 'currentView = dishSearchView';
-    document.cookie = 'currentDish = 4';
+    window.localStorage.setItem('currentView', 'dishSearchView');
     document.getElementById("sidebarView").style.display = "block";
     document.getElementById("dishSearchView").style.display = "block";
 
@@ -147,8 +147,7 @@ function changeMyView(id){
   if(id == "sidebarView"){
     console.log("updating menu");
     overviewView.update("updateMenu");
-    document.cookie = 'currentView = overviewView';
-    document.cookie = 'currentDish = 3';
+    window.localStorage.setItem('currentView', 'overviewView');
     document.getElementById("overviewView").style.display = "block";
   }
 };
@@ -156,9 +155,11 @@ function changeMyView(id){
 function changeViewToDetail(id){
   //Hide the view currently used
   hideAllViews();
-  let s = 'currentDish = ' + id;
-  document.cookie = 'currentView = detailView';
-  document.cookie = s;
+  //let s = 'currentDish = ' + id;
+  //document.cookie = 'currentView = detailView';
+  window.localStorage.setItem('currentView', 'detailView');
+  //document.cookie = s;
+  window.localStorage.setItem('currentDish', id);
   detailController.newDish(id);
   document.getElementById("sidebarView").style.display = "block";
   document.getElementById("detailView").style.display = "block";
@@ -168,8 +169,8 @@ function changeViewToDetail(id){
 function changeViewToSearch(id){
   //Hide the view currently used
   hideAllViews();
-  document.cookie = 'currentView = dishSearchView';
-  document.cookie = 'currentDish = 2';
+//  document.cookie = 'currentView = dishSearchView';
+  window.localStorage.setItem('currentView', 'dishSearchView');
   document.getElementById("sidebarView").style.display = "block";
   document.getElementById("dishSearchView").style.display = "block";
 };
@@ -177,8 +178,8 @@ function changeViewToSearch(id){
 function changeToPrint(id){
   //Hide the view currently used
   hideAllViews();
-  document.cookie = 'currentView = printView';
-  document.cookie = 'currentDish = 1';
+  //document.cookie = 'currentView = printView';
+  window.localStorage.setItem('currentView', 'printView');
   printController.printMenu();
   document.getElementById("printView").style.display = "block";
 };
