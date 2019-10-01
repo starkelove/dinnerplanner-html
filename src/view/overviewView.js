@@ -4,8 +4,7 @@ class OverviewView {
         this.model = model;
 
     }
-        //<div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
-    // An example of creating HTML procedurally. Think about the pros and cons of this approach.
+    
     render() {
       let content = `
 
