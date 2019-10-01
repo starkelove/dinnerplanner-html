@@ -114,14 +114,6 @@ class OverviewView {
       this.container.getElementsByClassName("dishListPrice")[0].innerHTML = tempPrice;
     }
 
-    update(payload) {
-      if(payload == "updateMenu"){
-        console.log("IN UPDATE MENU");
-        this.updateMenuView();
-        this.overviewView.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
-        this.overviewView.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
-      }
-    }
 }
 
 const col1 =
