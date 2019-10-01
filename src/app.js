@@ -35,7 +35,7 @@ window.onload = function () {
 
   detailView = new DetailView(document.getElementsByClassName("mainpageDetail-container")[0], model);
   detailController = new DetailController(detailView, model);
-  detailController.renderView();
+  //detailController.renderView();
 
 
   overviewView = new OverviewView(document.getElementsByClassName("overview-container")[0], model);
@@ -120,7 +120,7 @@ console.log(document.cookie);
 function hideAllViews(){
   document.getElementById("homeView").style.display = "none";
   document.getElementById("sidebarView").style.display = "none";
-  document.getElementById("detailView").style.display = "none";
+  //document.getElementById("detailView").style.display = "none";
   document.getElementById("dishSearchView").style.display = "none";
   document.getElementById("dishLoader").style.display = "none";
   document.getElementById("overviewView").style.display = "none";
@@ -159,7 +159,8 @@ function changeViewToDetail(id){
   let s = 'currentDish = ' + id;
   document.cookie = 'currentView = detailView';
   document.cookie = s;
-  detailController.newDish(id);
+  //detailController.newDish(id);
+  detailController.renderView(id);
   document.getElementById("sidebarView").style.display = "block";
   document.getElementById("detailView").style.display = "block";
 
