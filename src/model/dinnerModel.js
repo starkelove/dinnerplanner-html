@@ -106,7 +106,9 @@ class DinnerModel {
   }
 
   updateLocalStorage(){
+    let tempString = window.localStorage.getItem('currentView');
     window.localStorage.clear();
+    window.localStorage.setItem('currentView', tempString);
     window.localStorage.setItem('numberOfGuests', this.noGuests);
     for(let i = 0; i < this.menu.length; i++){
       let s = 'dish' + (i+1);
