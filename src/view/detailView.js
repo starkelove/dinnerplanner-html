@@ -6,10 +6,7 @@ class DetailView {
   }
 
   render(dishId) { 
-    //this.model.setNumberOfGuests(2);
     this.container.innerHTML = content;
-    //document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
-    //document.getElementById("number").value = this.model.getNumberOfGuests();
     document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
     document.getElementsByClassName("value-total-priceinview")[0].innerHTML = this.model.getTotalMenuPrice();
 
