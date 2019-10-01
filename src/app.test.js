@@ -198,11 +198,11 @@ describe("DinnerPlanner App", () => {
       //input.value = 5;
       console.log(input);
 
-      await input.dispatchEvent(new Event("click"));
-      let array = await model.getFullMenu();
+      input.dispatchEvent(new Event("click"));
+      let array = model.getFullMenu();
     //  console.log(array[0].title);
       console.log(model.getFullMenu());
-      expect(""+array[0].title).to.equal("Breakfast pizza");
+      expect(""+array[0].title).to.equal("Breakfast Pizza");
     });
 
     it("Observer updates the view", () => {

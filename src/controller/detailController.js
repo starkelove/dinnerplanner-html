@@ -3,6 +3,7 @@ class DetailController {
         this.view = view;
         this.model = model;
         this.id = null;
+        this.savedDish = null;
 
     }
 
@@ -11,8 +12,10 @@ class DetailController {
 
       var self = this;
       var addToMenu = async function(){
-        let dish = await self.model.getDish(self.id);
-        self.model.addDishToMenu(dish);
+        //let dish = await self.model.getDish(self.id);
+        console.log(self.savedDish);
+      //  await self.model.getDish(self.id).then(data => {self.model.addDishToMenu(data)});
+        self.model.addDishToMenu(self.savedDish);
 
       }
       var returnToSearch = function() {
@@ -28,6 +31,7 @@ class DetailController {
       this.view.detail.innerHTML = loader;
       this.id = id;
       let dish = await this.model.getDish(id);
+      this.savedDish = dish;
       let title = dish.title;
       let ingredients = dish.extendedIngredients;
       ingredients = ingredients.map(dishen => dishen.original);

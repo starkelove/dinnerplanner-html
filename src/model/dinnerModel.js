@@ -157,6 +157,7 @@ class DinnerModel {
 			dishesAPI = data.results;
 			console.log(dishesAPI);
 			document.getElementById("dishLoader").style.display = "none";
+      this.notifyObservers(["updateSearch", dishesAPI]);
 			return dishesAPI;
 
 		});
