@@ -69,13 +69,13 @@ window.onload = function () {
     addStoredDish(dish3);
   }
 
-  let arr = document.cookie.split(';');
+  //let arr = document.cookie.split(';');
 
 /*  if (document.cookie.split(';').filter((item) => console.log(item) {
     console.log('The cookie "reader" has "1" for value')
   }*/
 //  console.log(tempModel.getNumberOfGuests());
-console.log(document.cookie);
+//console.log(document.cookie);
 let stringCurrent = window.localStorage.getItem('currentView');
   if(stringCurrent != null){
     //this.model = document.cookie;
