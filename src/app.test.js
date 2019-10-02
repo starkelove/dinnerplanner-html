@@ -120,12 +120,9 @@ describe("DinnerPlanner App", () => {
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        /*
-        console.log(v.innerHTML);
         let arr = v.innerHTML.split('. ');
-        console.log(arr);
-        let arr2 = arr[1].split('\n');*/
-        expect(v.innerHTML).to.equal("Breakfast Pizza");
+        let arr2 = arr[1].split('\n');
+        expect(arr2[0]).to.equal("Breakfast Pizza");
       }
     });
 

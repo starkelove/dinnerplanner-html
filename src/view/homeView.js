@@ -4,7 +4,6 @@ class HomeView {
     this.startBtn = null;
   }
 
-  // An example of creating HTML declaratively. Think about the pros and cons of this approach.
   render() {
     var content = /* template */ `
     <div class="header d-flex align-items-center justify-content-center">

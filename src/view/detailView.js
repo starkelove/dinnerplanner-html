@@ -22,13 +22,11 @@ class DetailView {
     document.getElementsByClassName("value-main-course-nameinview")[0].innerHTML = title;
     document.getElementsByClassName("value-main-ingredients")[0].innerHTML = ingredients;
     document.getElementsByClassName("value-picture")[0].innerHTML = imgString;
-    //document.getElementsByClassName("dishItems")[0].innerHTML = title;
     this.afterRender();
   }
 
   afterRender() {
     this.dishSearchView = document.getElementById("dishSearchView");
-    //document.getElementById("loader").style.display = "none";
 
   }
 }

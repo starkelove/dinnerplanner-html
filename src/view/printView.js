@@ -5,16 +5,13 @@ class PrintView {
         this.overviewView = null;
     }
 
-    // An example of creating HTML procedurally. Think about the pros and cons of this approach.
     render() {
 
       this.container.innerHTML = content;
 
       document.getElementsByClassName("value-num-guests")[0].innerHTML = this.model.getNumberOfGuests();
       document.getElementsByClassName("value-total-price")[0].innerHTML = this.model.getTotalMenuPrice();
-
       document.getElementsByClassName("value-total-priceinview")[0].innerHTML = this.model.getTotalMenuPrice();
-
 
       let array = this.model.getFullMenu();
       let title = array.map(dish => dish.title);
@@ -27,8 +24,6 @@ class PrintView {
       document.getElementsByClassName("value-main-course-nameinview")[0].innerHTML = title;
       document.getElementsByClassName("value-main-ingredients")[0].innerHTML = ingredients;
       document.getElementsByClassName("value-picture")[0].innerHTML = imgString;
-
-
 
       this.afterRender();
     }

@@ -79,8 +79,6 @@ class OverviewView {
 
     async updateMenuView(){
       let array = await this.model.getFullMenu();
-      //let title = array.map(dish => dish.title);
-      console.log(array);
       let tempImg = `<div class="row">`;
       let tempName = `<div class="row">`;
       let tempPrice = `<div class="row">`;
@@ -91,9 +89,6 @@ class OverviewView {
         title = array[i].title;
         id = array[i].id;
         price = array[i].pricePerServing;
-      //  console.log(array[i].title);
-        //let s = i+1 + ". " +title;
-        //console.log(s);
         tempImg += col1;
         tempImg += "<img src=https://spoonacular.com/recipeImages/" + id + "-240x150.jpg>";
         tempImg += col2;
