@@ -100,7 +100,6 @@ describe("DinnerPlanner App", () => {
 
   describe("Confirmation page", () => {
     beforeEach(() => {
-    //  model.addDishToMenu(559251);
       overviewView.render();
     });
 
@@ -180,12 +179,17 @@ describe("DinnerPlanner App", () => {
       model = new DinnerModel();
       detailView = new DetailView(document.getElementById("page-content"), model);
       detailController = new DetailController(detailView, model);
-      detailController.renderView();
-      await detailController.newDish(559251);
+      detailController.renderView(-1);
+      await detailView.showDetails(559251);
+      sidebarView = new SidebarView(document.getElementsByClassName("sidebar-container")[0], model);
+      sidebarController = new SidebarController(sidebarView, model);
+      sidebarController.renderView();
+    //  await detailController.newDish(559251);
     });
 
     it("Has a dish", () => {
       const input = document.getElementsByClassName("value-main-course-nameinview")[0];
+      console.log(input);
       expect(input).to.not.be.a("null");
       let arr = input.innerHTML.split('\n');
       let arr2 = arr[1].split('\n');
@@ -205,10 +209,12 @@ describe("DinnerPlanner App", () => {
       expect(""+array[0].title).to.equal("Breakfast Pizza");
     });
 
-    it("Observer updates the view", () => {
-      model.setNumberOfGuests(6);
-      const input = document.getElementsByClassName("input-num-guests")[0];
-      expect(""+input.value).to.equal("6");
+    it("Observer updates the view", async() => {
+      //model.setNumberOfGuests(6);
+      await model.getDish(559251).then(data => {model.addDishToMenu(data)});
+      const input = document.getElementsByClassName("value-main-course-name")[0].innerHTML;
+      console.log(input);
+      expect(""+input).to.equal("1. Breakfast Pizza\n");
     });
   });
 });

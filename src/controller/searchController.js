@@ -23,13 +23,10 @@ class SearchController {
         window.localStorage.setItem('searchType', selValue);
         window.localStorage.setItem('searchQuery', s);
         let list = await self.model.getAllDishes(selValue, s);
-        //let title = list.map(dish => dish.title);
         self.pic = list.map(dish => dish.id);
 
-        //self.view.update(payload);
 
         for(let i = 0; i < list.length; i++){
-          //console.log("imageFood" + (i+1));
           let s = (i+1);
           document.getElementById(s).addEventListener("click", goToDetailView , false);
 

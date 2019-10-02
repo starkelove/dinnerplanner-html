@@ -2,16 +2,17 @@ class DetailView {
   constructor(container, model) {
     this.container = container;
     this.model = model;
-   
+
     this.detailView = null;
     this.dishLoader = null;
     this.addToMenuBtn = null;
     this.returnSearchBtn = null;
     this.detail = null;
+    this.savedDish = null;
 
   }
 
-  render(dishId) { 
+  render(dishId) {
 
     let content =/* template */ `
 
@@ -42,7 +43,12 @@ class DetailView {
     this.container.innerHTML = content;
 
     document.getElementById("detail").innerHTML = loader;
-    this.showDetails(dishId);
+    if(dishId == -1){
+      //Do nothing
+    }else{
+      this.showDetails(dishId);
+    }
+
     this.afterRender();
   }
 
@@ -53,7 +59,7 @@ class DetailView {
     this.returnSearchBtn = document.getElementById("returnSearchBtn");
     this.detail = document.getElementById("detail");
 
-    this.dishLoader.style.display = "none";
+    //this.dishLoader.style.display = "none";
   }
 
   update(payload) {
@@ -63,8 +69,9 @@ class DetailView {
   }
 
   async showDetails(dishId) {
-    
+
     let dish = await this.model.getDish(dishId);
+    this.savedDish = dish;
     let title = dish.title;
     let ingredients = dish.extendedIngredients;
     ingredients = ingredients.map(dishen => dishen.original);
@@ -84,7 +91,7 @@ class DetailView {
     showDish += detailCont5;
 
     document.getElementById("detail").innerHTML = showDish;
-    
+
   }
 }
 
@@ -135,4 +142,3 @@ const loader = `
     <span class="sr-only">Loading...</span>
 </div>
 `
-

@@ -35,7 +35,6 @@ class PrintView {
     afterRender() {
       this.printView = document.getElementById("printView");
       this.printMenu = document.getElementById("printMenu");
-      //this.container.getElementsByClassName("spinner-border")[0].style.display = "none";
     }
 
     update(payload){

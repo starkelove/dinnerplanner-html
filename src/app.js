@@ -6,7 +6,6 @@ window.onload = function () {
   //We instantiate our model
   model = new DinnerModel();
 
-  //model.setNumberOfGuests(1);
 
   let homeView = null;
   let searchView = null;
@@ -46,12 +45,8 @@ window.onload = function () {
   printController = new PrintController(printView, model);
   printController.renderView();
 
-  //document.cookie = "";
-  //document.cookie = "sidebarView";
   hideAllViews();
 
-  //window.localStorage.clear();
-  //let int = window.localStorage.getItem('numberOfGuests');
   model.setNumberOfGuests(window.localStorage.getItem('numberOfGuests'));
   console.log(window.localStorage.getItem('dish1'));
   dish1 = window.localStorage.getItem('dish1');
@@ -69,23 +64,14 @@ window.onload = function () {
     addStoredDish(dish3);
   }
 
-  //let arr = document.cookie.split(';');
 
-/*  if (document.cookie.split(';').filter((item) => console.log(item) {
-    console.log('The cookie "reader" has "1" for value')
-  }*/
-//  console.log(tempModel.getNumberOfGuests());
-//console.log(document.cookie);
 let stringCurrent = window.localStorage.getItem('currentView');
   if(stringCurrent != null){
-    //this.model = document.cookie;
-  //  let subarr = arr[0].split('=');
     console.log(stringCurrent);
     if(stringCurrent == "dishSearchView"){
 
       changeViewToSearch(1);
     }else if(stringCurrent == 'detailView'){
-      //let subarr2 = arr[1].split('=');
       let id = window.localStorage.getItem('currentDish');
       changeViewToDetail(id);
     }else if(stringCurrent == 'overviewView'){
@@ -99,7 +85,7 @@ let stringCurrent = window.localStorage.getItem('currentView');
 
 
 
-  //document.getElementById("homeView").style.display = "block";
+
   //Remove loader when done
   document.getElementById("loader").style.display = "none";
 
@@ -121,11 +107,13 @@ let stringCurrent = window.localStorage.getItem('currentView');
 function hideAllViews(){
   document.getElementById("homeView").style.display = "none";
   document.getElementById("sidebarView").style.display = "none";
-  //document.getElementById("detailView").style.display = "none";
   document.getElementById("dishSearchView").style.display = "none";
   document.getElementById("dishLoader").style.display = "none";
   document.getElementById("overviewView").style.display = "none";
   document.getElementById("printView").style.display = "none";
+  if(document.getElementById("detailView") != null){
+    document.getElementById("detailView").style.display = "none";
+  }
 }
 
 function changeMyView(id){
@@ -138,8 +126,6 @@ function changeMyView(id){
     window.localStorage.setItem('currentView', 'dishSearchView');
     document.getElementById("sidebarView").style.display = "block";
     document.getElementById("dishSearchView").style.display = "block";
-
-    //document.cookie="dishSearchView";
 
   }
 
@@ -155,10 +141,7 @@ function changeMyView(id){
 function changeViewToDetail(id){
   //Hide the view currently used
   hideAllViews();
-  //let s = 'currentDish = ' + id;
-  //document.cookie = 'currentView = detailView';
   window.localStorage.setItem('currentView', 'detailView');
-  //document.cookie = s;
   window.localStorage.setItem('currentDish', id);
   detailController.renderView(id);
   document.getElementById("sidebarView").style.display = "block";
@@ -169,7 +152,6 @@ function changeViewToDetail(id){
 function changeViewToSearch(id){
   //Hide the view currently used
   hideAllViews();
-//  document.cookie = 'currentView = dishSearchView';
   window.localStorage.setItem('currentView', 'dishSearchView');
   document.getElementById("sidebarView").style.display = "block";
   document.getElementById("dishSearchView").style.display = "block";
@@ -178,7 +160,6 @@ function changeViewToSearch(id){
 function changeToPrint(id){
   //Hide the view currently used
   hideAllViews();
-  //document.cookie = 'currentView = printView';
   window.localStorage.setItem('currentView', 'printView');
   printController.printMenu();
   document.getElementById("printView").style.display = "block";
